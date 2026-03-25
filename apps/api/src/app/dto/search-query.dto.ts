@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, IsArray } from 'class-validator';
+import { NodeType } from '@valeros-ldkit/shared-types';
+import { IsOptional, IsString, IsArray, IsObject } from 'class-validator';
+import { SchemaSearchInterface } from 'ldkit';
 
 export class SearchQueryDto {
   @ApiProperty({
@@ -21,11 +23,38 @@ export class SearchQueryDto {
   endpoints?: string[];
 
   @ApiProperty({
-    example: 'Growl',
+    description: 'See https://ldkit.io/docs/features/filtering',
+    type: String,
     required: false,
-    default: 'Growl',
+    examples: {
+      noFilter: {
+        value: '{}',
+        summary: 'No filter (return all)',
+      },
+      contains: {
+        value: '{"label":{"$contains":"Pikachu"}}',
+        summary: 'Contains text',
+      },
+      exactMatch: {
+        value: '{"label":"Bulbasaur"}',
+        summary: 'Exact match',
+      },
+      startsWith: {
+        value: '{"label":{"$strStarts":"Bulb"}}',
+        summary: 'Starts with',
+      },
+      inArray: {
+        value: '{"label":{"$in":["Bulbasaur","Ivysaur","Venusaur"]}}',
+        summary: 'In array',
+      },
+      regex: {
+        value: '{"label":{"$regex":"^P.*u$"}}',
+        summary: 'Regex pattern',
+      },
+      // TODO: Add examples for all filtering options
+    },
   })
   @IsOptional()
   @IsString()
-  searchTerm?: string;
+  filters?: string;
 }

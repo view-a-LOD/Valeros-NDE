@@ -3,6 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { NodeType } from '@valeros-ldkit/shared-types';
 import { AppService } from './app.service';
 import { SearchQueryDto } from './dto/search-query.dto';
+import { SchemaSearchInterface } from 'ldkit';
 
 @ApiTags('search')
 @Controller()
@@ -19,12 +20,20 @@ export class AppController {
   })
   async search(@Query() query: SearchQueryDto): Promise<NodeType[]> {
     const endpoints = query.endpoints || [];
-    const searchTerm = query.searchTerm || '';
 
-    if (endpoints.length === 0 || !searchTerm) {
+    let filters: SchemaSearchInterface<NodeType> | undefined;
+    if (query.filters) {
+      try {
+        filters = JSON.parse(query.filters);
+      } catch (error) {
+        throw new Error('Invalid JSON in filters parameter');
+      }
+    }
+
+    if (endpoints.length === 0) {
       return [];
     }
 
-    return this.appService.search(endpoints, searchTerm);
+    return this.appService.search(endpoints, filters);
   }
 }
