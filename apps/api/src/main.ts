@@ -9,7 +9,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
 
   const config = new DocumentBuilder()
-    .setTitle('Valeros LDKit API')
+    .setTitle('Valeros API')
     .setDescription('API for searching Linked Data endpoints')
     .setVersion('1.0')
     .build();
