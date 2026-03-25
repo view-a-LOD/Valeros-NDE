@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { createLens, Lens, SchemaInterface, type Options } from 'ldkit';
 import { rdfs } from 'ldkit/namespaces';
+import { QueryEngine } from '@comunica/query-sparql';
 
 const NodeSchema = {
   label: rdfs.label,
@@ -19,8 +20,10 @@ export class AppService {
   }
 
   async search(endpoint: string, searchTerm?: string): Promise<NodeType[]> {
+    const queryEngine = new QueryEngine();
     const options: Options = {
       sources: [endpoint],
+      queryEngine,
     };
 
     const lens: Lens<NodeType> = createLens(NodeSchema, options);
