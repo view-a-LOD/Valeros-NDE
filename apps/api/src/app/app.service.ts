@@ -36,6 +36,7 @@ export class AppService {
     const lens: Lens<NodeType> = createLens(NodeSchema, options);
 
     if (searchTerm) {
+      // TODO: Support full-text search here (e.g. through QLever ql: syntax)
       const results: NodeType[] = await lens.find({
         where: {
           label: { $contains: searchTerm },
