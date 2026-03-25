@@ -1,9 +1,54 @@
-<div class="hero min-h-screen bg-base-200">
-  <div class="hero-content text-center">
-    <div class="max-w-md">
-      <h1 class="text-5xl font-bold">Sample front-end</h1>
-      <p class="py-6">...</p>
-      <button class="btn btn-primary">Send request</button>
+<div class="container mx-auto p-8 max-w-4xl">
+  <div class="form-control mb-6">
+    <div class="input-group">
+      <input
+        type="text"
+        placeholder="Search..."
+        class="input input-bordered w-full"
+        [ngModel]="searchTerm()"
+        (ngModelChange)="searchTerm.set($event)"
+        (keyup.enter)="onSearch()"
+      />
+      <button
+        class="btn btn-primary mt-2"
+        (click)="onSearch()"
+        [disabled]="loading()"
+      >
+        @if (loading()) {
+          <span class="loading loading-spinner"></span>
+        } @else {
+          Search
+        }
+      </button>
     </div>
   </div>
+
+  @if (error()) {
+    <div class="alert alert-error mb-6">
+      <span>{{ error() }}</span>
+    </div>
+  }
+
+  @if (results().length > 0) {
+    <div class="mb-4 text-sm text-base-content/70">
+      Found {{ results().length }} results
+    </div>
+
+    <div class="space-y-2">
+      @for (result of results(); track result.$id) {
+        <div class="card">
+          <div class="card-body p-4">
+            <h2 class="card-title text-lg">{{ result.label || 'No label' }}</h2>
+            <p class="text-sm text-base-content/60 font-mono">
+              {{ result.$id }}
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  } @else if (!loading() && searchTerm()) {
+    <div class="text-center py-12 text-base-content/60">
+      <p>No results found for "{{ searchTerm() }}"</p>
+    </div>
+  }
 </div>
