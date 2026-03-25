@@ -31,6 +31,11 @@ export class SearchQueryDto {
         value: '{}',
         summary: 'No filter (return all)',
       },
+      byId: {
+        value:
+          '{"$id":"https://triplydb.com/academy/pokemon/id/pokemon/pikachu"}',
+        summary: 'Get by ID (IRI)',
+      },
       contains: {
         value: '{"label":{"$contains":"Pikachu"}}',
         summary: 'Contains text',
