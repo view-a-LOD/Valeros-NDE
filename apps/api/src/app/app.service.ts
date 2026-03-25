@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { createLens, Lens, SchemaInterface, type Options } from 'ldkit';
 import { rdfs } from 'ldkit/namespaces';
-import { QueryEngine } from '@comunica/query-sparql';
+import { QueryEngine as Comunica } from '@comunica/query-sparql';
 
 const NodeSchema = {
   label: rdfs.label,
@@ -13,17 +13,24 @@ type NodeType = SchemaInterface<typeof NodeSchema>;
 export class AppService {
   async getData(): Promise<NodeType[]> {
     const searchHits: NodeType[] = await this.search(
-      'https://api.triplydb.com/datasets/academy/pokemon/sparql',
+      [
+        'https://api.triplydb.com/datasets/academy/pokemon/sparql',
+        'https://api.triplydb.com/datasets/Triply/iris/sparql',
+      ],
       'Growl',
     );
     return searchHits;
   }
 
-  async search(endpoint: string, searchTerm?: string): Promise<NodeType[]> {
-    const queryEngine = new QueryEngine();
+  async search(endpoints: string[], searchTerm?: string): Promise<NodeType[]> {
+    if (!endpoints || endpoints.length === 0) {
+      return [];
+    }
+
+    const engine = new Comunica();
     const options: Options = {
-      sources: [endpoint],
-      queryEngine,
+      sources: endpoints as [string, ...string[]],
+      engine,
     };
 
     const lens: Lens<NodeType> = createLens(NodeSchema, options);
