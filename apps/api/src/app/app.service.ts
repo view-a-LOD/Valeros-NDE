@@ -1,13 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { createLens, Lens, SchemaInterface, type Options } from 'ldkit';
-import { rdfs } from 'ldkit/namespaces';
+import { createLens, Lens, type Options } from 'ldkit';
 import { QueryEngine as Comunica } from '@comunica/query-sparql';
-
-const NodeSchema = {
-  label: rdfs.label,
-} as const;
-
-type NodeType = SchemaInterface<typeof NodeSchema>;
+import { NodeSchema, NodeType } from '@valeros-ldkit/shared-types';
 
 @Injectable()
 export class AppService {
