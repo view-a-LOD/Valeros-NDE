@@ -19,7 +19,12 @@ export class AppController {
     description: 'Returns matching nodes',
   })
   async search(@Query() query: SearchQueryDto): Promise<NodeType[]> {
-    const endpoints = query.endpoints || [];
+    let endpoints: string[] = [];
+    if (query.endpoints) {
+      endpoints = Array.isArray(query.endpoints)
+        ? query.endpoints
+        : [query.endpoints];
+    }
 
     let filters: SchemaSearchInterface<NodeType> | undefined;
     if (query.filters) {
