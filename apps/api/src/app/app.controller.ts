@@ -19,12 +19,10 @@ export class AppController {
     description: 'Returns matching nodes',
   })
   async search(@Query() query: SearchQueryDto): Promise<NodeType[]> {
-    let endpoints: string[] = [];
-    if (query.endpoints) {
-      endpoints = Array.isArray(query.endpoints)
-        ? query.endpoints
-        : [query.endpoints];
-    }
+    const endpoints: string[] = [
+      'https://api.triplydb.com/datasets/academy/pokemon/sparql',
+      'https://api.triplydb.com/datasets/Triply/iris/sparql',
+    ];
 
     let filters: SchemaSearchInterface<NodeType> | undefined;
     if (query.filters) {
@@ -33,10 +31,6 @@ export class AppController {
       } catch (error) {
         throw new Error('Invalid JSON in filters parameter');
       }
-    }
-
-    if (endpoints.length === 0) {
-      return [];
     }
 
     return this.appService.search(endpoints, filters);
