@@ -15,6 +15,16 @@ import { Type } from 'class-transformer';
 export class SearchQueryDto {
   @ApiProperty({
     description:
+      'Should support search operators/modifiers such as wildcards, fuzzy search, etc. See [Lucene Query Parser Syntax](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html) for example standards. Unsure how far we should take this.',
+    example: '"Van Gogh" paint* museum~',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  query?: string;
+
+  @ApiProperty({
+    description:
       'See [LDkit filtering](https://ldkit.io/docs/features/filtering) for syntax. Note that a different syntax might make more sense here, work-in-progress.',
     type: String,
     required: false,
