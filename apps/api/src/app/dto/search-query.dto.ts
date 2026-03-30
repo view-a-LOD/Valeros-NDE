@@ -25,6 +25,36 @@ export class SearchQueryDto {
 
   @ApiProperty({
     description:
+      'Properties to retrieve for nodes. Uses [SPARQL Property Paths](https://www.w3.org/TR/sparql11-property-paths/) syntax for now. This might not be the right standard for this, but demonstrates the concept well. Should support retrieving specific properties, potentially N hops away or through inverse relations. See [GH issue](https://github.com/view-a-LOD/Valeros/issues/224) for more details. This might need to be (pre-)defined for each data layer instead of being passed as a parameter. [LDkit data schemas](https://ldkit.io/) might play a role for this.',
+    type: [String],
+    required: false,
+    examples: {
+      basic: {
+        value: ['rdfs:label', 'schema:description'],
+        summary: 'Basic properties',
+      },
+      sequence: {
+        value: [
+          'dc:creator|schema:author/(schema:givenName|schema:familyName|schema:birthDate|schema:deathDate)',
+        ],
+        summary: 'Details of creator/authors of search hit nodes (one hop)',
+      },
+      inverse: {
+        value: [
+          '^(schema:about|schema:mentions)^(schema:author|dc:creator)/(schema:givenName|schema:familyName|schema:birthDate|schema:deathDate)',
+        ],
+        summary:
+          'Details of authors/creators of documents about search hit nodes (two hops, including inverse)',
+      },
+    },
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  properties?: string[];
+
+  @ApiProperty({
+    description:
       'See [LDkit filtering](https://ldkit.io/docs/features/filtering) for syntax. Note that a different syntax might make more sense here, work-in-progress.',
     type: String,
     required: false,
