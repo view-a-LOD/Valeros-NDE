@@ -55,6 +55,34 @@ export class SearchQueryDto {
 
   @ApiProperty({
     description:
+      'Properties to use for searching the data. This _likely_ need to be (pre-)defined for each data layer instead of being passed as a parameter.',
+    type: [String],
+    required: false,
+    examples: {
+      basic: {
+        value: ['rdfs:label', 'schema:description'],
+        summary: 'Search in label and description',
+      },
+      sequence: {
+        value: [
+          'dc:creator|schema:author/(schema:givenName|schema:familyName)',
+        ],
+        summary: 'Search in creator/author names (one hop)',
+      },
+      inverse: {
+        value: ['^(schema:about|schema:mentions)/rdfs:label'],
+        summary:
+          'Search in labels of documents that mention this node (one hop, inverse)',
+      },
+    },
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  searchProperties?: string[];
+
+  @ApiProperty({
+    description:
       'See [LDkit filtering](https://ldkit.io/docs/features/filtering) for syntax. Note that a different syntax might make more sense here, work-in-progress.',
     type: String,
     required: false,
