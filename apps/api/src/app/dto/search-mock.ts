@@ -12,6 +12,8 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
     },
   ],
   totalResults: 156,
+  limit: 10,
+  offset: 0,
   facets: {
     type: [
       {

@@ -55,6 +55,18 @@ export class SearchResponseDto {
   totalResults!: number;
 
   @ApiProperty({
+    description: 'Number of results returned',
+    example: 10,
+  })
+  limit!: number;
+
+  @ApiProperty({
+    description: 'Number of results skipped',
+    example: 0,
+  })
+  offset!: number;
+
+  @ApiProperty({
     description: 'Facet counts for requested facet properties',
     required: false,
     example: {
