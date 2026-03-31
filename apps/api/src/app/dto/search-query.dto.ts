@@ -93,27 +93,27 @@ export class SearchQueryDto {
       },
       // byId: {
       //   value:
-      //     '{"$id":"https://triplydb.com/academy/pokemon/id/pokemon/pikachu"}',
+      //     '{"$id":"http://www.wikidata.org/entity/Q5582"}',
       //   summary: 'Get by ID (IRI)',
       // },
       // contains: {
-      //   value: '{"label":{"$contains":"Pikachu"}}',
+      //   value: '{"label":{"$contains":"Gogh"}}',
       //   summary: 'Contains text',
       // },
       // exactMatch: {
-      //   value: '{"label":"Bulbasaur"}',
+      //   value: '{"label":"Rembrandt van Rijn"}',
       //   summary: 'Exact match',
       // },
       // startsWith: {
-      //   value: '{"label":{"$strStarts":"Bulb"}}',
+      //   value: '{"label":{"$strStarts":"Rem"}}',
       //   summary: 'Starts with',
       // },
       // inArray: {
-      //   value: '{"label":{"$in":["Bulbasaur","Ivysaur","Venusaur"]}}',
+      //   value: '{"label":{"$in":["Rembrandt van Rijn","Vincent van Gogh","Johannes Vermeer"]}}',
       //   summary: 'In array',
       // },
       // regex: {
-      //   value: '{"label":{"$regex":"^P.*u$"}}',
+      //   value: '{"label":{"$regex":"^V.*h$"}}',
       //   summary: 'Regex pattern',
       // },
       typeFilter: {

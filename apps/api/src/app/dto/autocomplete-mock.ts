@@ -3,13 +3,9 @@ import { AutocompleteResponseDto } from './autocomplete-response.dto';
 export const AUTOCOMPLETE_MOCK_DATA: AutocompleteResponseDto = {
   results: [
     {
-      $id: 'https://triplydb.com/academy/pokemon/id/pokemon/pikachu',
-      label: 'Pikachu',
-    },
-    {
-      $id: 'https://triplydb.com/academy/pokemon/id/pokemon/pinsir',
-      label: 'Pinsir',
+      $id: 'http://www.wikidata.org/entity/Q5582',
+      label: 'Vincent van Gogh',
     },
   ],
-  suggestions: ['Pikachu', 'Pichu'],
+  suggestions: ['Vincent van Gogh', 'Vermeer'],
 };

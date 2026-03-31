@@ -3,20 +3,20 @@ import { SearchResponseDto } from './search-response.dto';
 export const SEARCH_MOCK_DATA: SearchResponseDto = {
   results: [
     {
-      $id: 'https://triplydb.com/academy/pokemon/id/pokemon/pikachu',
-      label: 'Pikachu',
+      $id: 'http://www.wikidata.org/entity/Q5582',
+      label: 'Vincent van Gogh',
     },
     {
-      $id: 'https://triplydb.com/academy/pokemon/id/pokemon/pinsir',
-      label: 'Pinsir',
+      $id: 'http://www.wikidata.org/entity/Q5598',
+      label: 'Rembrandt van Rijn',
     },
   ],
   totalResults: 156,
   facets: {
     type: [
       {
-        value: 'https://triplydb.com/academy/pokemon/vocab/Pokémon',
-        label: 'Pokémon',
+        value: 'http://schema.org/Person',
+        label: 'Person',
         count: 150,
       },
     ],

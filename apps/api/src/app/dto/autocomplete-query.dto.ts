@@ -4,7 +4,7 @@ import { IsOptional, IsString } from 'class-validator';
 export class AutocompleteQueryDto {
   @ApiProperty({
     description: '(Partial) search query',
-    example: 'pi',
+    example: 'vi',
     required: true,
   })
   @IsString()

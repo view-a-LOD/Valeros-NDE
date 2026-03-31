@@ -3,13 +3,13 @@ import { ApiProperty } from '@nestjs/swagger';
 export class NodeDto {
   @ApiProperty({
     description: 'Node IRI',
-    example: 'https://triplydb.com/academy/pokemon/id/pokemon/pikachu',
+    example: 'http://www.wikidata.org/entity/Q5582',
   })
   $id!: string;
 
   @ApiProperty({
     description: 'Node label',
-    example: 'Pikachu',
+    example: 'Vincent van Gogh',
   })
   label?: string;
 }
