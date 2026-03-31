@@ -24,6 +24,9 @@ Run backend/API and frontend concurrently:
 pnpm dev
 ```
 
+- API: http://localhost:3000/api/docs
+- Frontend: http://localhost:4200
+
 Or run them separately:
 
 ```bash
