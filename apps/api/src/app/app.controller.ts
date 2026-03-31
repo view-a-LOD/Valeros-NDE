@@ -37,10 +37,10 @@ export class AppController {
   @ApiResponse({
     status: 200,
     description:
-      'Returns matching nodes. ⚠️ TODO: Needs work wrt provenance (which datasets/endpoints did the data come from?)',
-    type: [SearchResponseDto],
+      'Returns matching nodes with facet counts. ⚠️ TODO: Needs work wrt provenance (which datasets/endpoints did the data come from?)',
+    type: SearchResponseDto,
   })
-  async search(@Query() query: SearchQueryDto): Promise<SearchResponseDto[]> {
+  async search(@Query() query: SearchQueryDto): Promise<SearchResponseDto> {
     return SEARCH_MOCK_DATA;
 
     // let filters: SchemaSearchInterface<NodeType> | undefined;

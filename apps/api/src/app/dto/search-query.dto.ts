@@ -144,6 +144,18 @@ export class SearchQueryDto {
   filters?: string;
 
   @ApiProperty({
+    description:
+      'Properties to generate facet counts for. Takes into account the current query and applied filters. ⚠️ To discuss, do we need nested faceting? E.g., for every "type" facet, retrieve "medium" (sub-)facets as well.',
+    example: ['type', 'creator', 'creator.nationality'],
+    type: [String],
+    required: false,
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  facets?: string[];
+
+  @ApiProperty({
     description: 'Field to sort by',
     example: 'label',
     required: false,
