@@ -83,7 +83,7 @@ export class SearchQueryDto {
 
   @ApiProperty({
     description:
-      'See [LDkit filtering](https://ldkit.io/docs/features/filtering) for syntax. Note that a different syntax might make more sense here, work-in-progress.',
+      'See [LDkit filtering](https://ldkit.io/docs/features/filtering) for syntax. A different syntax might make more sense here, work-in-progress. From what I\'ve seen, LDkit filtering seems to be strictly property-based, so a filter like "Nodes that refer to X in a way (via any property)" might require custom SPARQL queries. Note that the examples below are generally not yet functioning and are included as examples of what types of filtering might be important for using this API.',
     type: String,
     required: false,
     examples: {
@@ -91,30 +91,50 @@ export class SearchQueryDto {
         value: '{}',
         summary: 'No filter (return all)',
       },
-      byId: {
+      // byId: {
+      //   value:
+      //     '{"$id":"https://triplydb.com/academy/pokemon/id/pokemon/pikachu"}',
+      //   summary: 'Get by ID (IRI)',
+      // },
+      // contains: {
+      //   value: '{"label":{"$contains":"Pikachu"}}',
+      //   summary: 'Contains text',
+      // },
+      // exactMatch: {
+      //   value: '{"label":"Bulbasaur"}',
+      //   summary: 'Exact match',
+      // },
+      // startsWith: {
+      //   value: '{"label":{"$strStarts":"Bulb"}}',
+      //   summary: 'Starts with',
+      // },
+      // inArray: {
+      //   value: '{"label":{"$in":["Bulbasaur","Ivysaur","Venusaur"]}}',
+      //   summary: 'In array',
+      // },
+      // regex: {
+      //   value: '{"label":{"$regex":"^P.*u$"}}',
+      //   summary: 'Regex pattern',
+      // },
+      typeFilter: {
         value:
-          '{"$id":"https://triplydb.com/academy/pokemon/id/pokemon/pikachu"}',
-        summary: 'Get by ID (IRI)',
+          '{"@type":{"$in":["schema:CreativeWork","schema:Drawing","schema:ImageObject","schema:Map","schema:Photograph","schema:VideoObject","schema:Person","https://data.cbg.nl/pico#PersonObservation","foaf:Agent","http://www.nationaalarchief.nl/mdto#archiefvormer"]}}',
+        summary: 'Nodes with "Visual" or "People" types',
       },
-      contains: {
-        value: '{"label":{"$contains":"Pikachu"}}',
-        summary: 'Contains text',
+      hasRightsData: {
+        value: '{"rights":{"$filter":"BOUND(?value)"}}',
+        summary: 'Nodes that have a "rights" property',
       },
-      exactMatch: {
-        value: '{"label":"Bulbasaur"}',
-        summary: 'Exact match',
+      refersToRembrandt: {
+        value:
+          '{"$filter":"?subject ?p <http://www.wikidata.org/entity/Q5598> || ?subject ?p <https://data.rkd.nl/artists/66219>"}',
+        summary:
+          'Nodes that refer to Rembrandt van Rijn in a way (via any property)',
       },
-      startsWith: {
-        value: '{"label":{"$strStarts":"Bulb"}}',
-        summary: 'Starts with',
-      },
-      inArray: {
-        value: '{"label":{"$in":["Bulbasaur","Ivysaur","Venusaur"]}}',
-        summary: 'In array',
-      },
-      regex: {
-        value: '{"label":{"$regex":"^P.*u$"}}',
-        summary: 'Regex pattern',
+      artworksByDutchArtists: {
+        value: '{"creator":{"nationality":"Dutch"}}',
+        summary:
+          'Nodes of Dutch creators (nested filter: node → creator → nationality)',
       },
       // TODO: Add examples for all filtering options
     },
