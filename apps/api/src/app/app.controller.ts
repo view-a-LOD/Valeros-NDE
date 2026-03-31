@@ -37,7 +37,7 @@ export class AppController {
   @ApiResponse({
     status: 200,
     description:
-      'Returns matching nodes with facet counts. ⚠️ TODO: Needs work wrt provenance (which datasets/endpoints did the data come from?)',
+      'Returns matching nodes with facet counts. ⚠️ TODO: Needs work wrt provenance (which datasets/endpoints did the data come from?). 💭 To discuss: How far do we want to take things wrt JSON-LD compliance? Currently, no JSON-LD context is returned, meaning the syntax is more _inspired_ by JSON-LD than actually valid JSON-LD.',
     type: SearchResponseDto,
   })
   async search(@Query() query: SearchQueryDto): Promise<SearchResponseDto> {
