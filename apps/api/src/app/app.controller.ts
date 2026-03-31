@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { NodeType } from '@valeros-ldkit/shared-types';
+import { NodeSchema, NodeType } from '@valeros-ldkit/shared-types';
 import { AppService } from './app.service';
 import { SearchQueryDto } from './dto/search-query.dto';
 import { SearchResponseDto } from './dto/search-response.dto';
@@ -8,6 +8,7 @@ import { AutocompleteQueryDto } from './dto/autocomplete-query.dto';
 import { AutocompleteResponseDto } from './dto/autocomplete-response.dto';
 import { SchemaSearchInterface } from 'ldkit';
 import { AUTOCOMPLETE_MOCK_DATA } from './dto/autocomplete-mock';
+import { SEARCH_MOCK_DATA } from './dto/search-mock';
 
 @ApiTags('search')
 @Controller()
@@ -39,21 +40,18 @@ export class AppController {
       'Returns matching nodes. ⚠️ TODO: Needs work wrt provenance (which datasets/endpoints did the data come from?)',
     type: [SearchResponseDto],
   })
-  async search(@Query() query: SearchQueryDto): Promise<NodeType[]> {
-    const endpoints: string[] = [
-      'https://api.triplydb.com/datasets/academy/pokemon/sparql',
-      'https://api.triplydb.com/datasets/Triply/iris/sparql',
-    ];
+  async search(@Query() query: SearchQueryDto): Promise<SearchResponseDto[]> {
+    return SEARCH_MOCK_DATA;
 
-    let filters: SchemaSearchInterface<NodeType> | undefined;
-    if (query.filters) {
-      try {
-        filters = JSON.parse(query.filters);
-      } catch (error) {
-        throw new Error('Invalid JSON in filters parameter');
-      }
-    }
+    // let filters: SchemaSearchInterface<NodeType> | undefined;
+    // if (query.filters) {
+    //   try {
+    //     filters = JSON.parse(query.filters);
+    //   } catch (error) {
+    //     throw new Error('Invalid JSON in filters parameter');
+    //   }
+    // }
 
-    return this.appService.search(endpoints, filters);
+    // return this.appService.search(endpoints, filters);
   }
 }
