@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { NodeType } from '@valeros-ldkit/shared-types';
+import { NodeType, SearchQuery } from '@valeros-ldkit/shared-types';
 import {
   IsOptional,
   IsString,
@@ -12,7 +12,7 @@ import {
 import { SchemaSearchInterface } from 'ldkit';
 import { Type } from 'class-transformer';
 
-export class SearchQueryDto {
+export class SearchQueryDto implements SearchQuery {
   @ApiProperty({
     description:
       'Should support search operators/modifiers such as wildcards, fuzzy search, etc. See [Lucene Query Parser Syntax](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html) for example standards. Unsure how far we should take this.',

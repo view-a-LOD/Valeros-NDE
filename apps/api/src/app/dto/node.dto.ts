@@ -1,18 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ValueObject, NodeObject } from 'jsonld';
+import {
+  SearchValueObject,
+  JsonLdPropertyValue,
+  SearchNode,
+} from '@valeros-ldkit/shared-types';
 
-export type SearchValueObject = ValueObject & {
-  highlight?: string;
-  snippet?: string;
-};
-
-export type JsonLdPropertyValue = NodeObject[keyof NodeObject];
-
-export type SearchNodeObject = NodeObject & {
-  [key: string]: JsonLdPropertyValue;
-};
-
-export class NodeDto implements SearchNodeObject {
+export class NodeDto implements SearchNode {
   @ApiProperty({
     description: 'Node IRI',
     example: 'http://www.wikidata.org/entity/Q5582',

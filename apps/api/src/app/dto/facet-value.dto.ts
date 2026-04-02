@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { SearchValueObject } from './node.dto';
+import { SearchValueObject, FacetValue } from '@valeros-ldkit/shared-types';
 
-export class FacetValueDto {
+export class FacetValueDto implements FacetValue {
   @ApiProperty({
     description: 'Facet value IRI',
     example: 'http://www.wikidata.org/entity/Q5598',

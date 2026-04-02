@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { SearchResponse } from '@valeros-ldkit/shared-types';
 import { FacetValueDto } from './facet-value.dto';
 import { NodeDto } from './node.dto';
 
-export class SearchResponseDto {
+export class SearchResponseDto implements SearchResponse {
   @ApiProperty({
     description: 'Search results',
     type: [NodeDto],

@@ -6,8 +6,3 @@ export const NodeSchema = {
 } as const;
 
 export type NodeType = SchemaInterface<typeof NodeSchema>;
-
-export interface SearchQuery {
-  endpoints?: string[];
-  filters?: string;
-}
