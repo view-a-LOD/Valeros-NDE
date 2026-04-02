@@ -6,7 +6,11 @@
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "dependencies": {
+    "jsonld": "^8.3.2",
     "ldkit": "^2.6.0",
     "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/jsonld": "^1.5.15"
   }
 }
