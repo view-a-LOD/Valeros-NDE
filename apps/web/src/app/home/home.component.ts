@@ -14,10 +14,16 @@ import {
 } from '@valeros-ldkit/shared-types';
 import { SearchService } from '../services/search.service';
 import { AutocompleteDropdownComponent } from '../components/autocomplete-dropdown/autocomplete-dropdown.component';
+import { SearchResultComponent } from '../components/search-result/search-result.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule, AutocompleteDropdownComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    AutocompleteDropdownComponent,
+    SearchResultComponent,
+  ],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {

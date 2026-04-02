@@ -1,0 +1,18 @@
+<div class="card border border-base-300">
+  <div class="card-body p-4">
+    <h2 class="card-title text-lg">
+      {{ getLabel() }}
+    </h2>
+
+    @if (getDescription()) {
+      <p class="text-sm text-base-content/70 mt-1">
+        {{ getDescription() }}
+      </p>
+    }
+
+    <pre
+      class="text-xs font-mono bg-base-300 p-3 rounded overflow-x-auto mt-2 opacity-50 hover:opacity-100 transition-opacity"
+      >{{ result() | json }}</pre
+    >
+  </div>
+</div>

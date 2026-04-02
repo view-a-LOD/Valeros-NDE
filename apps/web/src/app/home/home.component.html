@@ -50,16 +50,7 @@
 
     <div class="space-y-2">
       @for (result of results(); track result['@id']) {
-        <div class="card">
-          <div class="card-body p-4">
-            <h2 class="card-title text-lg">
-              {{ result.label?.[0]?.['@value'] || 'No label' }}
-            </h2>
-            <p class="text-sm text-base-content/60 font-mono">
-              {{ result['@id'] }}
-            </p>
-          </div>
-        </div>
+        <app-search-result [result]="result" />
       }
     </div>
   } @else if (!loading() && searchTerm()) {
