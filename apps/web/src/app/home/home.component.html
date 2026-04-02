@@ -31,16 +31,18 @@
 
   @if (results().length > 0) {
     <div class="mb-4 text-sm text-base-content/70">
-      Found {{ results().length }} results
+      Found {{ totalResults() }} results (showing {{ results().length }})
     </div>
 
     <div class="space-y-2">
-      @for (result of results(); track result.$id) {
+      @for (result of results(); track result['@id']) {
         <div class="card">
           <div class="card-body p-4">
-            <h2 class="card-title text-lg">{{ result.label || 'No label' }}</h2>
+            <h2 class="card-title text-lg">
+              {{ result.label?.[0]?.['@value'] || 'No label' }}
+            </h2>
             <p class="text-sm text-base-content/60 font-mono">
-              {{ result.$id }}
+              {{ result['@id'] }}
             </p>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NodeType } from '@valeros-ldkit/shared-types';
+import { SearchNode, SearchResponse } from '@valeros-ldkit/shared-types';
 import { SearchService } from '../services/search.service';
 
 @Component({
@@ -11,11 +11,10 @@ import { SearchService } from '../services/search.service';
 })
 export class HomeComponent {
   searchTerm = signal('');
-  results = signal<NodeType[]>([]);
+  results = signal<SearchNode[]>([]);
+  totalResults = signal(0);
   loading = signal(false);
   error = signal<string | null>(null);
-
-  endpoints = ['https://api.triplydb.com/datasets/academy/pokemon/sparql'];
 
   private searchService = inject(SearchService);
 
@@ -36,18 +35,20 @@ export class HomeComponent {
 
     this.searchService
       .search({
-        endpoints: this.endpoints,
+        query: term,
         filters: filters,
       })
       .subscribe({
-        next: (results) => {
-          this.results.set(results);
+        next: (response: SearchResponse) => {
+          this.results.set(response.results);
+          this.totalResults.set(response.totalResults);
           this.loading.set(false);
         },
         error: (err) => {
           this.error.set('Failed to search: ' + err.message);
           this.loading.set(false);
           this.results.set([]);
+          this.totalResults.set(0);
         },
       });
   }

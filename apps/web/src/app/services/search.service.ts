@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { NodeType, SearchQuery } from '@valeros-ldkit/shared-types';
+import { SearchQuery, SearchResponse } from '@valeros-ldkit/shared-types';
 
 @Injectable({
   providedIn: 'root',
@@ -10,19 +10,42 @@ export class SearchService {
   private apiUrl = 'http://localhost:3000/api';
   private http = inject(HttpClient);
 
-  search(query: SearchQuery): Observable<NodeType[]> {
+  search(query: SearchQuery): Observable<SearchResponse> {
+    const params: HttpParams = this.buildQueryParams(query);
+    return this.http.get<SearchResponse>(`${this.apiUrl}/search`, { params });
+  }
+
+  private buildQueryParams(query: SearchQuery): HttpParams {
     let params = new HttpParams();
 
-    if (query.endpoints && query.endpoints.length > 0) {
-      query.endpoints.forEach((endpoint) => {
-        params = params.append('endpoints', endpoint);
-      });
-    }
+    const addParam = (key: string, value?: string | number | boolean) => {
+      if (value !== undefined && value !== null && value !== '') {
+        params = params.set(key, value.toString());
+      }
+    };
 
-    if (query.filters) {
-      params = params.set('filters', query.filters);
-    }
+    const addArrayParam = (key: string, values?: string[]) => {
+      if (values?.length) {
+        values.forEach((value) => {
+          params = params.append(key, value);
+        });
+      }
+    };
 
-    return this.http.get<NodeType[]>(`${this.apiUrl}/search`, { params });
+    addParam('query', query.query);
+    addArrayParam('properties', query.properties);
+    addArrayParam('searchProperties', query.searchProperties);
+    addParam('filters', query.filters);
+    addArrayParam('facets', query.facets);
+    addParam('sortBy', query.sortBy);
+    addParam('sortOrder', query.sortOrder);
+    addParam('limit', query.limit);
+    addParam('offset', query.offset);
+    addArrayParam('languages', query.languages);
+    addParam('highlightMatches', query.highlightMatches);
+    addParam('returnHighlightedSnippets', query.returnHighlightedSnippets);
+    addParam('snippetLength', query.snippetLength);
+
+    return params;
   }
 }
