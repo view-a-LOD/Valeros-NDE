@@ -1,4 +1,10 @@
-import { Component, inject, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -22,6 +28,8 @@ export class HomeComponent {
   error = signal<string | null>(null);
 
   @ViewChild('autocomplete') autocomplete?: AutocompleteDropdownComponent;
+  @ViewChild('resultsContainer') resultsContainer?: ElementRef<HTMLDivElement>;
+  @ViewChild('noResultsMessage') noResultsMessage?: ElementRef<HTMLDivElement>;
 
   private searchService = inject(SearchService);
 
@@ -31,6 +39,7 @@ export class HomeComponent {
 
   onSuggestionSelect(suggestion: string): void {
     this.searchTerm.set(suggestion);
+    this.autocomplete?.hideAndSuppress();
     this.onSearch();
   }
 
@@ -43,6 +52,8 @@ export class HomeComponent {
   }
 
   onSearch(): void {
+    this.autocomplete?.hideAndSuppress();
+
     const term = this.searchTerm().trim();
 
     if (!term) {
@@ -67,6 +78,14 @@ export class HomeComponent {
           this.results.set(response.results);
           this.totalResults.set(response.totalResults);
           this.loading.set(false);
+
+          setTimeout(() => {
+            if (response.results.length > 0) {
+              this.resultsContainer?.nativeElement.focus();
+            } else {
+              this.noResultsMessage?.nativeElement.focus();
+            }
+          }, 0);
         },
         error: (err) => {
           this.error.set('Failed to search: ' + err.message);

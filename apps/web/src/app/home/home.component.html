@@ -40,7 +40,11 @@
   }
 
   @if (results().length > 0) {
-    <div class="mb-4 text-sm text-base-content/70">
+    <div
+      #resultsContainer
+      tabindex="-1"
+      class="mb-4 text-sm text-base-content/70 outline-none"
+    >
       Found {{ totalResults() }} results (showing {{ results().length }})
     </div>
 
@@ -59,7 +63,11 @@
       }
     </div>
   } @else if (!loading() && searchTerm()) {
-    <div class="text-center py-12 text-base-content/60">
+    <div
+      #noResultsMessage
+      tabindex="-1"
+      class="text-center py-12 text-base-content/60 outline-none"
+    >
       <p>No results found for "{{ searchTerm() }}"</p>
     </div>
   }

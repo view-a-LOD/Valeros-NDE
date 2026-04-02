@@ -41,6 +41,7 @@ export class AutocompleteDropdownComponent {
 
   private autocompleteService = inject(AutocompleteService);
   private autocompleteSubject = new Subject<string>();
+  private suppressAutocomplete = false;
 
   constructor() {
     this.initAutocomplete();
@@ -79,11 +80,20 @@ export class AutocompleteDropdownComponent {
   watchSearchTermChanges() {
     effect(() => {
       const term = this.searchTerm();
-      this.autocompleteSubject.next(term);
+      if (!this.suppressAutocomplete) {
+        this.autocompleteSubject.next(term);
+      } else {
+        this.suppressAutocomplete = false;
+      }
     });
   }
 
   hide(): void {
+    this.show.set(false);
+  }
+
+  hideAndSuppress(): void {
+    this.suppressAutocomplete = true;
     this.show.set(false);
   }
 
