@@ -1,6 +1,5 @@
 const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
 const { join } = require('path');
-const webpack = require('webpack');
 
 module.exports = {
   output: {
@@ -21,22 +20,6 @@ module.exports = {
       outputHashing: 'none',
       generatePackageJson: false,
       sourceMap: true,
-    }),
-    new webpack.IgnorePlugin({
-      checkResource(resource) {
-        const lazyImports = ['class-transformer/storage'];
-        if (!lazyImports.includes(resource)) {
-          return false;
-        }
-        try {
-          require.resolve(resource, {
-            paths: [process.cwd()],
-          });
-        } catch (err) {
-          return true;
-        }
-        return false;
-      },
     }),
   ],
 };
