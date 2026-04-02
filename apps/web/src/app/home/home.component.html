@@ -1,25 +1,36 @@
 <div class="container mx-auto p-8 max-w-4xl">
   <div class="form-control mb-6">
-    <div class="input-group">
-      <input
-        type="text"
-        placeholder="Search..."
-        class="input input-bordered w-full"
-        [ngModel]="searchTerm()"
-        (ngModelChange)="searchTerm.set($event)"
-        (keyup.enter)="onSearch()"
+    <div class="relative">
+      <div class="input-group">
+        <input
+          type="text"
+          placeholder="Search..."
+          class="input input-bordered w-full"
+          [ngModel]="searchTerm()"
+          (ngModelChange)="searchTerm.set($event)"
+          (keyup.enter)="onSearch()"
+          (focus)="onInputFocus()"
+          (blur)="onInputBlur()"
+        />
+        <button
+          class="btn btn-primary"
+          (click)="onSearch()"
+          [disabled]="loading()"
+        >
+          @if (loading()) {
+            <span class="loading loading-spinner"></span>
+          } @else {
+            Search
+          }
+        </button>
+      </div>
+
+      <app-autocomplete-dropdown
+        #autocomplete
+        [searchTerm]="searchTerm()"
+        (selectItem)="onAutocompleteSelect($event)"
+        (selectSuggestion)="onSuggestionSelect($event)"
       />
-      <button
-        class="btn btn-primary mt-2"
-        (click)="onSearch()"
-        [disabled]="loading()"
-      >
-        @if (loading()) {
-          <span class="loading loading-spinner"></span>
-        } @else {
-          Search
-        }
-      </button>
     </div>
   </div>
 

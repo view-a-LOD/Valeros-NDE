@@ -1,12 +1,17 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SearchNode, SearchResponse } from '@valeros-ldkit/shared-types';
+import {
+  SearchNode,
+  SearchResponse,
+  AutocompleteNode,
+} from '@valeros-ldkit/shared-types';
 import { SearchService } from '../services/search.service';
+import { AutocompleteDropdownComponent } from '../components/autocomplete-dropdown/autocomplete-dropdown.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AutocompleteDropdownComponent],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
@@ -16,7 +21,26 @@ export class HomeComponent {
   loading = signal(false);
   error = signal<string | null>(null);
 
+  @ViewChild('autocomplete') autocomplete?: AutocompleteDropdownComponent;
+
   private searchService = inject(SearchService);
+
+  onAutocompleteSelect(item: AutocompleteNode): void {
+    alert('TODO: To implement');
+  }
+
+  onSuggestionSelect(suggestion: string): void {
+    this.searchTerm.set(suggestion);
+    this.onSearch();
+  }
+
+  onInputFocus(): void {
+    this.autocomplete?.showCachedResults();
+  }
+
+  onInputBlur(): void {
+    this.autocomplete?.hide();
+  }
 
   onSearch(): void {
     const term = this.searchTerm().trim();

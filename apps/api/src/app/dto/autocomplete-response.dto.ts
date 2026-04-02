@@ -1,20 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { AutocompleteResponse } from '@valeros-ldkit/shared-types';
+import { AutocompleteNodeDto } from './autocomplete-node.dto';
 
-export class AutocompleteNodeDto {
-  @ApiProperty({
-    description: 'Node IRI',
-    example: 'http://www.wikidata.org/entity/Q5582',
-  })
-  $id!: string;
-
-  @ApiProperty({
-    description: 'Node label',
-    example: 'Vincent van Gogh',
-  })
-  label?: string;
-}
-
-export class AutocompleteResponseDto {
+export class AutocompleteResponseDto implements AutocompleteResponse {
   @ApiProperty({
     description: 'Node results',
     type: [AutocompleteNodeDto],

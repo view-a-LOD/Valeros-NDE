@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
+import { AutocompleteQuery } from '@valeros-ldkit/shared-types';
 
-export class AutocompleteQueryDto {
+export class AutocompleteQueryDto implements AutocompleteQuery {
   @ApiProperty({
     description: '(Partial) search query',
     example: 'vi',

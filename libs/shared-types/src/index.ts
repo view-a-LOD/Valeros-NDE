@@ -5,3 +5,6 @@ export type { SearchNode, JsonLdPropertyValue } from './lib/search-node';
 export type { FacetValue } from './lib/facet-value';
 export type { SearchResponse } from './lib/search-response';
 export type { SearchQuery } from './lib/search-query';
+export type { AutocompleteNode } from './lib/autocomplete-node';
+export type { AutocompleteResponse } from './lib/autocomplete-response';
+export type { AutocompleteQuery } from './lib/autocomplete-query';
