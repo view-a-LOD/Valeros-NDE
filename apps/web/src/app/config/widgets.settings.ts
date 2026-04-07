@@ -5,36 +5,33 @@ import { BadgeWidget } from '../shared/components/widgets/badge-widget/badge-wid
 import { BirthplaceWidget } from '../custom-widgets/birthplace-widget/birthplace-widget.component';
 import { ImageWidget } from '../shared/components/widgets/image-widget/image-widget.component';
 import { MapWidget } from '../shared/components/widgets/map-widget/map-widget.component';
-import { WidgetMapping } from '../shared/types/widget-config';
-
-const baseMappings: WidgetMapping[] = [
-  {
-    properties: ['label'],
-    component: TextWidget,
-    config: {
-      showPropertyLabel: false,
-      asHeader: true,
-    },
-  },
-  {
-    properties: ['@type'],
-    component: BadgeWidget,
-    config: {
-      propertyLabel: 'Soort',
-      // showPropertyLabel: false,
-    },
-  },
-  {
-    properties: ['description'],
-    component: TextWidget,
-    config: {
-      propertyLabel: 'Beschrijving',
-    },
-  },
-];
 
 export const WIDGETS_SETTINGS: WidgetsSettings = {
-  mappings: [...baseMappings],
+  mappings: [
+    {
+      properties: ['label'],
+      component: TextWidget,
+      config: {
+        showPropertyLabel: false,
+        asHeader: true,
+      },
+    },
+    {
+      properties: ['@type'],
+      component: BadgeWidget,
+      config: {
+        propertyLabel: 'Soort',
+        // showPropertyLabel: false,
+      },
+    },
+    {
+      properties: ['description'],
+      component: TextWidget,
+      config: {
+        propertyLabel: 'Beschrijving',
+      },
+    },
+  ],
   defaultWidget: {
     component: JsonWidget,
     properties: [],
@@ -46,7 +43,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
 
 export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
-    ...baseMappings,
+    ...WIDGETS_SETTINGS.mappings,
     {
       properties: ['birthPlace'],
       component: TextWidget,
