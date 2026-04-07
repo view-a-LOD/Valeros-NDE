@@ -2,7 +2,7 @@ import { WidgetConfig, WidgetMapping } from '../shared/types/widget-config';
 import { TextWidget } from '../shared/components/widgets/text-widget/text-widget.component';
 import { JsonWidget } from '../shared/components/widgets/json-widget/json-widget.component';
 import { BadgeWidget } from '../shared/components/widgets/badge-widget/badge-widget.component';
-import { MapWidget } from '../shared/components/widgets/map-widget/map-widget.component';
+import { BirthplaceWidget } from '../custom-widgets/birthplace-widget/birthplace-widget.component';
 
 export const WIDGET_CONFIG: WidgetConfig = [
   {
@@ -26,7 +26,7 @@ export const WIDGET_CONFIG: WidgetConfig = [
     config: {},
   },
   {
-    component: MapWidget,
+    component: BirthplaceWidget,
     properties: ['birthPlace'],
     config: {},
   },

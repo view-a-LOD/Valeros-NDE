@@ -1,0 +1,15 @@
+<app-property-label-wrapper [property]="property()">
+  @if (birthPlaceNode()) {
+    <app-text-widget
+      [node]="birthPlaceNode()!"
+      [property]="'label'"
+      [config]="{ showPropertyLabel: false, asHeader: false }"
+    />
+
+    <app-map-widget
+      [node]="birthPlaceNode()!"
+      [property]="'geo'"
+      [config]="{ showPropertyLabel: false }"
+    />
+  }
+</app-property-label-wrapper>
