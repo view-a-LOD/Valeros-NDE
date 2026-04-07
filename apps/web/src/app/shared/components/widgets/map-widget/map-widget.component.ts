@@ -18,6 +18,7 @@ export class MapWidget extends BaseWidget implements AfterViewInit {
   }
 
   private initMap(): void {
+    // TODO: Retrieve coordinates from data
     const lat = 52.0907;
     const lng = 5.1214;
 
