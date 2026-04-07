@@ -38,3 +38,5 @@ export const PROPERTY_ORDER: string[] = [
   '@type',
   'description',
 ];
+
+export const HIDDEN_PROPERTIES: string[] = ['@id'];
