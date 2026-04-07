@@ -3,6 +3,16 @@ import { BaseWidget } from '../base-widget';
 import { PropertyLabelWrapperComponent } from '../../property-label-wrapper/property-label-wrapper.component';
 import * as L from 'leaflet';
 
+const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
+const iconUrl = 'assets/leaflet/marker-icon.png';
+const shadowUrl = 'assets/leaflet/marker-shadow.png';
+const iconDefault = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+});
+L.Marker.prototype.options.icon = iconDefault;
+
 @Component({
   selector: 'app-map-widget',
   standalone: true,
