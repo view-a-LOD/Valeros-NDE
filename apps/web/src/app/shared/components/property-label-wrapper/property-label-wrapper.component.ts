@@ -7,4 +7,5 @@ import { Component, input } from '@angular/core';
 })
 export class PropertyLabelWrapperComponent {
   property = input.required<string>();
+  showLabel = input<boolean>(true);
 }

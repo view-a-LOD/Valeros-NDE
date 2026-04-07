@@ -5,7 +5,15 @@ import { JsonWidget } from '../shared/components/widgets/json-widget/json-widget
 export const WIDGET_CONFIG: WidgetConfig = [
   {
     component: TextWidget,
-    properties: ['label', 'description'],
+    properties: ['label'],
+    config: {
+      showPropertyLabel: false,
+      asHeader: true,
+    },
+  },
+  {
+    component: TextWidget,
+    properties: ['description'],
     config: {},
   },
 ];

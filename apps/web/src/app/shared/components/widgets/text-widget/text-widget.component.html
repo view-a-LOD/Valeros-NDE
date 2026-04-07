@@ -1,5 +1,14 @@
-<app-property-label-wrapper [property]="property()">
+<app-property-label-wrapper
+  [property]="property()"
+  [showLabel]="showPropertyLabel()"
+>
   @if (getHighlightedFirstValue()) {
-    <app-highlighted-text [text]="getHighlightedFirstValue()!" />
+    @if (asHeader()) {
+      <h2 class="text-2xl font-bold">
+        <app-highlighted-text [text]="getHighlightedFirstValue()!" />
+      </h2>
+    } @else {
+      <app-highlighted-text [text]="getHighlightedFirstValue()!" />
+    }
   }
 </app-property-label-wrapper>

@@ -1,10 +1,14 @@
 import { Type } from '@angular/core';
 import { BaseWidget } from '../components/widgets/base-widget';
 
+export interface BaseWidgetConfig {
+  showPropertyLabel?: boolean;
+}
+
 export interface WidgetMapping {
   component: Type<BaseWidget>;
   properties: string[];
-  config?: Record<string, unknown>;
+  config?: BaseWidgetConfig & Record<string, unknown>;
 }
 
 export type WidgetConfig = WidgetMapping[];

@@ -1,11 +1,16 @@
 import { Directive, input, computed } from '@angular/core';
 import { SearchNode, SearchValueObject } from '@valeros-ldkit/shared-types';
+import { BaseWidgetConfig } from '../../types/widget-config';
 
 @Directive()
 export abstract class BaseWidget {
   node = input.required<SearchNode>();
   property = input.required<string>();
-  config = input<Record<string, unknown>>({});
+  config = input<BaseWidgetConfig & Record<string, unknown>>({});
+
+  showPropertyLabel = computed(() => {
+    return this.config().showPropertyLabel !== false;
+  });
 
   values = computed<SearchValueObject[]>(() => {
     const propValue = this.node()[this.property()];

@@ -1,4 +1,7 @@
-<app-property-label-wrapper [property]="property()">
+<app-property-label-wrapper
+  [property]="property()"
+  [showLabel]="showPropertyLabel()"
+>
   <div class="text-xs">
     <pre class="font-mono bg-base-300 p-2 rounded overflow-x-auto">{{
       values() | json
