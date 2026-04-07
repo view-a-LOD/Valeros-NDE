@@ -7,12 +7,12 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
       '@id': 'http://www.wikidata.org/entity/Q5582',
       '@type': ['http://schema.org/Person'],
       label: [
-        {
-          '@value': 'Vincent van Gogh',
-          '@language': 'en',
-          highlight: '<mark>Vincent</mark> van Gogh',
-          snippet: '<mark>Vincent</mark> van Gogh',
-        },
+        // {
+        //   '@value': 'Vincent van Gogh',
+        //   '@language': 'en',
+        //   highlight: '<mark>Vincent</mark> van Gogh',
+        //   snippet: '<mark>Vincent</mark> van Gogh',
+        // },
         {
           '@value': 'Vincent van Gogh',
           '@language': 'nl',
@@ -21,15 +21,15 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
         },
       ],
       description: [
-        {
-          '@value':
-            'Dutch post-impressionist painter Vincent van Gogh is among the most famous and influential figures in the history of Western art.',
-          '@language': 'en',
-          highlight:
-            'Dutch post-impressionist painter <mark>Vincent</mark> van Gogh is among the most famous and influential figures in the history of Western art.',
-          snippet:
-            '...post-impressionist painter <mark>Vincent</mark> van Gogh is among the most famous...',
-        },
+        // {
+        //   '@value':
+        //     'Dutch post-impressionist painter Vincent van Gogh is among the most famous and influential figures in the history of Western art.',
+        //   '@language': 'en',
+        //   highlight:
+        //     'Dutch post-impressionist painter <mark>Vincent</mark> van Gogh is among the most famous and influential figures in the history of Western art.',
+        //   snippet:
+        //     '...post-impressionist painter <mark>Vincent</mark> van Gogh is among the most famous...',
+        // },
         {
           '@value':
             'Nederlandse postimpressionistische schilder Vincent van Gogh behoort tot de beroemdste en invloedrijkste figuren in de geschiedenis van de westerse kunst.',
@@ -43,20 +43,20 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
       birthPlace: {
         '@id': 'http://www.wikidata.org/entity/Q9883',
         label: [
-          {
-            '@value': 'Zundert',
-            '@language': 'en',
-          },
+          // {
+          //   '@value': 'Zundert',
+          //   '@language': 'en',
+          // },
           {
             '@value': 'Zundert',
             '@language': 'nl',
           },
         ],
         description: [
-          {
-            '@value': 'Municipality in North Brabant, Netherlands',
-            '@language': 'en',
-          },
+          // {
+          //   '@value': 'Municipality in North Brabant, Netherlands',
+          //   '@language': 'en',
+          // },
           {
             '@value': 'Gemeente in Noord-Brabant, Nederland',
             '@language': 'nl',
@@ -83,7 +83,7 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
       {
         '@id': 'http://schema.org/Person',
         label: [
-          { '@value': 'Person', '@language': 'en' },
+          // { '@value': 'Person', '@language': 'en' },
           { '@value': 'Persoon', '@language': 'nl' },
         ],
         count: 42,
@@ -91,7 +91,7 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
       {
         '@id': 'http://schema.org/CreativeWork',
         label: [
-          { '@value': 'Creative Work', '@language': 'en' },
+          // { '@value': 'Creative Work', '@language': 'en' },
           { '@value': 'Creatief werk', '@language': 'nl' },
         ],
         count: 38,
@@ -101,7 +101,7 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
             {
               '@id': 'http://vocab.getty.edu/aat/300033618',
               label: [
-                { '@value': 'Oil painting', '@language': 'en' },
+                // { '@value': 'Oil painting', '@language': 'en' },
                 { '@value': 'Olieverfschilderij', '@language': 'nl' },
               ],
               count: 15,
@@ -109,7 +109,7 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
             {
               '@id': 'http://vocab.getty.edu/aat/300033973',
               label: [
-                { '@value': 'Drawing', '@language': 'en' },
+                // { '@value': 'Drawing', '@language': 'en' },
                 { '@value': 'Tekening', '@language': 'nl' },
               ],
               count: 12,
@@ -117,7 +117,7 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
             {
               '@id': 'http://vocab.getty.edu/aat/300041273',
               label: [
-                { '@value': 'Prints', '@language': 'en' },
+                // { '@value': 'Prints', '@language': 'en' },
                 { '@value': 'Prenten', '@language': 'nl' },
               ],
               count: 11,
@@ -130,7 +130,7 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
       {
         '@id': 'http://www.wikidata.org/entity/Q5598',
         label: [
-          { '@value': 'Rembrandt van Rijn', '@language': 'en' },
+          // { '@value': 'Rembrandt van Rijn', '@language': 'en' },
           { '@value': 'Rembrandt van Rijn', '@language': 'nl' },
         ],
         count: 15,
@@ -138,7 +138,7 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
       {
         '@id': 'http://www.wikidata.org/entity/Q41264',
         label: [
-          { '@value': 'Johannes Vermeer', '@language': 'en' },
+          // { '@value': 'Johannes Vermeer', '@language': 'en' },
           { '@value': 'Johannes Vermeer', '@language': 'nl' },
         ],
         count: 8,
@@ -148,7 +148,7 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
       {
         '@id': 'http://www.wikidata.org/entity/Q55',
         label: [
-          { '@value': 'Dutch', '@language': 'en' },
+          // { '@value': 'Dutch', '@language': 'en' },
           { '@value': 'Nederlands', '@language': 'nl' },
         ],
         count: 23,
@@ -156,7 +156,7 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
       {
         '@id': 'http://www.wikidata.org/entity/Q142',
         label: [
-          { '@value': 'French', '@language': 'en' },
+          // { '@value': 'French', '@language': 'en' },
           { '@value': 'Frans', '@language': 'nl' },
         ],
         count: 12,
@@ -164,7 +164,7 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
       {
         '@id': 'http://www.wikidata.org/entity/Q38',
         label: [
-          { '@value': 'Italian', '@language': 'en' },
+          // { '@value': 'Italian', '@language': 'en' },
           { '@value': 'Italiaans', '@language': 'nl' },
         ],
         count: 7,
