@@ -34,17 +34,17 @@ export const WIDGET_CONFIG: WidgetConfig = [
     },
   },
   {
+    component: BirthplaceWidget,
+    properties: ['birthPlace'],
+    config: {},
+  },
+  {
     component: ImageWidget,
     properties: ['associatedMedia'],
     config: {
       propertyPath: 'thumbnailUrl',
     },
   },
-  // {
-  //   component: BirthplaceWidget,
-  //   properties: ['birthPlace'],
-  //   config: {},
-  // },
 ];
 
 export const DEFAULT_WIDGET: WidgetMapping = {

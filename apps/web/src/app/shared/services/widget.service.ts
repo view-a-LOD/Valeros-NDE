@@ -13,10 +13,10 @@ export class WidgetService {
   private config: WidgetConfig = inject(WIDGET_CONFIG_TOKEN);
   private defaultWidget: WidgetMapping = inject(DEFAULT_WIDGET_TOKEN);
 
-  getWidgetForProperty(property: string): WidgetMapping {
-    const mapping = this.config.find((m: WidgetMapping) =>
+  getWidgetsForProperty(property: string): WidgetMapping[] {
+    const mappings = this.config.filter((m: WidgetMapping) =>
       m.properties.includes(property),
     );
-    return mapping || this.defaultWidget;
+    return mappings.length > 0 ? mappings : [this.defaultWidget];
   }
 }
