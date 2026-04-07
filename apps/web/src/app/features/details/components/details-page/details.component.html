@@ -1,17 +1,25 @@
 <div class="p-4">
-  @if (decodedId) {
+  @if (loading()) {
+    <div class="flex items-center justify-center p-8">
+      <span class="loading loading-spinner loading-lg"></span>
+    </div>
+  } @else if (error()) {
+    <div class="alert alert-error">
+      <span>{{ error() }}</span>
+    </div>
+  } @else if (data()) {
     <div class="mb-4">
       <h2 class="text-lg font-semibold mb-2">ID:</h2>
       <p class="text-sm break-all">{{ decodedId }}</p>
     </div>
 
     <div>
-      <h2 class="text-lg font-semibold mb-2">JSON:</h2>
+      <h2 class="text-lg font-semibold mb-2">Data:</h2>
       <pre class="text-xs font-mono bg-base-300 p-3 rounded overflow-x-auto">{{
-        { id: decodedId } | json
+        data() | json
       }}</pre>
     </div>
   } @else {
-    <p>No ID provided</p>
+    <p>No data available</p>
   }
 </div>
