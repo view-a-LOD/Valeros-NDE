@@ -1,6 +1,10 @@
 import { Directive, input, computed } from '@angular/core';
 import { SearchNode, SearchValueObject } from '@valeros-ldkit/shared-types';
 import { BaseWidgetConfig } from '../../types/widget-config';
+import {
+  normalizeToArray,
+  applyPropertyPath,
+} from '../../utils/property-path.util';
 
 @Directive()
 export abstract class BaseWidget {
@@ -13,15 +17,18 @@ export abstract class BaseWidget {
   });
 
   values = computed<SearchValueObject[]>(() => {
-    const propValue = this.node()[this.property()];
+    const propValues: SearchValueObject[] = normalizeToArray(
+      this.node()[this.property()] as SearchValueObject | SearchValueObject[],
+    );
 
-    if (!propValue) return [];
+    if (!propValues) return [];
 
-    if (Array.isArray(propValue)) {
-      return propValue as SearchValueObject[];
+    const propertyPath = this.config().propertyPath;
+    if (propertyPath) {
+      return applyPropertyPath(propValues, propertyPath) as SearchValueObject[];
     }
 
-    return [propValue as SearchValueObject];
+    return propValues;
   });
 
   protected getHighlightedValues(): string[] {

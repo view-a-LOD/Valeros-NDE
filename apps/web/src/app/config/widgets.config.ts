@@ -26,10 +26,17 @@ export const WIDGET_CONFIG: WidgetConfig = [
     config: {},
   },
   {
-    component: BirthplaceWidget,
+    component: TextWidget,
     properties: ['birthPlace'],
-    config: {},
+    config: {
+      propertyPath: 'label',
+    },
   },
+  // {
+  //   component: BirthplaceWidget,
+  //   properties: ['birthPlace'],
+  //   config: {},
+  // },
 ];
 
 export const DEFAULT_WIDGET: WidgetMapping = {

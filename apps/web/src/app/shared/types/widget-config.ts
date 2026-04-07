@@ -3,6 +3,7 @@ import { BaseWidget } from '../components/widgets/base-widget';
 
 export interface BaseWidgetConfig {
   showPropertyLabel?: boolean;
+  propertyPath?: string;
 }
 
 export interface WidgetMapping {
