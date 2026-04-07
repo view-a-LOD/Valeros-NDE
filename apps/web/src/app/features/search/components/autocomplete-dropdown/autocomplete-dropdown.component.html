@@ -14,15 +14,10 @@
             Results
           </div>
           @for (item of results(); track item.$id) {
-            <button
-              class="w-full text-left px-3 py-2 hover:bg-base-200 rounded-md transition-colors"
-              (click)="selectItem.emit(item)"
-            >
-              <div class="font-medium">{{ item.label || 'No label' }}</div>
-              <div class="text-xs text-base-content/60 font-mono truncate">
-                {{ item.$id }}
-              </div>
-            </button>
+            <app-autocomplete-result-item
+              [item]="item"
+              (itemClick)="selectItem.emit(item)"
+            />
           }
         </div>
       }
@@ -33,12 +28,10 @@
             Suggestions
           </div>
           @for (suggestion of suggestions(); track suggestion) {
-            <button
-              class="w-full text-left px-3 py-2 hover:bg-base-200 rounded-md transition-colors flex items-center gap-2"
-              (click)="selectSuggestion.emit(suggestion)"
-            >
-              <span>{{ suggestion }}</span>
-            </button>
+            <app-autocomplete-suggestion-item
+              [suggestion]="suggestion"
+              (suggestionClick)="selectSuggestion.emit(suggestion)"
+            />
           }
         </div>
       }

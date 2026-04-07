@@ -15,10 +15,16 @@ import {
 import { AutocompleteService } from '../../services/autocomplete.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { AutocompleteResultItemComponent } from './autocomplete-result-item/autocomplete-result-item.component';
+import { AutocompleteSuggestionItemComponent } from './autocomplete-suggestion-item/autocomplete-suggestion-item.component';
 
 @Component({
   selector: 'app-autocomplete-dropdown',
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    AutocompleteResultItemComponent,
+    AutocompleteSuggestionItemComponent,
+  ],
   templateUrl: './autocomplete-dropdown.component.html',
   standalone: true,
 })
