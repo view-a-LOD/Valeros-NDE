@@ -63,6 +63,16 @@ export const SEARCH_MOCK_DATA: SearchResponseDto = {
           },
         ],
       },
+      associatedMedia: [
+        {
+          '@id': 'https://example.org/v1/images/{id}',
+          '@type': 'ImageObject',
+          contentUrl:
+            'https://collections.uu.nl/IIIF/33832/full/max/0/default.jpg',
+          thumbnailUrl:
+            'https://collections.uu.nl/IIIF/33832/full/!512,512/0/default.jpg',
+        },
+      ],
     },
   ],
   totalResults: 156,
