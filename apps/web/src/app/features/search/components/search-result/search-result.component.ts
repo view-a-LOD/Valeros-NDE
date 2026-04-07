@@ -4,10 +4,7 @@ import { Router } from '@angular/router';
 import { SearchNode } from '@valeros-ldkit/shared-types';
 import { DynamicWidgetComponent } from '../../../../shared/components/widgets/dynamic-widget/dynamic-widget.component';
 import { PropertyLabelWrapperComponent } from '../../../../shared/components/property-label-wrapper/property-label-wrapper.component';
-import {
-  PROPERTY_ORDER,
-  HIDDEN_PROPERTIES,
-} from '../../../../config/widgets.config';
+import { WIDGETS_SETTINGS } from '../../../../config/widgets.settings';
 
 @Component({
   selector: 'app-search-result',
@@ -26,12 +23,12 @@ export class SearchResultComponent {
 
   orderedProperties = computed(() => {
     const allProps = Object.keys(this.result()).filter(
-      (prop) => !HIDDEN_PROPERTIES.includes(prop),
+      (prop) => !WIDGETS_SETTINGS.hiddenProperties?.includes(prop),
     );
 
     return allProps.sort((a, b) => {
-      const indexA = PROPERTY_ORDER.indexOf(a);
-      const indexB = PROPERTY_ORDER.indexOf(b);
+      const indexA = WIDGETS_SETTINGS.propertyOrder?.indexOf(a) ?? -1;
+      const indexB = WIDGETS_SETTINGS.propertyOrder?.indexOf(b) ?? -1;
 
       const orderIsDefinedForA = indexA !== -1;
       const orderIsDefinedForB = indexB !== -1;
