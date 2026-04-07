@@ -1,104 +1,14 @@
-import {
-  Component,
-  inject,
-  signal,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import {
-  SearchNode,
-  SearchResponse,
-  AutocompleteNode,
-} from '@valeros-ldkit/shared-types';
-import { SearchService } from '../../services/search.service';
-import { AutocompleteDropdownComponent } from '../autocomplete-dropdown/autocomplete-dropdown.component';
+import { SearchStore } from '../../state/search.store';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { SearchResultComponent } from '../search-result/search-result.component';
 
 @Component({
   selector: 'app-search-page',
-  imports: [
-    CommonModule,
-    FormsModule,
-    AutocompleteDropdownComponent,
-    SearchResultComponent,
-  ],
+  imports: [CommonModule, SearchBarComponent, SearchResultComponent],
   templateUrl: './search-page.component.html',
 })
 export class SearchPageComponent {
-  searchTerm = signal('');
-  results = signal<SearchNode[]>([]);
-  totalResults = signal(0);
-  loading = signal(false);
-  error = signal<string | null>(null);
-
-  @ViewChild('autocomplete') autocomplete?: AutocompleteDropdownComponent;
-  @ViewChild('resultsContainer') resultsContainer?: ElementRef<HTMLDivElement>;
-  @ViewChild('noResultsMessage') noResultsMessage?: ElementRef<HTMLDivElement>;
-
-  private searchService = inject(SearchService);
-
-  onAutocompleteSelect(item: AutocompleteNode): void {
-    alert('TODO: To implement');
-  }
-
-  onSuggestionSelect(suggestion: string): void {
-    this.searchTerm.set(suggestion);
-    this.autocomplete?.hideAndSuppress();
-    this.onSearch();
-  }
-
-  onInputFocus(): void {
-    this.autocomplete?.showCachedResults();
-  }
-
-  onInputBlur(): void {
-    this.autocomplete?.hide();
-  }
-
-  onSearch(): void {
-    this.autocomplete?.hideAndSuppress();
-
-    const term = this.searchTerm().trim();
-
-    if (!term) {
-      this.results.set([]);
-      return;
-    }
-
-    this.loading.set(true);
-    this.error.set(null);
-
-    const filters = JSON.stringify({
-      label: { $contains: term },
-    });
-
-    this.searchService
-      .search({
-        query: term,
-        filters: filters,
-      })
-      .subscribe({
-        next: (response: SearchResponse) => {
-          this.results.set(response.results);
-          this.totalResults.set(response.totalResults);
-          this.loading.set(false);
-
-          setTimeout(() => {
-            if (response.results.length > 0) {
-              this.resultsContainer?.nativeElement.focus();
-            } else {
-              this.noResultsMessage?.nativeElement.focus();
-            }
-          }, 0);
-        },
-        error: (err) => {
-          this.error.set('Failed to search: ' + err.message);
-          this.loading.set(false);
-          this.results.set([]);
-          this.totalResults.set(0);
-        },
-      });
-  }
+  store = inject(SearchStore);
 }

@@ -7,7 +7,7 @@ import { buildHttpParams } from '../../../shared/utils/http-params.util';
 @Injectable({
   providedIn: 'root',
 })
-export class SearchService {
+export class SearchApiService {
   private apiUrl = 'http://localhost:3000/api';
   private http = inject(HttpClient);
 
