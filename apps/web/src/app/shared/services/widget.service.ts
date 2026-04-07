@@ -10,7 +10,7 @@ import {
 export class WidgetService {
   private router = inject(Router);
 
-  private getCurrentSettings(): WidgetsSettings {
+  getCurrentSettings(): WidgetsSettings {
     const url = this.router.url;
     return url.startsWith('/details')
       ? DETAILS_WIDGETS_SETTINGS

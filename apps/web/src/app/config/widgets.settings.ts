@@ -87,4 +87,5 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
+  includedProperties: ['@id'],
 };

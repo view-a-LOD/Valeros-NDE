@@ -6,6 +6,7 @@ export interface WidgetsSettings {
   defaultWidget: WidgetMapping;
   propertyOrder?: string[];
   hiddenProperties?: string[];
+  includedProperties?: string[];
 }
 
 export interface WidgetMapping {

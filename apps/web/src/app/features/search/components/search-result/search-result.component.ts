@@ -4,7 +4,11 @@ import { Router } from '@angular/router';
 import { SearchNode } from '@valeros-ldkit/shared-types';
 import { DynamicWidgetComponent } from '../../../../shared/components/widgets/dynamic-widget/dynamic-widget.component';
 import { PropertyLabelWrapperComponent } from '../../../../shared/components/property-label-wrapper/property-label-wrapper.component';
-import { WIDGETS_SETTINGS } from '../../../../config/widgets.settings';
+import { WidgetService } from '../../../../shared/services/widget.service';
+import {
+  getVisibleProperties,
+  sortProperties,
+} from '../../../../shared/utils/property-filter.util';
 
 @Component({
   selector: 'app-search-result',
@@ -20,26 +24,13 @@ export class SearchResultComponent {
   result = input.required<SearchNode>();
 
   private router = inject(Router);
+  private widgetService = inject(WidgetService);
 
   orderedProperties = computed(() => {
-    const allProps = Object.keys(this.result()).filter(
-      (prop) => !WIDGETS_SETTINGS.hiddenProperties?.includes(prop),
-    );
-
-    return allProps.sort((a, b) => {
-      const indexA = WIDGETS_SETTINGS.propertyOrder?.indexOf(a) ?? -1;
-      const indexB = WIDGETS_SETTINGS.propertyOrder?.indexOf(b) ?? -1;
-
-      const orderIsDefinedForA = indexA !== -1;
-      const orderIsDefinedForB = indexB !== -1;
-
-      if (orderIsDefinedForA && orderIsDefinedForB) return indexA - indexB;
-      if (orderIsDefinedForA) return -1;
-      if (orderIsDefinedForB) return 1;
-      if (!orderIsDefinedForA && !orderIsDefinedForB) return a.localeCompare(b);
-
-      return 0;
-    });
+    const settings = this.widgetService.getCurrentSettings();
+    const properties = Object.keys(this.result());
+    const visibleProperties = getVisibleProperties(properties, settings);
+    return sortProperties(visibleProperties, settings.propertyOrder);
   });
 
   navigateToDetails(): void {
