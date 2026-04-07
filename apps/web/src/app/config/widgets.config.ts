@@ -11,62 +11,62 @@ import { MapWidget } from '../shared/components/widgets/map-widget/map-widget.co
 
 export const WIDGET_CONFIG: WidgetMappingConfig = [
   {
-    component: BadgeWidget,
     properties: ['@type'],
+    component: BadgeWidget,
     config: {
       propertyLabel: 'Soort',
       // showPropertyLabel: false,
     },
   },
   {
-    component: TextWidget,
     properties: ['label'],
+    component: TextWidget,
     config: {
       showPropertyLabel: false,
       asHeader: true,
     },
   },
   {
-    component: TextWidget,
     properties: ['description'],
+    component: TextWidget,
     config: {
       propertyLabel: 'Beschrijving',
     },
   },
   {
-    component: TextWidget,
     properties: ['birthPlace'],
+    component: TextWidget,
     config: {
       propertyPath: 'label',
       propertyLabel: 'Geboorteplaats',
     },
   },
   {
-    component: TextWidget,
     properties: ['birthPlace'],
+    component: TextWidget,
     config: {
       showPropertyLabel: false,
       propertyPath: 'description',
     },
   },
   {
-    component: MapWidget,
     properties: ['birthPlace'],
+    component: MapWidget,
     config: {
       // propertyLabel: 'Kaart',
       showPropertyLabel: false,
     },
   },
   // {
-  //   component: BirthplaceWidget,
   //   properties: ['birthPlace'],
+  //   component: BirthplaceWidget,
   //   config: {
   //     propertyLabel: 'Geboorteplaats (kaart)',
   //   },
   // },
   {
-    component: ImageWidget,
     properties: ['associatedMedia'],
+    component: ImageWidget,
     config: {
       propertyPath: 'thumbnailUrl',
       propertyLabel: 'Afbeelding',
