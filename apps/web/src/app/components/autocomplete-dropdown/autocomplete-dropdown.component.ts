@@ -42,6 +42,7 @@ export class AutocompleteDropdownComponent {
   private autocompleteService = inject(AutocompleteService);
   private autocompleteSubject = new Subject<string>();
   private suppressAutocomplete = false;
+  private cancelPending = false;
 
   constructor() {
     this.initAutocomplete();
@@ -57,12 +58,20 @@ export class AutocompleteDropdownComponent {
             this.show.set(false);
             return [];
           }
+          if (this.cancelPending) {
+            return [];
+          }
+          this.cancelPending = false;
           this.loading.set(true);
           return this.autocompleteService.autocomplete({ query: term });
         }),
       )
       .subscribe({
         next: (response: AutocompleteResponse) => {
+          if (this.cancelPending) {
+            this.loading.set(false);
+            return;
+          }
           this.results.set(response.results);
           this.suggestions.set(response.suggestions);
           this.show.set(true);
@@ -81,6 +90,7 @@ export class AutocompleteDropdownComponent {
     effect(() => {
       const term = this.searchTerm();
       if (!this.suppressAutocomplete) {
+        this.cancelPending = false;
         this.autocompleteSubject.next(term);
       } else {
         this.suppressAutocomplete = false;
@@ -90,10 +100,14 @@ export class AutocompleteDropdownComponent {
 
   hide(): void {
     this.show.set(false);
+    this.cancelPending = true;
+    this.loading.set(false);
   }
 
   hideAndSuppress(): void {
     this.suppressAutocomplete = true;
+    this.cancelPending = true;
+    this.loading.set(false);
     this.show.set(false);
   }
 
