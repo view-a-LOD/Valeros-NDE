@@ -1,5 +1,7 @@
-<div class="text-xs">
-  <pre class="font-mono bg-base-300 p-2 rounded overflow-x-auto">{{
-    values() | json
-  }}</pre>
-</div>
+<app-property-label-wrapper [propertyUri]="propertyUri()">
+  <div class="text-xs">
+    <pre class="font-mono bg-base-300 p-2 rounded overflow-x-auto">{{
+      values() | json
+    }}</pre>
+  </div>
+</app-property-label-wrapper>
