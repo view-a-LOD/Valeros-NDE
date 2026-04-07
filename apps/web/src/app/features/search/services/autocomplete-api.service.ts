@@ -10,7 +10,7 @@ import { buildHttpParams } from '../../../shared/utils/http-params.util';
 @Injectable({
   providedIn: 'root',
 })
-export class AutocompleteService {
+export class AutocompleteApiService {
   private apiUrl = 'http://localhost:3000/api';
   private http = inject(HttpClient);
 

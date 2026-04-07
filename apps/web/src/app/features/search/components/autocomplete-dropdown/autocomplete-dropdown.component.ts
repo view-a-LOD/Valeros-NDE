@@ -12,7 +12,7 @@ import {
   AutocompleteNode,
   AutocompleteResponse,
 } from '@valeros-ldkit/shared-types';
-import { AutocompleteService } from '../../services/autocomplete.service';
+import { AutocompleteApiService } from '../../services/autocomplete-api.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AutocompleteResultItemComponent } from './autocomplete-result-item/autocomplete-result-item.component';
@@ -45,7 +45,7 @@ export class AutocompleteDropdownComponent {
     () => this.results().length > 0 || this.suggestions().length > 0,
   );
 
-  private autocompleteService = inject(AutocompleteService);
+  private autocompleteService = inject(AutocompleteApiService);
   private autocompleteSubject = new Subject<string>();
   private suppressAutocomplete = false;
   private cancelPending = false;
