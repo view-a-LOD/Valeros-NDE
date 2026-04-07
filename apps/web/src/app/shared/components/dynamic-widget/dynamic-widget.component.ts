@@ -7,7 +7,7 @@ import {
   inject,
 } from '@angular/core';
 import { SearchNode } from '@valeros-ldkit/shared-types';
-import { WidgetService } from '../../../services/widget.service';
+import { WidgetService } from '../../services/widget.service';
 
 @Component({
   selector: 'app-dynamic-widget',

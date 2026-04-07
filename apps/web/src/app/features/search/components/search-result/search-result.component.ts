@@ -2,7 +2,7 @@ import { Component, input, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { SearchNode } from '@valeros-ldkit/shared-types';
-import { DynamicWidgetComponent } from '../../../../shared/components/widgets/dynamic-widget/dynamic-widget.component';
+import { DynamicWidgetComponent } from '../../../../shared/components/dynamic-widget/dynamic-widget.component';
 import { PropertyLabelWrapperComponent } from '../../../../shared/components/property-label-wrapper/property-label-wrapper.component';
 import { WidgetService } from '../../../../shared/services/widget.service';
 import {
