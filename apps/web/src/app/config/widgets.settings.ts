@@ -5,32 +5,48 @@ import { BadgeWidget } from '../shared/components/widgets/badge-widget/badge-wid
 import { BirthplaceWidget } from '../custom-widgets/birthplace-widget/birthplace-widget.component';
 import { ImageWidget } from '../shared/components/widgets/image-widget/image-widget.component';
 import { MapWidget } from '../shared/components/widgets/map-widget/map-widget.component';
+import { WidgetMapping } from '../shared/types/widget-config';
+
+const baseMappings: WidgetMapping[] = [
+  {
+    properties: ['label'],
+    component: TextWidget,
+    config: {
+      showPropertyLabel: false,
+      asHeader: true,
+    },
+  },
+  {
+    properties: ['@type'],
+    component: BadgeWidget,
+    config: {
+      propertyLabel: 'Soort',
+      // showPropertyLabel: false,
+    },
+  },
+  {
+    properties: ['description'],
+    component: TextWidget,
+    config: {
+      propertyLabel: 'Beschrijving',
+    },
+  },
+];
 
 export const WIDGETS_SETTINGS: WidgetsSettings = {
+  mappings: [...baseMappings],
+  defaultWidget: {
+    component: JsonWidget,
+    properties: [],
+    config: {},
+  },
+  propertyOrder: ['label', '@type', 'description'],
+  includedProperties: ['label', '@type', 'description'],
+};
+
+export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
-    {
-      properties: ['@type'],
-      component: BadgeWidget,
-      config: {
-        propertyLabel: 'Soort',
-        // showPropertyLabel: false,
-      },
-    },
-    {
-      properties: ['label'],
-      component: TextWidget,
-      config: {
-        showPropertyLabel: false,
-        asHeader: true,
-      },
-    },
-    {
-      properties: ['description'],
-      component: TextWidget,
-      config: {
-        propertyLabel: 'Beschrijving',
-      },
-    },
+    ...baseMappings,
     {
       properties: ['birthPlace'],
       component: TextWidget,
@@ -76,16 +92,6 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  propertyOrder: ['label', '@type', 'description'],
   hiddenProperties: ['@id'],
-};
-
-export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
-  mappings: [],
-  defaultWidget: {
-    component: JsonWidget,
-    properties: [],
-    config: {},
-  },
-  includedProperties: ['@id'],
+  propertyOrder: ['label', '@type', 'description'],
 };
