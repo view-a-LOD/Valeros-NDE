@@ -3,6 +3,7 @@ import { TextWidget } from '../shared/components/widgets/text-widget/text-widget
 import { JsonWidget } from '../shared/components/widgets/json-widget/json-widget.component';
 import { BadgeWidget } from '../shared/components/widgets/badge-widget/badge-widget.component';
 import { BirthplaceWidget } from '../custom-widgets/birthplace-widget/birthplace-widget.component';
+import { ImageWidget } from '../shared/components/widgets/image-widget/image-widget.component';
 
 export const WIDGET_CONFIG: WidgetConfig = [
   {
@@ -30,6 +31,13 @@ export const WIDGET_CONFIG: WidgetConfig = [
     properties: ['birthPlace'],
     config: {
       propertyPath: 'label',
+    },
+  },
+  {
+    component: ImageWidget,
+    properties: ['associatedMedia'],
+    config: {
+      propertyPath: 'thumbnailUrl',
     },
   },
   // {

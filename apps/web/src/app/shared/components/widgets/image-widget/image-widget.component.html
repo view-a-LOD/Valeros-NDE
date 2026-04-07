@@ -1,0 +1,14 @@
+<app-property-label-wrapper
+  [property]="property()"
+  [showLabel]="showPropertyLabel()"
+>
+  @for (imageUrl of values(); track imageUrl) {
+    <div class="mb-2">
+      <img
+        [src]="imageUrl"
+        [alt]="property()"
+        class="rounded-lg max-w-full h-auto"
+      />
+    </div>
+  }
+</app-property-label-wrapper>
