@@ -5,7 +5,7 @@ import {
   AutocompleteQuery,
   AutocompleteResponse,
 } from '@valeros-ldkit/shared-types';
-import { buildHttpParams } from '../utils/http-params.util';
+import { buildHttpParams } from '../../../shared/utils/http-params.util';
 
 @Injectable({
   providedIn: 'root',

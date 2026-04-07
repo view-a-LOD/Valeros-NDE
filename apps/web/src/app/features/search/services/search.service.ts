@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SearchQuery, SearchResponse } from '@valeros-ldkit/shared-types';
-import { buildHttpParams } from '../utils/http-params.util';
+import { buildHttpParams } from '../../../shared/utils/http-params.util';
 
 @Injectable({
   providedIn: 'root',

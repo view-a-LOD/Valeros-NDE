@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { DetailsComponent } from './components/details/details.component';
-import { HomeComponent } from './home/home.component';
+import { DetailsComponent } from './features/details/components/details-page/details.component';
+import { SearchPageComponent } from './features/search/components/search-page/search-page.component';
 
 export const appRoutes: Route[] = [
   {
@@ -9,6 +9,6 @@ export const appRoutes: Route[] = [
   },
   {
     path: '**',
-    component: HomeComponent,
+    component: SearchPageComponent,
   },
 ];

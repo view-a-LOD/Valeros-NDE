@@ -12,21 +12,21 @@ import {
   SearchResponse,
   AutocompleteNode,
 } from '@valeros-ldkit/shared-types';
-import { SearchService } from '../services/search.service';
-import { AutocompleteDropdownComponent } from '../components/autocomplete-dropdown/autocomplete-dropdown.component';
-import { SearchResultComponent } from '../components/search-result/search-result.component';
+import { SearchService } from '../../services/search.service';
+import { AutocompleteDropdownComponent } from '../autocomplete-dropdown/autocomplete-dropdown.component';
+import { SearchResultComponent } from '../search-result/search-result.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-search-page',
   imports: [
     CommonModule,
     FormsModule,
     AutocompleteDropdownComponent,
     SearchResultComponent,
   ],
-  templateUrl: './home.component.html',
+  templateUrl: './search-page.component.html',
 })
-export class HomeComponent {
+export class SearchPageComponent {
   searchTerm = signal('');
   results = signal<SearchNode[]>([]);
   totalResults = signal(0);
