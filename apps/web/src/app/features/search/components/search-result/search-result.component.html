@@ -6,18 +6,16 @@
   role="button"
 >
   <div class="card-body p-4">
-    <h2 class="card-title text-lg">
-      <app-highlighted-text [text]="getLabel()"></app-highlighted-text>
-    </h2>
-
-    @if (getDescription()) {
-      <p class="text-sm text-base-content/70 mt-1">
-        <app-highlighted-text [text]="getDescription()!"></app-highlighted-text>
-      </p>
+    @for (propItem of result() | keyvalue; track propItem.key) {
+      <div class="mb-2">
+        <app-dynamic-widget [node]="result()" [propertyUri]="propItem.key" />
+      </div>
     }
 
+    <hr />
+
     <pre
-      class="text-xs font-mono bg-base-300 p-3 rounded overflow-x-auto mt-2 opacity-50 hover:opacity-100 transition-opacity"
+      class="text-xs font-mono bg-base-300 p-3 rounded overflow-x-auto mt-2 opacity-20 hover:opacity-100 transition-opacity"
       >{{ result() | json }}</pre
     >
   </div>
