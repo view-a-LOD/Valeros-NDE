@@ -79,3 +79,12 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
   propertyOrder: ['label', '@type', 'description'],
   hiddenProperties: ['@id'],
 };
+
+export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
+  mappings: [],
+  defaultWidget: {
+    component: JsonWidget,
+    properties: [],
+    config: {},
+  },
+};
