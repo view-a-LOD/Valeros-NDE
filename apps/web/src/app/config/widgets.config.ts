@@ -15,3 +15,10 @@ export const DEFAULT_WIDGET: WidgetMapping = {
   properties: [],
   config: {},
 };
+
+export const PROPERTY_ORDER: string[] = [
+  '@id',
+  '@type',
+  'label',
+  'description',
+];

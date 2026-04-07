@@ -6,9 +6,9 @@
   role="button"
 >
   <div class="card-body p-4">
-    @for (propItem of result() | keyvalue; track propItem.key) {
+    @for (property of orderedProperties(); track property) {
       <div class="mb-2">
-        <app-dynamic-widget [node]="result()" [property]="propItem.key" />
+        <app-dynamic-widget [node]="result()" [property]="property" />
       </div>
     }
 
