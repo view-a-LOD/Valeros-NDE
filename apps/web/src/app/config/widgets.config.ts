@@ -7,13 +7,15 @@ import { JsonWidget } from '../shared/components/widgets/json-widget/json-widget
 import { BadgeWidget } from '../shared/components/widgets/badge-widget/badge-widget.component';
 import { BirthplaceWidget } from '../custom-widgets/birthplace-widget/birthplace-widget.component';
 import { ImageWidget } from '../shared/components/widgets/image-widget/image-widget.component';
+import { MapWidget } from '../shared/components/widgets/map-widget/map-widget.component';
 
 export const WIDGET_CONFIG: WidgetMappingConfig = [
   {
     component: BadgeWidget,
     properties: ['@type'],
     config: {
-      showPropertyLabel: false,
+      propertyLabel: 'Soort',
+      // showPropertyLabel: false,
     },
   },
   {
@@ -27,25 +29,47 @@ export const WIDGET_CONFIG: WidgetMappingConfig = [
   {
     component: TextWidget,
     properties: ['description'],
-    config: {},
+    config: {
+      propertyLabel: 'Beschrijving',
+    },
   },
   {
     component: TextWidget,
     properties: ['birthPlace'],
     config: {
       propertyPath: 'label',
+      propertyLabel: 'Geboorteplaats',
     },
   },
   {
-    component: BirthplaceWidget,
+    component: TextWidget,
     properties: ['birthPlace'],
-    config: {},
+    config: {
+      showPropertyLabel: false,
+      propertyPath: 'description',
+    },
   },
+  {
+    component: MapWidget,
+    properties: ['birthPlace'],
+    config: {
+      // propertyLabel: 'Kaart',
+      showPropertyLabel: false,
+    },
+  },
+  // {
+  //   component: BirthplaceWidget,
+  //   properties: ['birthPlace'],
+  //   config: {
+  //     propertyLabel: 'Geboorteplaats (kaart)',
+  //   },
+  // },
   {
     component: ImageWidget,
     properties: ['associatedMedia'],
     config: {
       propertyPath: 'thumbnailUrl',
+      propertyLabel: 'Afbeelding',
     },
   },
 ];
@@ -56,11 +80,6 @@ export const DEFAULT_WIDGET: WidgetMapping = {
   config: {},
 };
 
-export const PROPERTY_ORDER: string[] = [
-  'label',
-  '@id',
-  '@type',
-  'description',
-];
+export const PROPERTY_ORDER: string[] = ['label', '@type', 'description'];
 
 export const HIDDEN_PROPERTIES: string[] = ['@id'];
