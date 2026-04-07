@@ -1,4 +1,10 @@
-<div class="card border border-base-300">
+<div
+  class="card border border-base-300 cursor-pointer hover:bg-base-200 transition-colors"
+  (click)="navigateToDetails()"
+  (keyup.enter)="navigateToDetails()"
+  tabindex="0"
+  role="button"
+>
   <div class="card-body p-4">
     <h2 class="card-title text-lg">
       {{ getLabel() }}
