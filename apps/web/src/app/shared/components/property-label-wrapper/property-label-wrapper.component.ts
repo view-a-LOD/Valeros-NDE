@@ -1,4 +1,5 @@
-import { Component, input } from '@angular/core';
+import { Component, input, computed } from '@angular/core';
+import { WidgetConfig } from '../../types/widget-config';
 
 @Component({
   selector: 'app-property-label-wrapper',
@@ -7,5 +8,8 @@ import { Component, input } from '@angular/core';
 })
 export class PropertyLabelWrapperComponent {
   property = input.required<string>();
-  showLabel = input<boolean>(true);
+  config = input<WidgetConfig>({});
+
+  showLabel = computed(() => this.config().showPropertyLabel !== false);
+  displayLabel = computed(() => this.config().propertyLabel || this.property());
 }

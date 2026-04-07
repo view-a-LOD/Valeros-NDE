@@ -16,6 +16,10 @@ export abstract class BaseWidget {
     return this.config().showPropertyLabel !== false;
   });
 
+  propertyLabel = computed(() => {
+    return this.config().propertyLabel;
+  });
+
   values = computed<SearchValueObject[]>(() => {
     const propValues: SearchValueObject[] = normalizeToArray(
       this.node()[this.property()] as SearchValueObject | SearchValueObject[],

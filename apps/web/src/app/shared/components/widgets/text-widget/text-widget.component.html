@@ -1,7 +1,4 @@
-<app-property-label-wrapper
-  [property]="property()"
-  [showLabel]="showPropertyLabel()"
->
+<app-property-label-wrapper [property]="property()" [config]="config()">
   @if (asHeader()) {
     @for (value of getHighlightedValues(); track $index) {
       <h2 class="text-2xl font-bold">

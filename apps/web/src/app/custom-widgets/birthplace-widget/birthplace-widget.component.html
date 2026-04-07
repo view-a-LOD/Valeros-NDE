@@ -1,7 +1,4 @@
-<app-property-label-wrapper
-  [property]="property()"
-  [showLabel]="showPropertyLabel()"
->
+<app-property-label-wrapper [property]="property()" [config]="config()">
   @for (birthPlaceNode of birthPlaceNodes(); track birthPlaceNode['@id']) {
     <div class="mb-4">
       <app-text-widget

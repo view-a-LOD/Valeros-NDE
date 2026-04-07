@@ -1,7 +1,7 @@
 import { Injectable, inject, InjectionToken } from '@angular/core';
-import { WidgetMapping, WidgetConfig } from '../types/widget-config';
+import { WidgetMapping, WidgetMappingConfig } from '../types/widget-config';
 
-export const WIDGET_CONFIG_TOKEN = new InjectionToken<WidgetConfig>(
+export const WIDGET_CONFIG_TOKEN = new InjectionToken<WidgetMappingConfig>(
   'WidgetConfig',
 );
 export const DEFAULT_WIDGET_TOKEN = new InjectionToken<WidgetMapping>(
@@ -10,7 +10,7 @@ export const DEFAULT_WIDGET_TOKEN = new InjectionToken<WidgetMapping>(
 
 @Injectable({ providedIn: 'root' })
 export class WidgetService {
-  private config: WidgetConfig = inject(WIDGET_CONFIG_TOKEN);
+  private config: WidgetMappingConfig = inject(WIDGET_CONFIG_TOKEN);
   private defaultWidget: WidgetMapping = inject(DEFAULT_WIDGET_TOKEN);
 
   getWidgetsForProperty(property: string): WidgetMapping[] {

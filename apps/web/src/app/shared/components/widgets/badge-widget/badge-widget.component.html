@@ -1,7 +1,4 @@
-<app-property-label-wrapper
-  [property]="property()"
-  [showLabel]="showPropertyLabel()"
->
+<app-property-label-wrapper [property]="property()" [config]="config()">
   <div class="flex flex-wrap gap-2">
     @for (value of values(); track $index) {
       <span class="badge badge-primary">{{ value }}</span>
