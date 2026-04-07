@@ -12,13 +12,16 @@
       </div>
     }
 
-    <!-- <hr />
-
-    <app-property-label-wrapper [property]="'Full node JSON'">
+    <details
+      (click)="$event.stopPropagation()"
+      (keydown)="$event.stopPropagation()"
+      tabindex="0"
+    >
+      <summary>Full node JSON</summary>
       <pre
-        class="text-xs font-mono bg-base-300 p-3 rounded overflow-x-auto mt-2 opacity-20 hover:opacity-100 transition-opacity"
+        class="text-xs font-mono bg-base-300 p-3 rounded overflow-x-auto mt-2"
         >{{ result() | json }}</pre
       >
-    </app-property-label-wrapper> -->
+    </details>
   </div>
 </div>
