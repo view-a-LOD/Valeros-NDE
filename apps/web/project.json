@@ -19,7 +19,10 @@
             "input": "apps/web/public"
           }
         ],
-        "styles": ["apps/web/src/styles.scss"],
+        "styles": [
+          "apps/web/src/styles.scss",
+          "node_modules/leaflet/dist/leaflet.css"
+        ],
         "inlineStyleLanguage": "scss"
       },
       "configurations": {
