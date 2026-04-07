@@ -7,12 +7,12 @@
 >
   <div class="card-body p-4">
     <h2 class="card-title text-lg">
-      {{ getLabel() }}
+      <app-highlighted-text [text]="getLabel()"></app-highlighted-text>
     </h2>
 
     @if (getDescription()) {
       <p class="text-sm text-base-content/70 mt-1">
-        {{ getDescription() }}
+        <app-highlighted-text [text]="getDescription()!"></app-highlighted-text>
       </p>
     }
 
