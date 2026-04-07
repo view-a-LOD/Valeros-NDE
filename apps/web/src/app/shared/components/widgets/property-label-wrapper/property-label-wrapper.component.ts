@@ -6,5 +6,5 @@ import { Component, input } from '@angular/core';
   templateUrl: './property-label-wrapper.component.html',
 })
 export class PropertyLabelWrapperComponent {
-  propertyUri = input.required<string>();
+  property = input.required<string>();
 }

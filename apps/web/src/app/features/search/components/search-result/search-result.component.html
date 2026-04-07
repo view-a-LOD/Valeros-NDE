@@ -8,13 +8,13 @@
   <div class="card-body p-4">
     @for (propItem of result() | keyvalue; track propItem.key) {
       <div class="mb-2">
-        <app-dynamic-widget [node]="result()" [propertyUri]="propItem.key" />
+        <app-dynamic-widget [node]="result()" [property]="propItem.key" />
       </div>
     }
 
     <hr />
 
-    <app-property-label-wrapper [propertyUri]="'Full node JSON'">
+    <app-property-label-wrapper [property]="'Full node JSON'">
       <pre
         class="text-xs font-mono bg-base-300 p-3 rounded overflow-x-auto mt-2 opacity-20 hover:opacity-100 transition-opacity"
         >{{ result() | json }}</pre

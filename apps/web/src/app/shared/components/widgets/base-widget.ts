@@ -4,11 +4,11 @@ import { SearchNode, SearchValueObject } from '@valeros-ldkit/shared-types';
 @Directive()
 export abstract class BaseWidget {
   node = input.required<SearchNode>();
-  propertyUri = input.required<string>();
+  property = input.required<string>();
   config = input<Record<string, unknown>>({});
 
   values = computed<SearchValueObject[]>(() => {
-    const propValue = this.node()[this.propertyUri()];
+    const propValue = this.node()[this.property()];
 
     if (!propValue) return [];
 
