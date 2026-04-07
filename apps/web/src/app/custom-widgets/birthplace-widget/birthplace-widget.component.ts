@@ -3,7 +3,7 @@ import { MapWidget } from '../../shared/components/widgets/map-widget/map-widget
 import { BaseWidget } from '../../shared/components/widgets/base-widget';
 import { TextWidget } from '../../shared/components/widgets/text-widget/text-widget.component';
 import { SearchNode } from '@valeros-ldkit/shared-types';
-import { PropertyLabelWrapperComponent } from "../../shared/components/property-label-wrapper/property-label-wrapper.component";
+import { PropertyLabelWrapperComponent } from '../../shared/components/property-label-wrapper/property-label-wrapper.component';
 
 @Component({
   selector: 'app-birthplace-widget',
@@ -12,9 +12,9 @@ import { PropertyLabelWrapperComponent } from "../../shared/components/property-
   templateUrl: './birthplace-widget.component.html',
 })
 export class BirthplaceWidget extends BaseWidget {
-  birthPlaceNode = computed<SearchNode | null>(() => {
-    const firstValue = this.getFirstValue();
-    if (!firstValue || typeof firstValue !== 'object') return null;
-    return firstValue as SearchNode;
+  birthPlaceNodes = computed<SearchNode[]>(() => {
+    return this.values()
+      .filter((v) => v && typeof v === 'object')
+      .map((v) => v as SearchNode);
   });
 }

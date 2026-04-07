@@ -1,21 +1,26 @@
-<app-property-label-wrapper [property]="property()">
-  @if (birthPlaceNode()) {
-    <app-text-widget
-      [node]="birthPlaceNode()!"
-      [property]="'label'"
-      [config]="{ showPropertyLabel: false, asHeader: false }"
-    />
+<app-property-label-wrapper
+  [property]="property()"
+  [showLabel]="showPropertyLabel()"
+>
+  @for (birthPlaceNode of birthPlaceNodes(); track birthPlaceNode['@id']) {
+    <div class="mb-4">
+      <app-text-widget
+        [node]="birthPlaceNode"
+        [property]="'label'"
+        [config]="{ showPropertyLabel: false, asHeader: false }"
+      />
 
-    <app-text-widget
-      [node]="birthPlaceNode()!"
-      [property]="'description'"
-      [config]="{ showPropertyLabel: false, asHeader: false }"
-    />
+      <app-text-widget
+        [node]="birthPlaceNode"
+        [property]="'description'"
+        [config]="{ showPropertyLabel: false, asHeader: false }"
+      />
 
-    <app-map-widget
-      [node]="birthPlaceNode()!"
-      [property]="'geo'"
-      [config]="{ showPropertyLabel: false }"
-    />
+      <app-map-widget
+        [node]="birthPlaceNode"
+        [property]="'geo'"
+        [config]="{ showPropertyLabel: false }"
+      />
+    </div>
   }
 </app-property-label-wrapper>

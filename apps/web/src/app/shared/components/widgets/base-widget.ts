@@ -24,14 +24,10 @@ export abstract class BaseWidget {
     return [propValue as SearchValueObject];
   });
 
-  protected getFirstValue(): SearchValueObject | undefined {
-    return this.values()[0];
-  }
-
-  protected getHighlightedFirstValue(): string | null {
-    const first = this.getFirstValue();
-    if (!first) return null;
-    return first.highlight || this.extractStringValue(first);
+  protected getHighlightedValues(): string[] {
+    return this.values()
+      .map((v) => v.highlight || this.extractStringValue(v))
+      .filter((v): v is string => v !== null);
   }
 
   protected extractStringValue(valueObj: SearchValueObject): string | null {

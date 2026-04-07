@@ -2,13 +2,17 @@
   [property]="property()"
   [showLabel]="showPropertyLabel()"
 >
-  @if (getHighlightedFirstValue()) {
-    @if (asHeader()) {
+  @if (asHeader()) {
+    @for (value of getHighlightedValues(); track $index) {
       <h2 class="text-2xl font-bold">
-        <app-highlighted-text [text]="getHighlightedFirstValue()!" />
+        <app-highlighted-text [text]="value" />
       </h2>
-    } @else {
-      <app-highlighted-text [text]="getHighlightedFirstValue()!" />
+    }
+  } @else {
+    @for (value of getHighlightedValues(); track $index) {
+      <div>
+        <app-highlighted-text [text]="value" />
+      </div>
     }
   }
 </app-property-label-wrapper>
