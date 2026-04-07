@@ -33,8 +33,8 @@ export const DEFAULT_WIDGET: WidgetMapping = {
 };
 
 export const PROPERTY_ORDER: string[] = [
+  'label',
   '@id',
   '@type',
-  'label',
   'description',
 ];
