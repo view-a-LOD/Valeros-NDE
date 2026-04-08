@@ -14,6 +14,15 @@ export class SearchStore {
   loading = signal(false);
   error = signal<string | null>(null);
 
+  constructor() {
+    this.performInitialSearch();
+  }
+
+  private performInitialSearch(): void {
+    this.searchTerm.set('*');
+    this.search();
+  }
+
   search(): void {
     const trimmedTerm = this.searchTerm().trim();
 
