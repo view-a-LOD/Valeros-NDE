@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { SearchNode } from '@valeros-ldkit/shared-types';
 import { DynamicWidgetComponent } from '../../../../shared/components/dynamic-widget/dynamic-widget.component';
-import { PropertyLabelWrapperComponent } from '../../../../shared/components/property-label-wrapper/property-label-wrapper.component';
 import { WidgetService } from '../../../../shared/services/widget.service';
 import {
   getVisibleProperties,
@@ -12,11 +11,7 @@ import {
 
 @Component({
   selector: 'app-search-result',
-  imports: [
-    CommonModule,
-    DynamicWidgetComponent,
-    PropertyLabelWrapperComponent,
-  ],
+  imports: [CommonModule, DynamicWidgetComponent],
   templateUrl: './search-result.component.html',
   standalone: true,
 })
