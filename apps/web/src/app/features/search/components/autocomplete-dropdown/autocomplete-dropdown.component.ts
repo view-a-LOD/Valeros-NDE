@@ -14,7 +14,12 @@ import {
 } from '@valeros-ldkit/shared-types';
 import { AutocompleteApiService } from '../../services/autocomplete-api.service';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  skip,
+  switchMap,
+} from 'rxjs/operators';
 import { AutocompleteResultItemComponent } from './autocomplete-result-item/autocomplete-result-item.component';
 import { AutocompleteSuggestionItemComponent } from './autocomplete-suggestion-item/autocomplete-suggestion-item.component';
 
@@ -57,6 +62,7 @@ export class AutocompleteDropdownComponent {
   initAutocomplete() {
     this.autocompleteSubject
       .pipe(
+        skip(1),
         debounceTime(this.debounceMs()),
         distinctUntilChanged(),
         switchMap((term) => {
