@@ -13,7 +13,7 @@
           <div class="text-xs font-semibold text-base-content/60 px-3 py-2">
             Results
           </div>
-          @for (item of results(); track item.$id) {
+          @for (item of results(); track item.id) {
             <app-autocomplete-result-item
               [item]="item"
               (itemClick)="selectItem.emit(item)"

@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { SearchApiService } from '../services/search-api.service';
-import { SearchNode } from '../../../types/search-node';
+import { NodeModel } from '../../../types/node/node.model';
 import { SearchResponse } from '../../../types/search-response';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class SearchStore {
   private searchApiService = inject(SearchApiService);
 
   searchTerm = signal('');
-  results = signal<SearchNode[]>([]);
+  results = signal<NodeModel[]>([]);
   totalResults = signal(0);
   loading = signal(false);
   error = signal<string | null>(null);
@@ -35,19 +35,15 @@ export class SearchStore {
     this.loading.set(true);
     this.error.set(null);
 
-    const filters = JSON.stringify({
-      label: { $contains: trimmedTerm },
-    });
-
     this.searchApiService
       .search({
-        query: trimmedTerm,
-        filters: filters,
+        q: trimmedTerm,
+        size: 10,
       })
       .subscribe({
         next: (response: SearchResponse) => {
-          this.results.set(response.results);
-          this.totalResults.set(response.totalResults);
+          this.results.set(response.orderedItems);
+          this.totalResults.set(response.partOf.totalItems);
           this.loading.set(false);
         },
         error: (err) => {

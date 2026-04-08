@@ -10,7 +10,7 @@ import { IiifWidget } from '../shared/components/widgets/iiif-widget/iiif-widget
 export const WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
     {
-      properties: ['label'],
+      properties: ['name'],
       component: TextWidget,
       config: {
         showPropertyLabel: false,
@@ -19,7 +19,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
-      properties: ['@type'],
+      properties: ['type'],
       component: BadgeWidget,
       config: {
         propertyLabel: 'Soort',
@@ -39,67 +39,36 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  propertyOrder: ['label', '@type', 'description'],
-  includedProperties: ['label', '@type', 'description'],
+  propertyOrder: ['name', 'type', 'description'],
+  includedProperties: ['name', 'type', 'description'],
 };
 
 export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
     ...WIDGETS_SETTINGS.mappings,
     {
-      properties: ['birthPlace'],
-      component: TextWidget,
-      config: {
-        propertyPath: 'label',
-        propertyLabel: 'Geboorteplaats',
-      },
-    },
-    {
-      properties: ['birthPlace'],
-      component: TextWidget,
-      config: {
-        showPropertyLabel: false,
-        propertyPath: 'description',
-      },
-    },
-    {
-      properties: ['birthPlace'],
-      component: MapWidget,
-      config: {
-        // propertyLabel: 'Kaart',
-        showPropertyLabel: false,
-      },
-    },
-    // {
-    //   properties: ['birthPlace'],
-    //   component: BirthplaceWidget,
-    //   config: {
-    //     propertyLabel: 'Geboorteplaats (kaart)',
-    //   },
-    // },
-    // {
-    //   properties: ['associatedMedia'],
-    //   component: ImageWidget,
-    //   config: {
-    //     propertyPath: 'thumbnailUrl',
-    //     propertyLabel: 'Afbeelding',
-    //     position: 'left',
-    //   },
-    // },
-    {
       properties: ['associatedMedia'],
-      component: IiifWidget,
+      component: ImageWidget,
       config: {
-        showPropertyLabel: false,
+        propertyPath: 'thumbnailUrl',
+        propertyLabel: 'Afbeelding',
         position: 'left',
       },
     },
+    // {
+    //   properties: ['associatedMedia'],
+    //   component: IiifWidget,
+    //   config: {
+    //     showPropertyLabel: false,
+    //     position: 'left',
+    //   },
+    // },
   ],
   defaultWidget: {
     component: JsonWidget,
     properties: [],
     config: {},
   },
-  hiddenProperties: ['@id'],
-  propertyOrder: ['label', '@type', 'description'],
+  hiddenProperties: ['id'],
+  propertyOrder: ['name', 'type', 'description'],
 };

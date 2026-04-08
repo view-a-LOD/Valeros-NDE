@@ -1,10 +1,17 @@
-import { SearchNode } from './search-node';
-import { FacetValue } from './facet-value';
+import { NodeModel } from './node/node.model';
 
 export interface SearchResponse {
-  results: SearchNode[];
-  totalResults: number;
-  limit: number;
-  offset: number;
-  facets?: Record<string, FacetValue[]>;
+  id: string;
+  type: 'OrderedCollectionPage';
+  partOf: {
+    id: string;
+    type: 'OrderedCollection';
+    totalItems: number;
+    first?: string;
+    last?: string;
+  };
+  next?: string;
+  prev?: string;
+  startIndex: number;
+  orderedItems: NodeModel[];
 }

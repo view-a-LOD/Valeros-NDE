@@ -1,15 +1,14 @@
 import { Directive, input, computed } from '@angular/core';
 import { BaseWidgetConfig } from '../../types/widget-config';
 import {
-  normalizeToArray,
   applyPropertyPath,
+  normalizeToArray,
 } from '../../utils/property-path.util';
-import { SearchNode } from '../../../types/search-node';
-import { SearchValueObject } from '../../../types/search-value-object';
+import { NodeModel } from '../../../types/node/node.model';
 
 @Directive()
 export abstract class BaseWidget {
-  node = input.required<SearchNode>();
+  node = input.required<NodeModel>();
   property = input.required<string>();
   config = input<BaseWidgetConfig & Record<string, unknown>>({});
 
@@ -21,31 +20,15 @@ export abstract class BaseWidget {
     return this.config().propertyLabel;
   });
 
-  values = computed<SearchValueObject[]>(() => {
-    const propValues: SearchValueObject[] = normalizeToArray(
-      this.node()[this.property()] as SearchValueObject | SearchValueObject[],
-    );
-
-    if (!propValues) return [];
+  values = computed<any[]>(() => {
+    const propValue = this.node()[this.property()];
+    const propValues = normalizeToArray(propValue);
 
     const propertyPath = this.config().propertyPath;
     if (propertyPath) {
-      return applyPropertyPath(propValues, propertyPath) as SearchValueObject[];
+      return applyPropertyPath(propValues, propertyPath) as any[];
     }
 
     return propValues;
   });
-
-  protected getHighlightedValues(): string[] {
-    return this.values()
-      .map((v) => v.highlight || this.extractStringValue(v))
-      .filter((v): v is string => v !== null);
-  }
-
-  protected extractStringValue(valueObj: SearchValueObject): string | null {
-    const value = valueObj['@value'];
-    if (!value) return null;
-    if (typeof value === 'object') return JSON.stringify(value);
-    return String(value);
-  }
 }

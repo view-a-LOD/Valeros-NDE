@@ -28,7 +28,7 @@ export class SearchBarComponent {
   }
 
   onAutocompleteSelect(item: AutocompleteNode): void {
-    const id = item.$id;
+    const id = item.id;
     if (id) {
       this.autocomplete?.hideAndSuppress();
       this.router.navigate(['/details', encodeURIComponent(id)]);

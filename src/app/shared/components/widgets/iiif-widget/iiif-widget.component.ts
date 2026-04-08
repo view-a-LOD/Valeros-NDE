@@ -1,15 +1,8 @@
 import { Component, AfterViewInit, OnDestroy, computed } from '@angular/core';
 import { BaseWidget } from '../base-widget';
 import Mirador, { MiradorInstance, MiradorConfig } from 'mirador';
-import { SearchValueObject } from '../../../../types/search-value-object';
-
-// TODO: Define this type elsewhere
-type AssociatedMediaObject = SearchValueObject & {
-  '@id'?: string;
-  contentUrl?: string;
-  thumbnailUrl?: string;
-  encodingFormat?: string;
-};
+import { NodeModel } from '../../../../types/node/node.model';
+import { AssociatedMediaObject } from '../../../../types/node/associated-media-object';
 
 @Component({
   selector: 'app-iiif-widget',
@@ -24,7 +17,7 @@ export class IiifWidget extends BaseWidget implements AfterViewInit, OnDestroy {
   manifestUrls = computed(() => {
     return (this.values() as AssociatedMediaObject[])
       .filter((v) => this.isIIIFManifest(v))
-      .map((v) => v['@id'])
+      .map((v) => v.id)
       .filter((url): url is string => typeof url === 'string' && url !== '');
   });
 

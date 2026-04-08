@@ -3,7 +3,7 @@ import { MapWidget } from '../../shared/components/widgets/map-widget/map-widget
 import { BaseWidget } from '../../shared/components/widgets/base-widget';
 import { TextWidget } from '../../shared/components/widgets/text-widget/text-widget.component';
 import { PropertyLabelWrapperComponent } from '../../shared/components/property-label-wrapper/property-label-wrapper.component';
-import { SearchNode } from '../../types/search-node';
+import { NodeModel } from '../../types/node/node.model';
 
 @Component({
   selector: 'app-birthplace-widget',
@@ -12,9 +12,9 @@ import { SearchNode } from '../../types/search-node';
   templateUrl: './birthplace-widget.component.html',
 })
 export class BirthplaceWidget extends BaseWidget {
-  birthPlaceNodes = computed<SearchNode[]>(() => {
+  birthPlaceNodes = computed<NodeModel[]>(() => {
     return this.values()
       .filter((v) => v && typeof v === 'object')
-      .map((v) => v as SearchNode);
+      .map((v) => v as NodeModel);
   });
 }

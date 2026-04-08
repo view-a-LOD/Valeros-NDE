@@ -10,17 +10,13 @@ import { AutocompleteResponse } from '../../../types/autocomplete-response';
   providedIn: 'root',
 })
 export class AutocompleteApiService {
-  private apiUrl = 'http://localhost:3000/api';
-  private http = inject(HttpClient);
-
   autocomplete(query: AutocompleteQuery): Observable<AutocompleteResponse> {
-    const params: HttpParams = buildHttpParams(query);
-
+    // TODO: Connect with API
     const mockResponse: AutocompleteResponse = {
       results: [
         {
-          $id: 'http://www.wikidata.org/entity/Q5582',
-          label: 'Vincent van Gogh',
+          id: 'http://www.wikidata.org/entity/Q5582',
+          name: 'Vincent van Gogh',
         },
       ],
       suggestions: ['Vincent van Gogh', 'Vermeer'],
@@ -32,9 +28,5 @@ export class AutocompleteApiService {
         subscriber.complete();
       }, 300);
     });
-
-    // return this.http.get<AutocompleteResponse>(`${this.apiUrl}/autocomplete`, {
-    //   params,
-    // });
   }
 }

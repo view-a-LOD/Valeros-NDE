@@ -1,4 +1,4 @@
 export interface AutocompleteNode {
-  $id: string;
-  label?: string;
+  id: string;
+  name?: string;
 }

@@ -1,11 +1,11 @@
 @if (asHeader()) {
-  @for (value of getHighlightedValues(); track $index) {
+  @for (value of values(); track $index) {
     <h2 class="text-2xl font-bold">
       <span [innerHTML]="value"></span>
     </h2>
   }
 } @else {
-  @for (value of getHighlightedValues(); track $index) {
+  @for (value of values(); track $index) {
     <div>
       <span [innerHTML]="value"></span>
     </div>

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SearchApiService } from '../../../search/services/search-api.service';
 import { NodeComponent } from '../../../../shared/components/node/node.component';
-import { SearchNode } from '../../../../types/search-node';
+import { NodeModel } from '../../../../types/node/node.model';
 
 @Component({
   selector: 'app-details',
@@ -14,7 +14,7 @@ import { SearchNode } from '../../../../types/search-node';
 export class DetailsComponent implements OnInit {
   id: string | null = null;
   decodedId: string | null = null;
-  data = signal<SearchNode | null>(null);
+  data = signal<NodeModel | null>(null);
   loading = signal<boolean>(false);
   error = signal<string | null>(null);
 
@@ -35,19 +35,15 @@ export class DetailsComponent implements OnInit {
     this.loading.set(true);
     this.error.set(null);
 
-    const filters = JSON.stringify({
-      '@id': { $eq: this.decodedId },
-    });
-
+    // TODO: Replace with call for getting details for this node (by ID)
     this.searchApiService
       .search({
-        query: '',
-        filters: filters,
+        q: this.decodedId,
       })
       .subscribe({
         next: (response) => {
-          if (response.results.length > 0) {
-            this.data.set(response.results[0]);
+          if (response.orderedItems.length > 0) {
+            this.data.set(response.orderedItems[0]);
           } else {
             this.error.set('No data found for this ID');
           }

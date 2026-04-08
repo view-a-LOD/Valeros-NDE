@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { WidgetMapping } from '../../types/widget-config';
 import { PropertyLabelWrapperComponent } from '../property-label-wrapper/property-label-wrapper.component';
-import { SearchNode } from '../../../types/search-node';
+import { NodeModel } from '../../../types/node/node.model';
 
 @Component({
   selector: 'app-dynamic-widget',
@@ -16,7 +16,7 @@ import { SearchNode } from '../../../types/search-node';
   imports: [PropertyLabelWrapperComponent],
 })
 export class DynamicWidgetComponent implements AfterViewInit {
-  data = input.required<SearchNode>();
+  data = input.required<NodeModel>();
   property = input.required<string>();
   widget = input.required<WidgetMapping>();
 

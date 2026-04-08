@@ -8,7 +8,7 @@ import {
   getVisibleProperties,
   sortProperties,
 } from '../../utils/property-filter.util';
-import { SearchNode } from '../../../types/search-node';
+import { NodeModel } from '../../../types/node/node.model';
 
 @Component({
   selector: 'app-node',
@@ -18,7 +18,7 @@ import { SearchNode } from '../../../types/search-node';
   standalone: true,
 })
 export class NodeComponent {
-  data = input.required<SearchNode>();
+  data = input.required<NodeModel>();
 
   private router = inject(Router);
   private widgetService = inject(WidgetService);
@@ -55,7 +55,7 @@ export class NodeComponent {
   });
 
   navigateToDetails(): void {
-    const id = this.data()['@id'];
+    const id = this.data().id;
     if (id) {
       this.router.navigate(['/details', encodeURIComponent(id)]);
     }

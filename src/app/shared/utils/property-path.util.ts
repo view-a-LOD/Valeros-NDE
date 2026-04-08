@@ -7,7 +7,8 @@ export function getNestedValue(value: unknown, path: string): unknown {
   }, value);
 }
 
-export function normalizeToArray<T>(value: T | T[]): T[] {
+export function normalizeToArray<T>(value: T | T[] | undefined | null): T[] {
+  if (value === undefined || value === null) return [];
   return Array.isArray(value) ? value : [value];
 }
 
