@@ -27,9 +27,9 @@ export class SearchApiService {
         {
           id: 'https://example.org/v1/heritage-objects/{id}',
           type: 'CreativeWork',
-          name: 'Fysisch laboratorium Utrecht 1896',
+          name: 'Fysisch laboratorium <mark>Utrecht</mark> 1896',
           description:
-            'Zwart-wit foto van een kamer in het fysisch laboratorium te Utrecht, met rechts de amanuensis dhr. Marinus Pieter Filbri, in het midden de toen nog assistent Van Huffel en links de instrumentmaker G. Koolschijn, Utrecht, 1896.',
+            'Zwart-wit foto van een kamer in het fysisch laboratorium te Utrecht, met rechts de amanuensis dhr. Marinus Pieter Filbri, in het midden de toen nog assistent Van Huffel en links de instrumentmaker G. Koolschijn, <mark>Utrecht</mark>, 1896.',
           associatedMedia: [
             {
               id: 'https://example.org/v1/images/{id}',
