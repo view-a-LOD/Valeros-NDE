@@ -52,17 +52,16 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
       config: {
         propertyPath: 'thumbnailUrl',
         propertyLabel: 'Afbeelding',
+      },
+    },
+    {
+      properties: ['associatedMedia'],
+      component: IiifWidget,
+      config: {
+        showPropertyLabel: false,
         position: 'left',
       },
     },
-    // {
-    //   properties: ['associatedMedia'],
-    //   component: IiifWidget,
-    //   config: {
-    //     showPropertyLabel: false,
-    //     position: 'left',
-    //   },
-    // },
   ],
   defaultWidget: {
     component: JsonWidget,

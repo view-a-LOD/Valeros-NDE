@@ -39,6 +39,12 @@ export class SearchApiService {
               thumbnailUrl:
                 'https://collections.uu.nl/IIIF/33832/full/!512,512/0/default.jpg',
             },
+            {
+              id: 'https://iiif.bodleian.ox.ac.uk/iiif/manifest/e32a277e-91e2-4a6d-8ba6-cc4bad230410.json',
+              type: 'MediaObject',
+              encodingFormat:
+                "application/ld+json;profile='http://iiif.io/api/presentation/2/context.json'",
+            },
           ],
         },
       ],
