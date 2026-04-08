@@ -1,1 +1,12 @@
-<ng-container #container></ng-container>
+@for (widget of widgets(); track $index) {
+  @if (widget.config?.showPropertyLabel !== false) {
+    <app-property-label-wrapper
+      [property]="property()"
+      [config]="widget.config || {}"
+    >
+      <ng-container #widgetContainer></ng-container>
+    </app-property-label-wrapper>
+  } @else {
+    <ng-container #widgetContainer></ng-container>
+  }
+}

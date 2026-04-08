@@ -1,15 +1,13 @@
-<app-property-label-wrapper [property]="property()" [config]="config()">
-  @if (asHeader()) {
-    @for (value of getHighlightedValues(); track $index) {
-      <h2 class="text-2xl font-bold">
-        <app-highlighted-text [text]="value" />
-      </h2>
-    }
-  } @else {
-    @for (value of getHighlightedValues(); track $index) {
-      <div>
-        <app-highlighted-text [text]="value" />
-      </div>
-    }
+@if (asHeader()) {
+  @for (value of getHighlightedValues(); track $index) {
+    <h2 class="text-2xl font-bold">
+      <span [innerHTML]="value"></span>
+    </h2>
   }
-</app-property-label-wrapper>
+} @else {
+  @for (value of getHighlightedValues(); track $index) {
+    <div>
+      <span [innerHTML]="value"></span>
+    </div>
+  }
+}

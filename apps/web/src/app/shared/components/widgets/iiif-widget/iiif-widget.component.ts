@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, OnDestroy, computed } from '@angular/core';
 import { BaseWidget } from '../base-widget';
-import { PropertyLabelWrapperComponent } from '../../property-label-wrapper/property-label-wrapper.component';
 import Mirador, { MiradorInstance, MiradorConfig } from 'mirador';
 import { SearchValueObject } from '@valeros-ldkit/shared-types';
 
@@ -15,7 +14,7 @@ type AssociatedMediaObject = SearchValueObject & {
 @Component({
   selector: 'app-iiif-widget',
   standalone: true,
-  imports: [PropertyLabelWrapperComponent],
+  imports: [],
   templateUrl: './iiif-widget.component.html',
 })
 export class IiifWidget extends BaseWidget implements AfterViewInit, OnDestroy {

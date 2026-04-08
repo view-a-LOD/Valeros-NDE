@@ -1,6 +1,5 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { BaseWidget } from '../base-widget';
-import { PropertyLabelWrapperComponent } from '../../property-label-wrapper/property-label-wrapper.component';
 import * as L from 'leaflet';
 
 const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
@@ -16,7 +15,7 @@ L.Marker.prototype.options.icon = iconDefault;
 @Component({
   selector: 'app-map-widget',
   standalone: true,
-  imports: [PropertyLabelWrapperComponent],
+  imports: [],
   templateUrl: './map-widget.component.html',
 })
 export class MapWidget extends BaseWidget implements AfterViewInit {
