@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, OnDestroy, computed } from '@angular/core';
 import { BaseWidget } from '../base-widget';
 import Mirador, { MiradorInstance, MiradorConfig } from 'mirador';
-import { NodeModel } from '../../../../types/node/node.model';
-import { AssociatedMediaObject } from '../../../../types/node/associated-media-object';
+import { NodeModel } from '../../../types/node/node.model';
+import { AssociatedMediaObject } from '../../../types/node/associated-media-object';
 
 @Component({
   selector: 'app-iiif-widget',

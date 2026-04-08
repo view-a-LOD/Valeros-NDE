@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { WidgetMapping } from '../../types/widget-config';
 import { PropertyLabelWrapperComponent } from '../property-label-wrapper/property-label-wrapper.component';
-import { NodeModel } from '../../../types/node/node.model';
+import { NodeModel } from '../../types/node/node.model';
 
 @Component({
   selector: 'app-dynamic-widget',

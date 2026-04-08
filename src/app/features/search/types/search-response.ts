@@ -1,4 +1,4 @@
-import { NodeModel } from './node/node.model';
+import { NodeModel } from '../../../shared/types/node/node.model';
 
 export interface SearchResponse {
   id: string;

@@ -4,7 +4,7 @@ import {
   applyPropertyPath,
   normalizeToArray,
 } from '../../utils/property-path.util';
-import { NodeModel } from '../../../types/node/node.model';
+import { NodeModel } from '../../types/node/node.model';
 
 @Directive()
 export abstract class BaseWidget {

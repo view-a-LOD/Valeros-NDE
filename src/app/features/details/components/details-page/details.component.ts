@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SearchApiService } from '../../../search/services/search-api.service';
 import { NodeComponent } from '../../../../shared/components/node/node.component';
-import { NodeModel } from '../../../../types/node/node.model';
+import { NodeModel } from '../../../../shared/types/node/node.model';
 
 @Component({
   selector: 'app-details',

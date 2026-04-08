@@ -19,8 +19,8 @@ import {
 } from 'rxjs/operators';
 import { AutocompleteResultItemComponent } from './autocomplete-result-item/autocomplete-result-item.component';
 import { AutocompleteSuggestionItemComponent } from './autocomplete-suggestion-item/autocomplete-suggestion-item.component';
-import { AutocompleteNode } from '../../../../types/autocomplete-node';
-import { AutocompleteResponse } from '../../../../types/autocomplete-response';
+import { AutocompleteNode } from '../../types/autocomplete-node';
+import { AutocompleteResponse } from '../../types/autocomplete-response';
 
 @Component({
   selector: 'app-autocomplete-dropdown',

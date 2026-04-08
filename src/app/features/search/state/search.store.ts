@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { SearchApiService } from '../services/search-api.service';
-import { NodeModel } from '../../../types/node/node.model';
-import { SearchResponse } from '../../../types/search-response';
+import { NodeModel } from '../../../shared/types/node/node.model';
+import { SearchResponse } from '../types/search-response';
 
 @Injectable({
   providedIn: 'root',

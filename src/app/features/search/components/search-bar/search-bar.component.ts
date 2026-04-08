@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SearchStore } from '../../state/search.store';
 import { AutocompleteDropdownComponent } from '../autocomplete-dropdown/autocomplete-dropdown.component';
-import { AutocompleteNode } from '../../../../types/autocomplete-node';
+import { AutocompleteNode } from '../../types/autocomplete-node';
 
 @Component({
   selector: 'app-search-bar',

@@ -3,8 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { buildHttpParams } from '../../../shared/utils/http-params.util';
-import { AutocompleteQuery } from '../../../types/autocomplete-query';
-import { AutocompleteResponse } from '../../../types/autocomplete-response';
+import { AutocompleteQuery } from '../types/autocomplete-query';
+import { AutocompleteResponse } from '../types/autocomplete-response';
 
 @Injectable({
   providedIn: 'root',

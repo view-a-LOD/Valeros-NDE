@@ -8,7 +8,7 @@ import {
   getVisibleProperties,
   sortProperties,
 } from '../../utils/property-filter.util';
-import { NodeModel } from '../../../types/node/node.model';
+import { NodeModel } from '../../types/node/node.model';
 
 @Component({
   selector: 'app-node',

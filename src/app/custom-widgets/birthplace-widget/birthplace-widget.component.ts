@@ -3,7 +3,7 @@ import { MapWidget } from '../../shared/components/widgets/map-widget/map-widget
 import { BaseWidget } from '../../shared/components/widgets/base-widget';
 import { TextWidget } from '../../shared/components/widgets/text-widget/text-widget.component';
 import { PropertyLabelWrapperComponent } from '../../shared/components/property-label-wrapper/property-label-wrapper.component';
-import { NodeModel } from '../../types/node/node.model';
+import { NodeModel } from '../../shared/types/node/node.model';
 
 @Component({
   selector: 'app-birthplace-widget',
