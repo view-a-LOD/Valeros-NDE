@@ -1,6 +1,7 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AutocompleteNode } from '@valeros-ldkit/shared-types';
 import { SearchStore } from '../../state/search.store';
 import { AutocompleteDropdownComponent } from '../autocomplete-dropdown/autocomplete-dropdown.component';
@@ -13,6 +14,7 @@ import { AutocompleteDropdownComponent } from '../autocomplete-dropdown/autocomp
 })
 export class SearchBarComponent {
   store = inject(SearchStore);
+  private router = inject(Router);
 
   @ViewChild('autocomplete') autocomplete?: AutocompleteDropdownComponent;
 
@@ -26,7 +28,11 @@ export class SearchBarComponent {
   }
 
   onAutocompleteSelect(item: AutocompleteNode): void {
-    alert('TODO: To implement');
+    const id = item.$id;
+    if (id) {
+      this.autocomplete?.hideAndSuppress();
+      this.router.navigate(['/details', encodeURIComponent(id)]);
+    }
   }
 
   onSuggestionSelect(suggestion: string): void {
