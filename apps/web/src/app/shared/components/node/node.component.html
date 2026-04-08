@@ -6,22 +6,44 @@
   role="button"
 >
   <div class="card-body p-4">
-    @for (property of orderedProperties(); track property) {
-      <div class="mb-2">
-        <app-dynamic-widget [data]="data()" [property]="property" />
-      </div>
-    }
+    <!-- Top Container -->
+    <div class="bg-red-100 p-2 mb-2 rounded empty:hidden empty:mb-0"></div>
 
-    <details
-      (click)="$event.stopPropagation()"
-      (keydown)="$event.stopPropagation()"
-      tabindex="0"
-    >
-      <summary>Full node JSON</summary>
-      <pre
-        class="text-xs font-mono bg-base-300 p-3 rounded overflow-x-auto mt-2"
-        >{{ data() | json }}</pre
-      >
-    </details>
+    <!-- Middle Row: Left, Main, Right -->
+    <div class="flex gap-2 mb-2 min-w-0">
+      <!-- Left Container -->
+      <div
+        class="bg-blue-100 p-2 rounded overflow-auto empty:hidden empty:p-0 max-w-[33%]"
+      ></div>
+
+      <!-- Main Container -->
+      <div class="bg-green-100 p-2 rounded flex-1 min-w-[33%]">
+        @for (property of orderedProperties(); track property) {
+          <div class="mb-2">
+            <app-dynamic-widget [data]="data()" [property]="property" />
+          </div>
+        }
+
+        <details
+          (click)="$event.stopPropagation()"
+          (keydown)="$event.stopPropagation()"
+          tabindex="0"
+        >
+          <summary>Full node JSON</summary>
+          <pre
+            class="text-xs font-mono bg-base-300 p-3 rounded overflow-x-auto mt-2"
+            >{{ data() | json }}</pre
+          >
+        </details>
+      </div>
+
+      <!-- Right Container -->
+      <div
+        class="bg-yellow-100 p-2 rounded overflow-y-auto empty:hidden empty:p-0 max-w-[33%]"
+      ></div>
+    </div>
+
+    <!-- Bottom Container -->
+    <div class="bg-purple-100 p-2 rounded empty:hidden empty:mb-0"></div>
   </div>
 </div>
