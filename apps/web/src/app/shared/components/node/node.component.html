@@ -7,7 +7,7 @@
 >
   <div class="card-body p-4">
     <!-- Top Container -->
-    <div class="position-container position-container-topbottom bg-red-100">
+    <div class="position-container position-container-topbottom">
       @for (item of widgetsByPosition().top; track $index) {
         <app-dynamic-widget
           [data]="data()"
@@ -20,7 +20,7 @@
     <!-- Middle Row: Left, Main, Right -->
     <div class="flex gap-2 min-w-0">
       <!-- Left Container -->
-      <div class="position-container position-container-side bg-blue-100">
+      <div class="position-container position-container-side">
         @for (item of widgetsByPosition().left; track $index) {
           <app-dynamic-widget
             [data]="data()"
@@ -31,7 +31,7 @@
       </div>
 
       <!-- Main Container -->
-      <div class="position-container bg-green-100 flex-1 min-w-[33%]">
+      <div class="position-container flex-1 min-w-[33%]">
         @for (item of widgetsByPosition().main; track $index) {
           <app-dynamic-widget
             [data]="data()"
@@ -54,7 +54,7 @@
       </div>
 
       <!-- Right Container -->
-      <div class="position-container position-container-side bg-yellow-100">
+      <div class="position-container position-container-side">
         @for (item of widgetsByPosition().right; track $index) {
           <app-dynamic-widget
             [data]="data()"

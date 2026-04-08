@@ -1,5 +1,9 @@
 .position-container {
-  @apply p-2 rounded empty:hidden space-y-2 overflow-y-auto;
+  @apply empty:hidden space-y-2 overflow-y-auto;
+
+  app-dynamic-widget {
+    display: block;
+  }
 }
 
 .position-container-side {

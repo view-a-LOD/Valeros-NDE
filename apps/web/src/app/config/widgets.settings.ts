@@ -90,7 +90,7 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
       properties: ['associatedMedia'],
       component: IiifWidget,
       config: {
-        propertyLabel: 'IIIF',
+        showPropertyLabel: false,
         position: 'left',
       },
     },
