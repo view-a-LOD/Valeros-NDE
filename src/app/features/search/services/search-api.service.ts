@@ -26,14 +26,30 @@ export class SearchApiService {
       orderedItems: [
         {
           id: 'https://example.org/v1/heritage-objects/{id}',
-          type: 'CreativeWork',
-          name: 'Fysisch laboratorium <mark>Utrecht</mark> 1896',
-          description:
-            'Zwart-wit foto van een kamer in het fysisch laboratorium te Utrecht, met rechts de amanuensis dhr. Marinus Pieter Filbri, in het midden de toen nog assistent Van Huffel en links de instrumentmaker G. Koolschijn, <mark>Utrecht</mark>, 1896.',
+          type: ['CreativeWork', 'Painting'],
+          additionalType: [
+            {
+              id: 'https://example.org/v1/terms/{id}',
+              type: 'DefinedTerm',
+              name: 'fotoafdruk zwart-wit',
+            },
+          ],
+          name: 'Fysisch laboratorium Utrecht 1896',
+          creator: [
+            {
+              id: 'https://example.org/v1/persons/{id}',
+              type: 'Person',
+              name: 'John Doe',
+            },
+          ],
           associatedMedia: [
             {
-              id: 'https://example.org/v1/images/{id}',
-              type: 'ImageObject',
+              id: 'https://example.org/v1/media-objects/{id}',
+              type: ['MediaObject', 'ImageObject'],
+              license: {
+                id: 'https://example.org/v1/licenses/{id}',
+                name: 'Creative Commons: publieke domein',
+              },
               contentUrl:
                 'https://collections.uu.nl/IIIF/33832/full/max/0/default.jpg',
               thumbnailUrl:
@@ -46,6 +62,55 @@ export class SearchApiService {
                 "application/ld+json;profile='http://iiif.io/api/presentation/2/context.json'",
             },
           ],
+          description:
+            'Zwart-wit foto van een kamer in het fysisch laboratorium te Utrecht, met rechts de amanuensis dhr. Marinus Pieter Filbri, in het midden de toen nog assistent Van Huffel en links de instrumentmaker G. Koolschijn, Utrecht, 1896.',
+          dateCreated: '1896',
+          genre: [
+            {
+              id: 'https://example.org/v1/terms/{id}',
+              type: 'DefinedTerm',
+              name: 'natuurwetenschappen',
+            },
+          ],
+          material: [
+            {
+              id: 'https://example.org/v1/terms/{id}',
+              type: 'DefinedTerm',
+              name: 'papier',
+            },
+          ],
+          locationCreated: [
+            {
+              id: 'https://example.org/v1/places/{id}',
+              type: 'Place',
+              name: 'Physisch Laboratorium',
+            },
+          ],
+          contentLocation: [
+            {
+              id: 'https://example.org/v1/places/{id}',
+              type: 'Place',
+              name: 'Physisch Laboratorium',
+            },
+          ],
+          temporalCoverage: '1896',
+          size: '74 x 92 cm',
+          text: 'Zwart-wit foto van een kamer in het fysisch laboratorium te Utrecht',
+          publisher: {
+            id: 'https://example.org/v1/organizations/{id}',
+            type: 'Organization',
+            name: 'Example Museum',
+          },
+          license: {
+            id: 'https://example.org/v1/licenses/{id}',
+            type: 'CreativeWork',
+            name: 'Creative Commons: publieke domein',
+          },
+          sdDatePublished: '2026-04-08T13:35:03Z',
+          isBasedOn: {
+            id: 'https://n2t.net/ark:/40020/collect100',
+            type: 'CreativeWork',
+          },
         },
       ],
     };
