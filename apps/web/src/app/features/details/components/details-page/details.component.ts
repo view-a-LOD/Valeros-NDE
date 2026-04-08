@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SearchApiService } from '../../../search/services/search-api.service';
 import { SearchNode } from '@valeros-ldkit/shared-types';
-import { NodeComponent } from '../../../search/components/node/node.component';
+import { NodeComponent } from '../../../../shared/components/node/node.component';
 
 @Component({
   selector: 'app-details',

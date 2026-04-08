@@ -2,12 +2,12 @@ import { Component, input, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { SearchNode } from '@valeros-ldkit/shared-types';
-import { DynamicWidgetComponent } from '../../../../shared/components/dynamic-widget/dynamic-widget.component';
-import { WidgetService } from '../../../../shared/services/widget.service';
+import { DynamicWidgetComponent } from '../dynamic-widget/dynamic-widget.component';
+import { WidgetService } from '../../services/widget.service';
 import {
   getVisibleProperties,
   sortProperties,
-} from '../../../../shared/utils/property-filter.util';
+} from '../../utils/property-filter.util';
 
 @Component({
   selector: 'app-node',

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchStore } from '../../state/search.store';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { NodeComponent } from '../node/node.component';
+import { NodeComponent } from '../../../../shared/components/node/node.component';
 
 @Component({
   selector: 'app-search-page',
