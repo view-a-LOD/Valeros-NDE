@@ -37,6 +37,7 @@
     "jsonld": "^9.0.0",
     "ldkit": "^2.6.0",
     "leaflet": "^1.9.4",
+    "mirador": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0"

@@ -5,6 +5,7 @@ import { BadgeWidget } from '../shared/components/widgets/badge-widget/badge-wid
 import { BirthplaceWidget } from '../custom-widgets/birthplace-widget/birthplace-widget.component';
 import { ImageWidget } from '../shared/components/widgets/image-widget/image-widget.component';
 import { MapWidget } from '../shared/components/widgets/map-widget/map-widget.component';
+import { IiifWidget } from '../shared/components/widgets/iiif-widget/iiif-widget.component';
 
 export const WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
@@ -81,6 +82,13 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
       config: {
         propertyPath: 'thumbnailUrl',
         propertyLabel: 'Afbeelding',
+      },
+    },
+    {
+      properties: ['associatedMedia'],
+      component: IiifWidget,
+      config: {
+        propertyLabel: 'IIIF',
       },
     },
   ],
