@@ -1,0 +1,11 @@
+.position-container {
+  @apply p-2 rounded empty:hidden space-y-2 overflow-y-auto;
+}
+
+.position-container-side {
+  @apply empty:p-0 w-1/3;
+}
+
+.position-container-topbottom {
+  @apply empty:mb-0;
+}

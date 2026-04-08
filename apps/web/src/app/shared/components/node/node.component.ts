@@ -14,6 +14,7 @@ import {
   selector: 'app-node',
   imports: [CommonModule, DynamicWidgetComponent],
   templateUrl: './node.component.html',
+  styleUrl: './node.component.scss',
   standalone: true,
 })
 export class NodeComponent {
