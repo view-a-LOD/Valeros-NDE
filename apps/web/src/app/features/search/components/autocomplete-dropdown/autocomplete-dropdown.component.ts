@@ -30,7 +30,7 @@ import { AutocompleteSuggestionItemComponent } from './autocomplete-suggestion-i
 })
 export class AutocompleteDropdownComponent {
   searchTerm = input<string>('');
-  minChars = input<number>(2);
+  minChars = input<number>(1);
   debounceMs = input<number>(300);
 
   selectItem = output<AutocompleteNode>();
