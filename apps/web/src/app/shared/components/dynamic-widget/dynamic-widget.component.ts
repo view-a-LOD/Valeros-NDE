@@ -15,7 +15,7 @@ import { WidgetService } from '../../services/widget.service';
   templateUrl: './dynamic-widget.component.html',
 })
 export class DynamicWidgetComponent implements AfterViewInit {
-  node = input.required<SearchNode>();
+  data = input.required<SearchNode>();
   property = input.required<string>();
 
   @ViewChild('container', { read: ViewContainerRef })
@@ -28,7 +28,7 @@ export class DynamicWidgetComponent implements AfterViewInit {
 
     for (const mapping of mappings) {
       const componentRef = this.container.createComponent(mapping.component);
-      componentRef.setInput('node', this.node());
+      componentRef.setInput('node', this.data());
       componentRef.setInput('property', this.property());
       componentRef.setInput('config', mapping.config);
     }

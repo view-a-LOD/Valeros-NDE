@@ -8,7 +8,7 @@
   <div class="card-body p-4">
     @for (property of orderedProperties(); track property) {
       <div class="mb-2">
-        <app-dynamic-widget [node]="result()" [property]="property" />
+        <app-dynamic-widget [data]="data()" [property]="property" />
       </div>
     }
 
@@ -20,7 +20,7 @@
       <summary>Full node JSON</summary>
       <pre
         class="text-xs font-mono bg-base-300 p-3 rounded overflow-x-auto mt-2"
-        >{{ result() | json }}</pre
+        >{{ data() | json }}</pre
       >
     </details>
   </div>

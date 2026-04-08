@@ -10,26 +10,26 @@ import {
 } from '../../../../shared/utils/property-filter.util';
 
 @Component({
-  selector: 'app-search-result',
+  selector: 'app-node',
   imports: [CommonModule, DynamicWidgetComponent],
-  templateUrl: './search-result.component.html',
+  templateUrl: './node.component.html',
   standalone: true,
 })
-export class SearchResultComponent {
-  result = input.required<SearchNode>();
+export class NodeComponent {
+  data = input.required<SearchNode>();
 
   private router = inject(Router);
   private widgetService = inject(WidgetService);
 
   orderedProperties = computed(() => {
     const settings = this.widgetService.getCurrentSettings();
-    const properties = Object.keys(this.result());
+    const properties = Object.keys(this.data());
     const visibleProperties = getVisibleProperties(properties, settings);
     return sortProperties(visibleProperties, settings.propertyOrder);
   });
 
   navigateToDetails(): void {
-    const id = this.result()['@id'];
+    const id = this.data()['@id'];
     if (id) {
       this.router.navigate(['/details', encodeURIComponent(id)]);
     }

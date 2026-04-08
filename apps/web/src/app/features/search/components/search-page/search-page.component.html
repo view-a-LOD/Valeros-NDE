@@ -19,7 +19,7 @@
 
     <div class="space-y-2">
       @for (result of store.results(); track result['@id']) {
-        <app-search-result [result]="result" />
+        <app-node [data]="result" />
       }
     </div>
   } @else if (!store.loading() && store.searchTerm()) {

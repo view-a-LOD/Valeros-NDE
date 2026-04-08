@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SearchApiService } from '../../../search/services/search-api.service';
 import { SearchNode } from '@valeros-ldkit/shared-types';
-import { SearchResultComponent } from '../../../search/components/search-result/search-result.component';
+import { NodeComponent } from '../../../search/components/node/node.component';
 
 @Component({
   selector: 'app-details',
-  imports: [CommonModule, SearchResultComponent],
+  imports: [CommonModule, NodeComponent],
   templateUrl: './details.component.html',
   standalone: true,
 })
