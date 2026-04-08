@@ -1,15 +1,12 @@
 import {
   Component,
   input,
-  ViewChildren,
-  QueryList,
+  ViewChild,
   ViewContainerRef,
   AfterViewInit,
-  inject,
-  computed,
 } from '@angular/core';
 import { SearchNode } from '@valeros-ldkit/shared-types';
-import { WidgetService } from '../../services/widget.service';
+import { WidgetMapping } from '../../types/widget-config';
 import { PropertyLabelWrapperComponent } from '../property-label-wrapper/property-label-wrapper.component';
 
 @Component({
@@ -21,28 +18,16 @@ import { PropertyLabelWrapperComponent } from '../property-label-wrapper/propert
 export class DynamicWidgetComponent implements AfterViewInit {
   data = input.required<SearchNode>();
   property = input.required<string>();
+  widget = input.required<WidgetMapping>();
 
-  @ViewChildren('widgetContainer', { read: ViewContainerRef })
-  widgetContainers!: QueryList<ViewContainerRef>;
-
-  private widgetService = inject(WidgetService);
-
-  widgets = computed(() => {
-    return this.widgetService.getWidgetsForProperty(this.property());
-  });
+  @ViewChild('widgetContainer', { read: ViewContainerRef })
+  widgetContainer!: ViewContainerRef;
 
   ngAfterViewInit() {
-    const containers = this.widgetContainers.toArray();
-    const widgets = this.widgets();
-
-    widgets.forEach((widget, index) => {
-      const container = containers[index];
-      if (container) {
-        const componentRef = container.createComponent(widget.component);
-        componentRef.setInput('node', this.data());
-        componentRef.setInput('property', this.property());
-        componentRef.setInput('config', widget.config);
-      }
-    });
+    const widget = this.widget();
+    const componentRef = this.widgetContainer.createComponent(widget.component);
+    componentRef.setInput('node', this.data());
+    componentRef.setInput('property', this.property());
+    componentRef.setInput('config', widget.config);
   }
 }

@@ -15,6 +15,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       config: {
         showPropertyLabel: false,
         asHeader: true,
+        position: 'top',
       },
     },
     {
@@ -76,19 +77,21 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     //     propertyLabel: 'Geboorteplaats (kaart)',
     //   },
     // },
-    {
-      properties: ['associatedMedia'],
-      component: ImageWidget,
-      config: {
-        propertyPath: 'thumbnailUrl',
-        propertyLabel: 'Afbeelding',
-      },
-    },
+    // {
+    //   properties: ['associatedMedia'],
+    //   component: ImageWidget,
+    //   config: {
+    //     propertyPath: 'thumbnailUrl',
+    //     propertyLabel: 'Afbeelding',
+    //     position: 'left',
+    //   },
+    // },
     {
       properties: ['associatedMedia'],
       component: IiifWidget,
       config: {
         propertyLabel: 'IIIF',
+        position: 'left',
       },
     },
   ],

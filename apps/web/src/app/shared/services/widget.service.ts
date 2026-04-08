@@ -19,9 +19,9 @@ export class WidgetService {
 
   getWidgetsForProperty(property: string): WidgetMapping[] {
     const settings = this.getCurrentSettings();
-    const mappings = settings.mappings.filter((m: WidgetMapping) =>
+    const widgets = settings.mappings.filter((m: WidgetMapping) =>
       m.properties.includes(property),
     );
-    return mappings.length > 0 ? mappings : [settings.defaultWidget];
+    return widgets.length > 0 ? widgets : [settings.defaultWidget];
   }
 }

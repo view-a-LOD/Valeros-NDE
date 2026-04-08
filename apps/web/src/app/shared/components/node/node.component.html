@@ -7,21 +7,39 @@
 >
   <div class="card-body p-4">
     <!-- Top Container -->
-    <div class="bg-red-100 p-2 mb-2 rounded empty:hidden empty:mb-0"></div>
+    <div class="bg-red-100 p-2 rounded empty:hidden empty:mb-0 space-y-2">
+      @for (item of widgetsByPosition().top; track $index) {
+        <app-dynamic-widget
+          [data]="data()"
+          [property]="item.property"
+          [widget]="item.widget"
+        />
+      }
+    </div>
 
     <!-- Middle Row: Left, Main, Right -->
-    <div class="flex gap-2 mb-2 min-w-0">
+    <div class="flex gap-2 min-w-0">
       <!-- Left Container -->
       <div
-        class="bg-blue-100 p-2 rounded overflow-auto empty:hidden empty:p-0 max-w-[33%]"
-      ></div>
+        class="bg-blue-100 p-2 rounded overflow-auto empty:hidden empty:p-0 w-1/3 space-y-2"
+      >
+        @for (item of widgetsByPosition().left; track $index) {
+          <app-dynamic-widget
+            [data]="data()"
+            [property]="item.property"
+            [widget]="item.widget"
+          />
+        }
+      </div>
 
       <!-- Main Container -->
-      <div class="bg-green-100 p-2 rounded flex-1 min-w-[33%]">
-        @for (property of orderedProperties(); track property) {
-          <div class="mb-2">
-            <app-dynamic-widget [data]="data()" [property]="property" />
-          </div>
+      <div class="bg-green-100 p-2 rounded flex-1 min-w-[33%] space-y-2">
+        @for (item of widgetsByPosition().main; track $index) {
+          <app-dynamic-widget
+            [data]="data()"
+            [property]="item.property"
+            [widget]="item.widget"
+          />
         }
 
         <details
@@ -39,11 +57,27 @@
 
       <!-- Right Container -->
       <div
-        class="bg-yellow-100 p-2 rounded overflow-y-auto empty:hidden empty:p-0 max-w-[33%]"
-      ></div>
+        class="bg-yellow-100 p-2 rounded overflow-y-auto empty:hidden empty:p-0 w-1/3 space-y-2"
+      >
+        @for (item of widgetsByPosition().right; track $index) {
+          <app-dynamic-widget
+            [data]="data()"
+            [property]="item.property"
+            [widget]="item.widget"
+          />
+        }
+      </div>
     </div>
 
     <!-- Bottom Container -->
-    <div class="bg-purple-100 p-2 rounded empty:hidden empty:mb-0"></div>
+    <div class="bg-purple-100 p-2 rounded empty:hidden empty:mb-0 space-y-2">
+      @for (item of widgetsByPosition().bottom; track $index) {
+        <app-dynamic-widget
+          [data]="data()"
+          [property]="item.property"
+          [widget]="item.widget"
+        />
+      }
+    </div>
   </div>
 </div>

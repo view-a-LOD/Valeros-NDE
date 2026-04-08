@@ -17,8 +17,11 @@ export interface WidgetMapping {
 
 export type WidgetConfig = BaseWidgetConfig & Record<string, unknown>;
 
+export type WidgetPosition = 'top' | 'left' | 'main' | 'right' | 'bottom';
+
 export interface BaseWidgetConfig {
   showPropertyLabel?: boolean;
   propertyLabel?: string;
   propertyPath?: string;
+  position?: WidgetPosition;
 }
