@@ -6,6 +6,7 @@ import { BirthplaceWidget } from '../custom-widgets/birthplace-widget/birthplace
 import { ImageGalleryWidget } from '../shared/components/widgets/image-gallery-widget/image-gallery-widget.component';
 import { MapWidget } from '../shared/components/widgets/map-widget/map-widget.component';
 import { IiifWidget } from '../shared/components/widgets/iiif-widget/iiif-widget.component';
+import { LinkWidget } from '../shared/components/widgets/link-widget/link-widget.component';
 
 export const WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
@@ -51,7 +52,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     },
   ],
   defaultWidget: {
-    component: JsonWidget,
+    component: LinkWidget,
     properties: [],
     config: {},
   },
@@ -62,7 +63,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
 export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [...WIDGETS_SETTINGS.mappings],
   defaultWidget: {
-    component: JsonWidget,
+    component: LinkWidget,
     properties: [],
     config: {},
   },
