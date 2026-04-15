@@ -84,6 +84,20 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      properties: ['birthDate'],
+      component: TextWidget,
+      config: {
+        propertyLabel: 'Geboortedatum',
+      },
+    },
+    {
+      properties: ['deathDate'],
+      component: TextWidget,
+      config: {
+        propertyLabel: 'Overlijdensdatum',
+      },
+    },
+    {
       properties: ['description'],
       component: TextWidget,
       config: {
