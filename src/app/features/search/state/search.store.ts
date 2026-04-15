@@ -47,6 +47,8 @@ export class SearchStore {
           this.results.set(response.orderedItems);
           this.totalResults.set(response.partOf.totalItems);
           this.loading.set(false);
+
+          console.log('Search results:', response);
         },
         error: (err) => {
           this.error.set('Failed to search: ' + err.message);
