@@ -1,6 +1,7 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { ApiService } from '../../../search/services/api.service';
 import { NodeComponent } from '../../../../shared/components/node/node.component';
 import { NodeModel } from '../../../../shared/types/node/node.model';
@@ -11,7 +12,7 @@ import { NodeModel } from '../../../../shared/types/node/node.model';
   templateUrl: './details.component.html',
   standalone: true,
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
   id: string | null = null;
   decodedId: string | null = null;
   data = signal<NodeModel | null>(null);
@@ -20,13 +21,20 @@ export class DetailsComponent implements OnInit {
 
   private route = inject(ActivatedRoute);
   private searchApiService = inject(ApiService);
+  private routeSubscription?: Subscription;
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id) {
-      this.decodedId = decodeURIComponent(this.id);
-      this.fetchData();
-    }
+    this.routeSubscription = this.route.paramMap.subscribe((params) => {
+      this.id = params.get('id');
+      if (this.id) {
+        this.decodedId = decodeURIComponent(this.id);
+        this.fetchData();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.routeSubscription?.unsubscribe();
   }
 
   private fetchData() {
