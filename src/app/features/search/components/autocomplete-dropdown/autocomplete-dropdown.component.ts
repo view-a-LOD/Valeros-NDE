@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AutocompleteApiService } from '../../services/autocomplete-api.service';
 import { Subject } from 'rxjs';
 import {
   debounceTime,
@@ -21,6 +20,7 @@ import { AutocompleteResultItemComponent } from './autocomplete-result-item/auto
 import { AutocompleteSuggestionItemComponent } from './autocomplete-suggestion-item/autocomplete-suggestion-item.component';
 import { AutocompleteNode } from '../../types/autocomplete-node';
 import { AutocompleteResponse } from '../../types/autocomplete-response';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-autocomplete-dropdown',
@@ -49,7 +49,7 @@ export class AutocompleteDropdownComponent {
     () => this.results().length > 0 || this.suggestions().length > 0,
   );
 
-  private autocompleteService = inject(AutocompleteApiService);
+  private apiService = inject(ApiService);
   private autocompleteSubject = new Subject<string>();
   private suppressAutocomplete = false;
   private cancelPending = false;
@@ -74,7 +74,7 @@ export class AutocompleteDropdownComponent {
           }
           this.cancelPending = false;
           this.loading.set(true);
-          return this.autocompleteService.autocomplete({ query: term });
+          return this.apiService.autocomplete({ query: term });
         }),
       )
       .subscribe({

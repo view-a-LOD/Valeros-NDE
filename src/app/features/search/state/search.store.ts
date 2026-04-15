@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { SearchApiService } from '../services/search-api.service';
+import { ApiService } from '../services/api.service';
 import { NodeModel } from '../../../shared/types/node/node.model';
 import { SearchResponse } from '../types/search-response';
 
@@ -7,7 +7,7 @@ import { SearchResponse } from '../types/search-response';
   providedIn: 'root',
 })
 export class SearchStore {
-  private searchApiService = inject(SearchApiService);
+  private searchApiService = inject(ApiService);
 
   searchTerm = signal('');
   results = signal<NodeModel[]>([]);

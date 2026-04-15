@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { SearchApiService } from '../../../search/services/search-api.service';
+import { ApiService } from '../../../search/services/api.service';
 import { NodeComponent } from '../../../../shared/components/node/node.component';
 import { NodeModel } from '../../../../shared/types/node/node.model';
 
@@ -19,7 +19,7 @@ export class DetailsComponent implements OnInit {
   error = signal<string | null>(null);
 
   private route = inject(ActivatedRoute);
-  private searchApiService = inject(SearchApiService);
+  private searchApiService = inject(ApiService);
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
