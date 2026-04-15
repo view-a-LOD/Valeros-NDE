@@ -59,6 +59,13 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
         propertyLabel: 'Beschrijving',
       },
     },
+    {
+      properties: ['geo'],
+      component: MapWidget,
+      config: {
+        // showPropertyLabel: false,
+      },
+    },
   ],
   defaultWidget: {
     component: LinkWidget,
