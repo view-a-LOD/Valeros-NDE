@@ -7,6 +7,7 @@ import { ImageGalleryWidget } from '../shared/components/widgets/image-gallery-w
 import { MapWidget } from '../shared/components/widgets/map-widget/map-widget.component';
 import { IiifWidget } from '../shared/components/widgets/iiif-widget/iiif-widget.component';
 import { LinkWidget } from '../shared/components/widgets/link-widget/link-widget.component';
+import { AddressWidget } from '../shared/components/widgets/address-widget/address-widget.component';
 
 export const WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
@@ -94,6 +95,13 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       component: MapWidget,
       config: {
         // showPropertyLabel: false,
+      },
+    },
+    {
+      properties: ['address'],
+      component: AddressWidget,
+      config: {
+        propertyLabel: 'Adres',
       },
     },
   ],
