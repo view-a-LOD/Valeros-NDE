@@ -8,7 +8,7 @@
       <span>{{ error() }}</span>
     </div>
   } @else if (data()) {
-    <app-node [data]="data()!" />
+    <app-node [data]="data()!" [clickable]="false" />
   } @else {
     <p>No data available</p>
   }

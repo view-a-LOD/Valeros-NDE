@@ -22,6 +22,7 @@ import { NodeModel } from '../../types/node/node.model';
 })
 export class NodeComponent {
   data = input.required<NodeModel>();
+  clickable = input<boolean>(true);
 
   private widgetService = inject(WidgetService);
 

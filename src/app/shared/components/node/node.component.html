@@ -1,7 +1,17 @@
-<a
-  [routerLink]="detailsRoute()"
-  class="card border border-base-300 cursor-pointer hover:bg-base-200 transition-colors block no-underline"
->
+@if (clickable()) {
+  <a
+    [routerLink]="detailsRoute()"
+    class="node-card cursor-pointer hover:bg-base-200 transition-colors block no-underline"
+  >
+    <ng-container *ngTemplateOutlet="cardContent" />
+  </a>
+} @else {
+  <div class="node-card">
+    <ng-container *ngTemplateOutlet="cardContent" />
+  </div>
+}
+
+<ng-template #cardContent>
   <div class="card-body p-4">
     <!-- Top Container -->
     <div class="position-container position-container-topbottom">
@@ -61,4 +71,4 @@
       }
     </div>
   </div>
-</a>
+</ng-template>
