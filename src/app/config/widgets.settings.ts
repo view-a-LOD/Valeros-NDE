@@ -3,7 +3,6 @@ import { TextWidget } from '../shared/components/widgets/text-widget/text-widget
 import { JsonWidget } from '../shared/components/widgets/json-widget/json-widget.component';
 import { BadgeWidget } from '../shared/components/widgets/badge-widget/badge-widget.component';
 import { BirthplaceWidget } from '../custom-widgets/birthplace-widget/birthplace-widget.component';
-import { ImageWidget } from '../shared/components/widgets/image-widget/image-widget.component';
 import { ImageGalleryWidget } from '../shared/components/widgets/image-gallery-widget/image-gallery-widget.component';
 import { MapWidget } from '../shared/components/widgets/map-widget/map-widget.component';
 import { IiifWidget } from '../shared/components/widgets/iiif-widget/iiif-widget.component';
