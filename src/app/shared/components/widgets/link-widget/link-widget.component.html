@@ -7,7 +7,9 @@
           class="flex items-baseline gap-2"
           [attr.aria-label]="'View details for ' + getNodeName(node)"
         >
-          <span>{{ getNodeName(node) }}</span>
+          <span class="underline decoration-base-content/30">{{
+            getNodeName(node)
+          }}</span>
           @if (getNodeType(node)) {
             <span class="text-xs text-base-content/60" aria-label="Type">
               ({{ getNodeType(node) }})
