@@ -44,6 +44,15 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      properties: ['additionalType'],
+      component: BadgeWidget,
+      config: {
+        propertyLabel: 'Soort',
+        propertyPath: 'name',
+        // showPropertyLabel: false,
+      },
+    },
+    {
       properties: ['description'],
       component: TextWidget,
       config: {
@@ -56,8 +65,14 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  propertyOrder: ['name', 'type', 'description'],
-  includedProperties: ['name', 'type', 'description', 'associatedMedia'],
+  propertyOrder: ['name', 'type', 'additionalType', 'description'],
+  includedProperties: [
+    'name',
+    'type',
+    'additionalType',
+    'description',
+    'associatedMedia',
+  ],
 };
 
 export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
@@ -67,6 +82,8 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
+  propertyOrder: WIDGETS_SETTINGS.propertyOrder
+    ? [...WIDGETS_SETTINGS.propertyOrder]
+    : [],
   hiddenProperties: ['id'],
-  propertyOrder: ['name', 'type', 'description'],
 };
