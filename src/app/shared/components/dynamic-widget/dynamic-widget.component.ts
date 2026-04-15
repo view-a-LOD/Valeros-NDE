@@ -4,10 +4,15 @@ import {
   ViewChild,
   ViewContainerRef,
   AfterViewInit,
+  effect,
+  DestroyRef,
+  ComponentRef,
+  inject,
 } from '@angular/core';
 import { WidgetMapping } from '../../types/widget-config';
 import { PropertyLabelWrapperComponent } from '../property-label-wrapper/property-label-wrapper.component';
 import { NodeModel } from '../../types/node/node.model';
+import { BaseWidget } from '../widgets/base-widget';
 
 @Component({
   selector: 'app-dynamic-widget',
@@ -23,11 +28,39 @@ export class DynamicWidgetComponent implements AfterViewInit {
   @ViewChild('widgetContainer', { read: ViewContainerRef })
   widgetContainer!: ViewContainerRef;
 
+  private componentRef?: ComponentRef<BaseWidget>;
+  private destroyRef = inject(DestroyRef);
+
+  constructor() {
+    effect(() => {
+      this.data();
+      this.property();
+      this.widget();
+      this.recreateWidget();
+    });
+  }
+
   ngAfterViewInit() {
+    this.createWidget();
+  }
+
+  private createWidget() {
     const widget = this.widget();
-    const componentRef = this.widgetContainer.createComponent(widget.component);
-    componentRef.setInput('node', this.data());
-    componentRef.setInput('property', this.property());
-    componentRef.setInput('config', widget.config);
+    this.componentRef = this.widgetContainer.createComponent(widget.component);
+    this.componentRef.setInput('node', this.data());
+    this.componentRef.setInput('property', this.property());
+    this.componentRef.setInput('config', widget.config);
+
+    this.destroyRef.onDestroy(() => {
+      this.componentRef?.destroy();
+    });
+  }
+
+  private recreateWidget() {
+    if (!this.componentRef) return;
+
+    this.componentRef.destroy();
+    this.widgetContainer.clear();
+    this.createWidget();
   }
 }
