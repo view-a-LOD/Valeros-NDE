@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AssociatedMediaObject } from '../types/node/associated-media-object';
 import { Dimensions } from '../types/dimensions';
 
 export interface IiifImageInfo {
@@ -30,9 +29,5 @@ export class IiifImageService {
       })),
       catchError(() => of(null)),
     );
-  }
-
-  getInfoJsonUrl(media: AssociatedMediaObject): string | undefined {
-    return media.isBasedOn?.id ? `${media.isBasedOn.id}/info.json` : undefined;
   }
 }

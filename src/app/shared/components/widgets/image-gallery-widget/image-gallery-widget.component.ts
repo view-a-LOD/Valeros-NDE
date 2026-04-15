@@ -7,9 +7,9 @@ import 'photoswipe/style.css';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IiifImageService } from '../../../services/iiif-image.service';
-import { normalizeToString } from '../../../utils/value-normalization.util';
 import { ImageModel } from '../../../types/image.model';
 import { Dimensions } from '../../../types/dimensions';
+import { toImageModel } from '../../../utils/image-model.util';
 
 @Component({
   selector: 'app-image-gallery-widget',
@@ -35,14 +35,7 @@ export class ImageGalleryWidget extends BaseWidget implements OnDestroy {
 
   private getImagesData(): ImageModel[] {
     return (this.values() as AssociatedMediaObject[])
-      .map(
-        (media: AssociatedMediaObject): ImageModel => ({
-          src: media.contentUrl || media.thumbnailUrl || '',
-          thumbnail: media.thumbnailUrl || media.contentUrl || '',
-          alt: normalizeToString(media.name) || media.id || 'Image',
-          iiifInfoUrl: this.iiifService.getInfoJsonUrl(media),
-        }),
-      )
+      .map((media: AssociatedMediaObject) => toImageModel(media))
       .filter((img) => img.src !== '');
   }
 
