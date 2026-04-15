@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { BaseWidget } from '../base-widget';
 import * as L from 'leaflet';
+import { normalizeToFirst } from '../../../utils/value-normalization.util';
 
 const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/marker-icon.png';
@@ -11,6 +12,12 @@ const iconDefault = L.icon({
   shadowUrl,
 });
 L.Marker.prototype.options.icon = iconDefault;
+
+type GeoCoordinates = {
+  latitude: number;
+  longitude: number;
+  type: 'GeoCoordinates';
+};
 
 @Component({
   selector: 'app-map-widget',
@@ -27,10 +34,14 @@ export class MapWidget extends BaseWidget implements AfterViewInit {
   }
 
   private initMap(): void {
-    // TODO: Retrieve coordinates from data
-    const lat = 52.0907;
-    const lng = 5.1214;
+    const coordinates: GeoCoordinates | undefined =
+      normalizeToFirst<GeoCoordinates>(this.values());
+    if (!coordinates) {
+      console.warn('No coordinates found, skipping map initialization');
+      return;
+    }
 
+    const { latitude: lat, longitude: lng } = coordinates;
     this.map = L.map(this.mapContainer.nativeElement).setView([lat, lng], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
