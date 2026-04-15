@@ -1,6 +1,6 @@
 import { Component, input, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DynamicWidgetComponent } from '../dynamic-widget/dynamic-widget.component';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetPosition, WidgetMapping } from '../../types/widget-config';
@@ -12,7 +12,7 @@ import { NodeModel } from '../../types/node/node.model';
 
 @Component({
   selector: 'app-node',
-  imports: [CommonModule, DynamicWidgetComponent],
+  imports: [CommonModule, DynamicWidgetComponent, RouterLink],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
   standalone: true,
@@ -23,7 +23,6 @@ import { NodeModel } from '../../types/node/node.model';
 export class NodeComponent {
   data = input.required<NodeModel>();
 
-  private router = inject(Router);
   private widgetService = inject(WidgetService);
 
   orderedProperties = computed(() => {
@@ -57,10 +56,8 @@ export class NodeComponent {
     return byPosition;
   });
 
-  navigateToDetails(): void {
+  detailsRoute = computed(() => {
     const id = this.data().id;
-    if (id) {
-      this.router.navigate(['/details', encodeURIComponent(id)]);
-    }
-  }
+    return id ? ['/details', encodeURIComponent(id)] : null;
+  });
 }
