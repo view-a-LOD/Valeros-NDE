@@ -33,4 +33,9 @@ export class ApiService {
       .get<SearchResponse>(url, { params })
       .pipe(map(transformToAutocompleteResponse));
   }
+
+  details(id: string): Observable<NodeModel> {
+    const url = `${this.apiBaseUrl}/heritage-objects/${id}`;
+    return this.http.get<NodeModel>(url);
+  }
 }

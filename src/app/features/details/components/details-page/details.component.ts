@@ -35,25 +35,15 @@ export class DetailsComponent implements OnInit {
     this.loading.set(true);
     this.error.set(null);
 
-    // TODO: Replace hardcoded page
-    this.searchApiService
-      .search({
-        q: this.decodedId,
-        page: 1,
-      })
-      .subscribe({
-        next: (response) => {
-          if (response.orderedItems.length > 0) {
-            this.data.set(response.orderedItems[0]);
-          } else {
-            this.error.set('No data found for this ID');
-          }
-          this.loading.set(false);
-        },
-        error: (err) => {
-          this.error.set('Failed to load data: ' + err.message);
-          this.loading.set(false);
-        },
-      });
+    this.searchApiService.details(this.decodedId).subscribe({
+      next: (response: NodeModel) => {
+        this.data.set(response);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        this.error.set('Failed to load data: ' + err.message);
+        this.loading.set(false);
+      },
+    });
   }
 }
