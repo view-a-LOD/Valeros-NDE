@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { buildHttpParams } from '../../../shared/utils/http-params.util';
 import { SearchQuery } from '../types/search-query';
 import { SearchResponse } from '../types/search-response';
@@ -8,12 +8,14 @@ import { AutocompleteQuery } from '../types/autocomplete-query';
 import { AutocompleteResponse } from '../types/autocomplete-response';
 import { transformToAutocompleteResponse } from '../utils/search-response.util';
 import { NodeModel } from '../../../shared/types/node/node.model';
+import { MockDataService } from './mock-data.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   private readonly http = inject(HttpClient);
+  private readonly mockDataService = inject(MockDataService);
   private readonly apiBaseUrl = 'http://localhost:3000/v1';
 
   search(query: SearchQuery): Observable<SearchResponse> {
@@ -35,6 +37,34 @@ export class ApiService {
   }
 
   details(id: string): Observable<NodeModel> {
+    if (id.includes('v1/places/')) {
+      return this.mockDataService.placeDetails(id);
+    }
+    // if (id.includes('v1/heritage-objects/')) {
+    //   return this.mockDataService.heritageObjectDetails(id);
+    // }
+    if (id.includes('v1/organizations/')) {
+      return this.mockDataService.organizationDetails(id);
+    }
+    if (id.includes('v1/persons/')) {
+      return this.mockDataService.personDetails(id);
+    }
+    if (id.includes('v1/occupations/')) {
+      return this.mockDataService.occupationDetails(id);
+    }
+    if (id.includes('v1/media-objects/')) {
+      return this.mockDataService.mediaObjectDetails(id);
+    }
+    if (id.includes('v1/licenses/')) {
+      return this.mockDataService.licenseDetails(id);
+    }
+    if (id.includes('v1/terms/')) {
+      return this.mockDataService.termDetails(id);
+    }
+    if (id.includes('v1/datasets/')) {
+      return this.mockDataService.datasetDetails(id);
+    }
+
     // TODO: Use proper endpoint when available (GET /v1/heritage-objects/{id})
     // For now, use search with ID filter
     const params = buildHttpParams({
@@ -42,10 +72,6 @@ export class ApiService {
       size: 1,
     });
     const url = `${this.apiBaseUrl}/heritage-objects/page/1`;
-
-    if (id.includes('v1/places/')) {
-      return this.placeDetails(id);
-    }
 
     return this.http.get<SearchResponse>(url, { params }).pipe(
       map((response) => {
@@ -55,27 +81,5 @@ export class ApiService {
         return response.orderedItems[0];
       }),
     );
-  }
-
-  // TODO: Use proper endpoint when available (GET /v1/places/{id})
-  placeDetails(id: string): Observable<NodeModel> {
-    return of({
-      id: 'https://example.org/v1/places/{id}',
-      type: 'Place',
-      name: 'Physisch Laboratorium',
-      address: {
-        type: 'PostalAddress',
-        streetAddress: 'Bijlhouwerstraat 6',
-        postalCode: '3511 ZC',
-        addressLocality: 'Utrecht',
-        addressRegion: 'Utrecht',
-        addressCountry: 'NL',
-      },
-      geo: {
-        type: 'GeoCoordinates',
-        latitude: 52.0815523,
-        longitude: 5.1203423,
-      },
-    });
   }
 }
