@@ -1,4 +1,7 @@
 export interface SearchQuery {
-  q?: string;
+  page: number;
   size?: number;
+  q?: string;
+  sort?: string;
+  filter?: string | string[];
 }

@@ -35,10 +35,11 @@ export class DetailsComponent implements OnInit {
     this.loading.set(true);
     this.error.set(null);
 
-    // TODO: Replace with call for getting details for this node (by ID)
+    // TODO: Replace hardcoded page
     this.searchApiService
       .search({
         q: this.decodedId,
+        page: 1,
       })
       .subscribe({
         next: (response) => {

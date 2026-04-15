@@ -35,10 +35,12 @@ export class SearchStore {
     this.loading.set(true);
     this.error.set(null);
 
+    // TODO: Replace hardcoded size and page
     this.searchApiService
       .search({
         q: trimmedTerm,
         size: 10,
+        page: 1,
       })
       .subscribe({
         next: (response: SearchResponse) => {

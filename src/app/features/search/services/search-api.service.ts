@@ -13,8 +13,9 @@ export class SearchApiService {
   private readonly apiBaseUrl = 'http://localhost:3000/v1';
 
   search(query: SearchQuery): Observable<SearchResponse> {
-    const params = buildHttpParams(query);
-    const url = `${this.apiBaseUrl}/heritage-objects/page/1`;
+    const { page, ...queryParams } = query;
+    const params = buildHttpParams(queryParams);
+    const url = `${this.apiBaseUrl}/heritage-objects/page/${page}`;
 
     return this.http.get<SearchResponse>(url, { params });
   }

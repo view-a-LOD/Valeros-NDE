@@ -1,3 +1,5 @@
+import { normalizeToArray } from './value-normalization.util';
+
 export function getNestedValue(value: unknown, path: string): unknown {
   return path.split('.').reduce((obj: unknown, key: string) => {
     if (obj && typeof obj === 'object' && key in obj) {
@@ -5,11 +7,6 @@ export function getNestedValue(value: unknown, path: string): unknown {
     }
     return undefined;
   }, value);
-}
-
-export function normalizeToArray<T>(value: T | T[] | undefined | null): T[] {
-  if (value === undefined || value === null) return [];
-  return Array.isArray(value) ? value : [value];
 }
 
 export function applyPropertyPath(values: unknown[], path: string): unknown[] {
