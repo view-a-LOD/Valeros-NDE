@@ -14,7 +14,7 @@ export function transformToAutocompleteResponse(
     }),
   );
 
-  // TODO: Replace with actual suggestions from API
+  // TODO: Replace with "Terms" endpoint call once available
   const suggestions: string[] = response.orderedItems
     .map((item: NodeModel) => normalizeToString(item.name))
     .filter((name): name is string => !!name);
