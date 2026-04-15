@@ -22,26 +22,17 @@ export interface IiifImageInfo {
 export class IiifImageService {
   private http = inject(HttpClient);
 
-  getImageDimensions(
-    infoUrl: string,
-    fallbackWidth = 1280,
-    fallbackHeight = 720,
-  ): Observable<Dimensions> {
+  getImageDimensions(infoUrl: string): Observable<Dimensions | null> {
     return this.http.get<IiifImageInfo>(infoUrl).pipe(
       map((info: IiifImageInfo) => ({
-        width: info.width || fallbackWidth,
-        height: info.height || fallbackHeight,
+        width: info.width,
+        height: info.height,
       })),
-      catchError(() =>
-        of({
-          width: fallbackWidth,
-          height: fallbackHeight,
-        }),
-      ),
+      catchError(() => of(null)),
     );
   }
 
-  getInfoJsonUrl(media: AssociatedMediaObject): string | null {
-    return media.isBasedOn?.id ? `${media.isBasedOn.id}/info.json` : null;
+  getInfoJsonUrl(media: AssociatedMediaObject): string | undefined {
+    return media.isBasedOn?.id ? `${media.isBasedOn.id}/info.json` : undefined;
   }
 }

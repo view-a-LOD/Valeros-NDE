@@ -8,7 +8,7 @@ import { forkJoin, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IiifImageService } from '../../../services/iiif-image.service';
 import { normalizeToString } from '../../../utils/value-normalization.util';
-import { ImageData } from './image-gallery-widget.types';
+import { ImageModel } from '../../../types/image.model';
 import { Dimensions } from '../../../types/dimensions';
 
 @Component({
@@ -21,7 +21,7 @@ export class ImageGalleryWidget extends BaseWidget implements OnDestroy {
   private iiifService = inject(IiifImageService);
   private lightbox?: PhotoSwipeLightbox;
   readonly galleryId = `gallery-${crypto.randomUUID()}`;
-  readonly imagesWithDimensions = signal<ImageData[]>([]);
+  readonly imagesWithDimensions = signal<ImageModel[]>([]);
 
   constructor() {
     super();
@@ -33,10 +33,10 @@ export class ImageGalleryWidget extends BaseWidget implements OnDestroy {
     });
   }
 
-  private getImagesData(): ImageData[] {
+  private getImagesData(): ImageModel[] {
     return (this.values() as AssociatedMediaObject[])
       .map(
-        (media: AssociatedMediaObject): ImageData => ({
+        (media: AssociatedMediaObject): ImageModel => ({
           src: media.contentUrl || media.thumbnailUrl || '',
           thumbnail: media.thumbnailUrl || media.contentUrl || '',
           alt: normalizeToString(media.name) || media.id || 'Image',
@@ -46,8 +46,8 @@ export class ImageGalleryWidget extends BaseWidget implements OnDestroy {
       .filter((img) => img.src !== '');
   }
 
-  private loadImageDimensions(images: ImageData[]): void {
-    const dimensionRequests: Observable<ImageData>[] = images.map((img) => {
+  private loadImageDimensions(images: ImageModel[]): void {
+    const dimensionRequests: Observable<ImageModel>[] = images.map((img) => {
       if (!img.iiifInfoUrl) {
         // TODO: Add alternative way of retrieving image dimensions if IIIF is not available
         console.warn('IIIF info URL not available for image:', img.src);
@@ -55,16 +55,15 @@ export class ImageGalleryWidget extends BaseWidget implements OnDestroy {
       }
 
       return this.iiifService.getImageDimensions(img.iiifInfoUrl).pipe(
-        map((dimensions: Dimensions) => ({
+        map((dimensions: Dimensions | null) => ({
           ...img,
-          width: dimensions.width,
-          height: dimensions.height,
+          dimensions: dimensions || undefined,
         })),
       );
     });
 
     forkJoin(dimensionRequests).subscribe(
-      (imagesWithDimensions: ImageData[]) => {
+      (imagesWithDimensions: ImageModel[]) => {
         this.imagesWithDimensions.set(imagesWithDimensions);
         setTimeout(() => {
           this.initializeLightbox();

@@ -10,8 +10,8 @@
     @for (image of imagesWithDimensions(); track $index) {
       <a
         [href]="image.src"
-        [attr.data-pswp-width]="image.width || 1280"
-        [attr.data-pswp-height]="image.height || 720"
+        [attr.data-pswp-width]="image.dimensions?.width || 1280"
+        [attr.data-pswp-height]="image.dimensions?.height || 720"
         [attr.aria-label]="'View ' + image.alt + ' in fullscreen'"
         class="block overflow-hidden hover:opacity-90 transition-opacity cursor-pointer"
       >
