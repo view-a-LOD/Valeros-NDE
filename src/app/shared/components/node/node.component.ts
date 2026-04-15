@@ -16,6 +16,9 @@ import { NodeModel } from '../../types/node/node.model';
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
   standalone: true,
+  host: {
+    class: 'block',
+  },
 })
 export class NodeComponent {
   data = input.required<NodeModel>();
