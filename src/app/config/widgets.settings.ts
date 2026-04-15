@@ -105,7 +105,6 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
   propertyOrder: ['name', 'type', 'additionalType', 'description'],
   includedProperties: [
     'name',
-    'type',
     'additionalType',
     'description',
     'associatedMedia',
