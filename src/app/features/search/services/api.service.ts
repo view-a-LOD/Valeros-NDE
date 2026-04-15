@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { buildHttpParams } from '../../../shared/utils/http-params.util';
 import { SearchQuery } from '../types/search-query';
 import { SearchResponse } from '../types/search-response';
@@ -43,6 +43,10 @@ export class ApiService {
     });
     const url = `${this.apiBaseUrl}/heritage-objects/page/1`;
 
+    if (id.includes('v1/places/')) {
+      return this.placeDetails(id);
+    }
+
     return this.http.get<SearchResponse>(url, { params }).pipe(
       map((response) => {
         if (response.orderedItems.length === 0) {
@@ -51,5 +55,27 @@ export class ApiService {
         return response.orderedItems[0];
       }),
     );
+  }
+
+  // TODO: Use proper endpoint when available (GET /v1/places/{id})
+  placeDetails(id: string): Observable<NodeModel> {
+    return of({
+      id: 'https://example.org/v1/places/{id}',
+      type: 'Place',
+      name: 'Physisch Laboratorium',
+      address: {
+        type: 'PostalAddress',
+        streetAddress: 'Bijlhouwerstraat 6',
+        postalCode: '3511 ZC',
+        addressLocality: 'Utrecht',
+        addressRegion: 'Utrecht',
+        addressCountry: 'NL',
+      },
+      geo: {
+        type: 'GeoCoordinates',
+        latitude: 52.0815523,
+        longitude: 5.1203423,
+      },
+    });
   }
 }
