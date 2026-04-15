@@ -35,7 +35,21 @@ export class ApiService {
   }
 
   details(id: string): Observable<NodeModel> {
-    const url = `${this.apiBaseUrl}/heritage-objects/${id}`;
-    return this.http.get<NodeModel>(url);
+    // TODO: Use proper endpoint when available (GET /v1/heritage-objects/{id})
+    // For now, use search with ID filter
+    const params = buildHttpParams({
+      filter: `id:${id}`,
+      size: 1,
+    });
+    const url = `${this.apiBaseUrl}/heritage-objects/page/1`;
+
+    return this.http.get<SearchResponse>(url, { params }).pipe(
+      map((response) => {
+        if (response.orderedItems.length === 0) {
+          throw new Error('No item found with this ID');
+        }
+        return response.orderedItems[0];
+      }),
+    );
   }
 }
