@@ -47,9 +47,39 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       properties: ['additionalType'],
       component: BadgeWidget,
       config: {
-        propertyLabel: 'Soort',
+        propertyLabel: 'Soort (aanvullend)',
         propertyPath: 'name',
         // showPropertyLabel: false,
+      },
+    },
+    {
+      properties: ['material'],
+      component: BadgeWidget,
+      config: {
+        propertyLabel: 'Materiaal',
+        propertyPath: 'name',
+        // showPropertyLabel: false,
+      },
+    },
+    {
+      properties: ['isPartOf'],
+      component: JsonWidget,
+      config: {
+        propertyLabel: 'isPartOf',
+      },
+    },
+    {
+      properties: ['creator'],
+      component: LinkWidget,
+      config: {
+        propertyLabel: 'Vervaardiger',
+      },
+    },
+    {
+      properties: ['dateCreated'],
+      component: TextWidget,
+      config: {
+        propertyLabel: 'Vervaardigingsdatum',
       },
     },
     {
