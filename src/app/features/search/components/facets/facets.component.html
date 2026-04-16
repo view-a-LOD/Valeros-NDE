@@ -1,38 +1,40 @@
 @if (store.facets().length > 0) {
   <div class="space-y-2">
     @for (facet of store.facets(); track facet.name) {
-      <div
-        class="collapse collapse-arrow border border-base-300 rounded-lg bg-base-100"
-      >
-        <input type="checkbox" class="peer" checked />
+      @if (facet.orderedItems.length > 0) {
         <div
-          class="collapse-title flex items-center font-semibold text-sm capitalize"
+          class="collapse collapse-arrow border border-base-300 rounded-lg bg-base-100"
         >
-          {{ facet.name }}
-        </div>
-        <div class="collapse-content">
-          <div class="space-y-1">
-            @for (item of facet.orderedItems; track item.value) {
-              <label
-                class="flex justify-between items-center text-sm cursor-pointer hover:bg-base-200 p-1 rounded gap-1"
-              >
-                <div class="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    class="checkbox checkbox-sm"
-                    [checked]="isSelected(facet.name, item.value)"
-                    (click)="onFacetToggle(facet.name, item.value)"
-                  />
-                  <span class="text-base-content/80">{{ item.value }}</span>
-                </div>
-                <span class="text-base-content/60 text-xs">{{
-                  item.count
-                }}</span>
-              </label>
-            }
+          <input type="checkbox" class="peer" checked />
+          <div
+            class="collapse-title flex items-center font-semibold text-sm capitalize"
+          >
+            {{ facet.name }}
+          </div>
+          <div class="collapse-content">
+            <div class="space-y-1">
+              @for (item of facet.orderedItems; track item.value) {
+                <label
+                  class="flex justify-between items-center text-sm cursor-pointer hover:bg-base-200 p-1 rounded gap-1"
+                >
+                  <div class="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      class="checkbox checkbox-sm"
+                      [checked]="isSelected(facet.name, item.value)"
+                      (click)="onFacetToggle(facet.name, item.value)"
+                    />
+                    <span class="text-base-content/80">{{ item.value }}</span>
+                  </div>
+                  <span class="text-base-content/60 text-xs">{{
+                    item.count
+                  }}</span>
+                </label>
+              }
+            </div>
           </div>
         </div>
-      </div>
+      }
     }
   </div>
 }
