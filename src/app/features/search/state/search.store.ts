@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { NodeModel } from '../../../shared/types/node/node.model';
 import { SearchResponse } from '../types/search-response';
+import { Facet } from '../types/facet';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class SearchStore {
   searchTerm = signal('');
   results = signal<NodeModel[]>([]);
   totalResults = signal(0);
+  facets = signal<Facet[]>([]);
   loading = signal(false);
   error = signal<string | null>(null);
 
@@ -46,6 +48,7 @@ export class SearchStore {
         next: (response: SearchResponse) => {
           this.results.set(response.orderedItems);
           this.totalResults.set(response.partOf.totalItems);
+          this.facets.set(response.partOf.facets || []);
           this.loading.set(false);
 
           console.log('Search results:', response);
@@ -55,6 +58,7 @@ export class SearchStore {
           this.loading.set(false);
           this.results.set([]);
           this.totalResults.set(0);
+          this.facets.set([]);
         },
       });
   }

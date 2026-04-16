@@ -1,0 +1,28 @@
+@if (store.facets().length > 0) {
+  <div class="my-6 space-y-2">
+    @for (facet of store.facets(); track facet.name) {
+      <div
+        class="collapse collapse-arrow border border-base-300 rounded-lg bg-base-100"
+      >
+        <input type="checkbox" class="peer" />
+        <div
+          class="collapse-title flex items-center font-semibold text-sm capitalize"
+        >
+          {{ facet.name }}
+        </div>
+        <div class="collapse-content">
+          <div class="space-y-1">
+            @for (item of facet.orderedItems; track item.value) {
+              <div class="flex justify-between items-center text-sm">
+                <span class="text-base-content/80">{{ item.value }}</span>
+                <span class="text-base-content/60 text-xs">{{
+                  item.count
+                }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+}

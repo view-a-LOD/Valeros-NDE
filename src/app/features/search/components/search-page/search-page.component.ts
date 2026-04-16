@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { SearchStore } from '../../state/search.store';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { NodeComponent } from '../../../../shared/components/node/node.component';
+import { FacetsComponent } from '../facets/facets.component';
 
 @Component({
   selector: 'app-search-page',
-  imports: [CommonModule, SearchBarComponent, NodeComponent],
+  imports: [CommonModule, SearchBarComponent, NodeComponent, FacetsComponent],
   templateUrl: './search-page.component.html',
 })
 export class SearchPageComponent {
