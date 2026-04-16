@@ -1,5 +1,6 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject, signal, effect } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { FilterStore } from './filter.store';
 import { NodeModel } from '../../../shared/types/node/node.model';
 import { SearchResponse } from '../types/search-response';
 import { Facet } from '../types/facet';
@@ -9,6 +10,7 @@ import { Facet } from '../types/facet';
 })
 export class SearchStore {
   private searchApiService = inject(ApiService);
+  private filterStore = inject(FilterStore);
 
   searchTerm = signal('');
   results = signal<NodeModel[]>([]);
@@ -19,6 +21,16 @@ export class SearchStore {
 
   constructor() {
     this.performInitialSearch();
+    this.initSearchOnFilterChanges();
+  }
+
+  private initSearchOnFilterChanges(): void {
+    effect(() => {
+      this.filterStore.selectedFilters();
+      if (this.searchTerm()) {
+        this.search();
+      }
+    });
   }
 
   private performInitialSearch(): void {
@@ -37,12 +49,15 @@ export class SearchStore {
     this.loading.set(true);
     this.error.set(null);
 
+    const filters = this.filterStore.buildFilterStrings();
+
     // TODO: Replace hardcoded size and page
     this.searchApiService
       .search({
         q: trimmedTerm,
         size: 10,
         page: 1,
+        ...(filters.length > 0 && { filter: filters }),
       })
       .subscribe({
         next: (response: SearchResponse) => {
