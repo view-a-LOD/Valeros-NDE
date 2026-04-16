@@ -26,9 +26,9 @@
     </div>
 
     <!-- Middle Row: Left, Main, Right -->
-    <div class="flex gap-6 min-w-0">
+    <div class="flex flex-col md:flex-row gap-6 min-w-0">
       <!-- Left Container -->
-      <div class="position-container position-container-side">
+      <div class="position-container position-container-side md:order-1">
         @for (item of widgetsByPosition().left; track $index) {
           <app-dynamic-widget
             [data]="data()"
@@ -39,7 +39,9 @@
       </div>
 
       <!-- Main Container -->
-      <div class="position-container flex-1 min-w-[33%]">
+      <div
+        class="position-container w-full md:flex-1 md:min-w-[33%] md:order-2"
+      >
         @for (item of widgetsByPosition().main; track $index) {
           <app-dynamic-widget
             [data]="data()"
@@ -50,7 +52,7 @@
       </div>
 
       <!-- Right Container -->
-      <div class="position-container position-container-side">
+      <div class="position-container position-container-side md:order-3">
         @for (item of widgetsByPosition().right; track $index) {
           <app-dynamic-widget
             [data]="data()"
