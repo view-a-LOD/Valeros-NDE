@@ -1,4 +1,5 @@
 import { NodeModel } from '../../../shared/types/node/node.model';
+import { Facet } from './facet';
 
 export interface SearchResponse {
   id: string;
@@ -9,6 +10,7 @@ export interface SearchResponse {
     totalItems: number;
     first?: string;
     last?: string;
+    facets?: Facet[];
   };
   next?: string;
   prev?: string;
