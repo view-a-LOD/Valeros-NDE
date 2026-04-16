@@ -1,0 +1,12 @@
+<!-- Desktop -->
+<button
+  (click)="onToggle()"
+  [class]="buttonClass"
+  class="hidden lg:inline-flex"
+>
+  {{ isOpen ? labelWhenOpen : labelWhenClosed }}
+</button>
+<!-- Mobile -->
+<label [for]="drawerId" [class]="buttonClass" class="lg:hidden">
+  {{ isOpen ? labelWhenOpen : labelWhenClosed }}
+</label>

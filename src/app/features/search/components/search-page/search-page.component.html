@@ -1,36 +1,54 @@
-<div class="container mx-auto p-8 max-w-4xl">
-  <app-search-bar />
+<app-drawer-layout
+  #drawer
+  drawerId="facets-drawer"
+  sidebarTitle="Filters"
+  closeLabel="Filters paneel sluiten"
+  [initiallyOpen]="true"
+>
+  <div drawer-content>
+    <div class="container mx-auto p-8 max-w-4xl">
+      <app-search-bar />
 
-  <app-facets />
+      <div class="mt-2 mb-6">
+        <app-drawer-toggle-button
+          drawerId="facets-drawer"
+          [isOpen]="drawer.isOpen()"
+          (toggle)="drawer.toggleDrawer()"
+        />
+      </div>
 
-  @if (store.error()) {
-    <div class="alert alert-error mb-6">
-      <span>{{ store.error() }}</span>
-    </div>
-  }
+      @if (store.error()) {
+        <div class="alert alert-error mb-6">
+          <span>{{ store.error() }}</span>
+        </div>
+      }
 
-  @if (store.results().length > 0) {
-    <div
-      #resultsContainer
-      tabindex="-1"
-      class="mb-4 text-sm text-base-content/70 outline-none"
-    >
-      Found {{ store.totalResults() }} results (showing
-      {{ store.results().length }})
-    </div>
+      @if (store.results().length > 0) {
+        <div
+          tabindex="-1"
+          class="mb-4 text-sm text-base-content/70 outline-none"
+        >
+          Found {{ store.totalResults() }} results (showing
+          {{ store.results().length }})
+        </div>
 
-    <div class="space-y-2">
-      @for (result of store.results(); track result.id) {
-        <app-node [data]="result" />
+        <div class="space-y-2">
+          @for (result of store.results(); track result.id) {
+            <app-node [data]="result" />
+          }
+        </div>
+      } @else if (!store.loading() && store.searchTerm()) {
+        <div
+          tabindex="-1"
+          class="text-center py-12 text-base-content/60 outline-none"
+        >
+          <p>No results found for "{{ store.searchTerm() }}"</p>
+        </div>
       }
     </div>
-  } @else if (!store.loading() && store.searchTerm()) {
-    <div
-      #noResultsMessage
-      tabindex="-1"
-      class="text-center py-12 text-base-content/60 outline-none"
-    >
-      <p>No results found for "{{ store.searchTerm() }}"</p>
-    </div>
-  }
-</div>
+  </div>
+
+  <div drawer-sidebar>
+    <app-facets />
+  </div>
+</app-drawer-layout>
