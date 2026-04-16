@@ -19,12 +19,15 @@ export class SearchBarComponent {
   @ViewChild('autocomplete') autocomplete?: AutocompleteDropdownComponent;
 
   onSearchTermChange(value: string): void {
-    this.store.setSearchTerm(value);
+    this.store.searchTerm.set(value);
   }
 
   onSearch(): void {
     this.autocomplete?.hideAndSuppress();
-    this.store.search();
+    const searchTerm = this.store.searchTerm();
+    this.router.navigate([], {
+      queryParams: { q: searchTerm || undefined, filters: undefined },
+    });
   }
 
   onAutocompleteSelect(item: AutocompleteNode): void {
@@ -36,9 +39,11 @@ export class SearchBarComponent {
   }
 
   onSuggestionSelect(suggestion: string): void {
-    this.store.setSearchTerm(suggestion);
+    this.store.searchTerm.set(suggestion);
     this.autocomplete?.hideAndSuppress();
-    this.store.search();
+    this.router.navigate([], {
+      queryParams: { q: suggestion || undefined, filters: undefined },
+    });
   }
 
   onInputFocus(): void {

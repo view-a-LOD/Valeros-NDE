@@ -1,10 +1,14 @@
-import { Injectable, signal } from '@angular/core';
-import { Filters } from '../types/filters';
+import { Injectable, signal, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { Filters, SerializableFilters } from '../types/filters';
+import { FacetValue } from '../types/facet';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FilterStore {
+  private router = inject(Router);
+
   selectedFilters = signal<Filters>({});
 
   toggleFilter(facetName: string, value: string): void {
@@ -23,7 +27,16 @@ export class FilterStore {
       currentFilters[facetName].add(value);
     }
 
-    this.selectedFilters.set(currentFilters);
+    this.updateUrlWithFilters(currentFilters);
+  }
+
+  private updateUrlWithFilters(filters: Filters): void {
+    const filterParam = this.serialize(filters);
+
+    this.router.navigate([], {
+      queryParams: { filters: filterParam || undefined },
+      queryParamsHandling: 'merge',
+    });
   }
 
   isFilterSelected(facetName: string, value: string): boolean {
@@ -31,7 +44,10 @@ export class FilterStore {
   }
 
   clearFilters(): void {
-    this.selectedFilters.set({});
+    this.router.navigate([], {
+      queryParams: { filters: undefined },
+      queryParamsHandling: 'merge',
+    });
   }
 
   buildFilterStrings(): string[] {
@@ -52,12 +68,54 @@ export class FilterStore {
     return Object.keys(this.selectedFilters()).length > 0;
   }
 
-  serialize(filters: Filters): string {
-    return JSON.stringify(filters, (key, value) => {
-      if (value instanceof Set) {
-        return Array.from(value).sort();
+  serialize(filters: Filters): string | null {
+    if (Object.keys(filters).length === 0) {
+      return null;
+    }
+
+    const serializableFilters: SerializableFilters = {};
+    for (const [facetName, values] of Object.entries(filters)) {
+      serializableFilters[facetName] = Array.from(values).sort();
+    }
+
+    return JSON.stringify(serializableFilters);
+  }
+
+  deserialize(filterParam: string | null): Filters {
+    if (!filterParam) {
+      return {};
+    }
+    try {
+      const parsed: SerializableFilters = JSON.parse(filterParam);
+      const filters: Filters = {};
+      for (const [facetName, values] of Object.entries(parsed)) {
+        filters[facetName] = new Set(values);
       }
-      return value;
-    });
+      return filters;
+    } catch {
+      return {};
+    }
+  }
+
+  clearFiltersIfQueryChanged(
+    newQuery: string,
+    previousQuery: string | null,
+  ): void {
+    const queryChanged = previousQuery !== null && previousQuery !== newQuery;
+
+    if (queryChanged) {
+      this.selectedFilters.set({});
+    }
+  }
+
+  syncFiltersFromUrl(urlFilters: string | null): void {
+    const currentFilters: Filters = this.selectedFilters();
+    const serializedFilters: string | null = this.serialize(currentFilters);
+    const filtersChanged: boolean = serializedFilters !== urlFilters;
+
+    if (filtersChanged) {
+      const deserializedFilters: Filters = this.deserialize(urlFilters);
+      this.selectedFilters.set(deserializedFilters);
+    }
   }
 }

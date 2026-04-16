@@ -1,6 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { distinctUntilChanged, map, skip } from 'rxjs';
+import { distinctUntilChanged, map, skip, filter } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { FilterStore } from './filter.store';
 import { NodeModel } from '../../../shared/types/node/node.model';
@@ -8,12 +9,18 @@ import { SearchResponse } from '../types/search-response';
 import { Facet } from '../types/facet';
 import { Filters } from '../types/filters';
 
+interface SearchUrlParams {
+  q: string;
+  filters: string | null;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class SearchStore {
   private searchApiService = inject(ApiService);
   private filterStore = inject(FilterStore);
+  private route = inject(ActivatedRoute);
 
   searchTerm = signal('');
   results = signal<NodeModel[]>([]);
@@ -23,35 +30,38 @@ export class SearchStore {
   error = signal<string | null>(null);
 
   constructor() {
-    this.performInitialSearch();
-    this.initSearchOnFilterChanges();
+    this.initSearchOnUrlChanges();
   }
 
-  private initSearchOnFilterChanges(): void {
-    toObservable(this.filterStore.selectedFilters)
+  private initSearchOnUrlChanges(): void {
+    let previousQuery: string | null = null;
+
+    this.route.queryParams
       .pipe(
-        skip(1),
-        map((filters: Filters) => this.filterStore.serialize(filters)),
-        distinctUntilChanged(),
+        map(
+          (params): SearchUrlParams => ({
+            q: params['q'] || '*',
+            filters: params['filters'] || null,
+          }),
+        ),
+        distinctUntilChanged((prev: SearchUrlParams, curr: SearchUrlParams) => {
+          const queryChanged = prev.q !== curr.q;
+          const filtersChanged = prev.filters !== curr.filters;
+          return !queryChanged && !filtersChanged;
+        }),
       )
-      .subscribe((serializedFilters) => {
-        console.log('Filter changed, searching...', serializedFilters);
-        if (this.searchTerm()) {
-          this.search(true);
-        }
+      .subscribe(({ q: query, filters }: SearchUrlParams) => {
+        this.filterStore.clearFiltersIfQueryChanged(query, previousQuery);
+        this.filterStore.syncFiltersFromUrl(filters);
+
+        previousQuery = query;
+        this.searchTerm.set(query);
+        this.performSearch(query);
       });
   }
 
-  private performInitialSearch(): void {
-    this.searchTerm.set('*');
-    this.search();
-  }
-
-  search(keepFilters = false): void {
-    if (!keepFilters) {
-      this.filterStore.clearFilters();
-    }
-    const trimmedTerm = this.searchTerm().trim();
+  private performSearch(term: string): void {
+    const trimmedTerm = term.trim();
 
     if (!trimmedTerm) {
       this.results.set([]);
@@ -88,9 +98,5 @@ export class SearchStore {
           this.facets.set([]);
         },
       });
-  }
-
-  setSearchTerm(term: string): void {
-    this.searchTerm.set(term);
   }
 }
