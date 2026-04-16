@@ -37,7 +37,7 @@ export class SearchStore {
       .subscribe((serializedFilters) => {
         console.log('Filter changed, searching...', serializedFilters);
         if (this.searchTerm()) {
-          this.search();
+          this.search(true);
         }
       });
   }
@@ -47,7 +47,10 @@ export class SearchStore {
     this.search();
   }
 
-  search(): void {
+  search(keepFilters = false): void {
+    if (!keepFilters) {
+      this.filterStore.clearFilters();
+    }
     const trimmedTerm = this.searchTerm().trim();
 
     if (!trimmedTerm) {
