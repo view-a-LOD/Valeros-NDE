@@ -4,7 +4,7 @@ import { SearchPageComponent } from './features/search/components/search-page/se
 
 export const appRoutes: Route[] = [
   {
-    path: 'details/:id',
+    path: 'details',
     component: DetailsComponent,
   },
   {

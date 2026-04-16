@@ -3,7 +3,8 @@
     @for (node of nodes; track node.id) {
       <li>
         <a
-          [routerLink]="['/details', getEncodedId(node)]"
+          [routerLink]="['/details']"
+          [queryParams]="getQueryParams(node)"
           class="flex items-baseline gap-2"
           [attr.aria-label]="'View details for ' + getNodeName(node)"
         >

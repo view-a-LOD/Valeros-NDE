@@ -14,7 +14,6 @@ import { NodeModel } from '../../../../shared/types/node/node.model';
 })
 export class DetailsComponent implements OnInit, OnDestroy {
   id: string | null = null;
-  decodedId: string | null = null;
   data = signal<NodeModel | null>(null);
   loading = signal<boolean>(false);
   error = signal<string | null>(null);
@@ -24,10 +23,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
   private routeSubscription?: Subscription;
 
   ngOnInit() {
-    this.routeSubscription = this.route.paramMap.subscribe((params) => {
+    this.routeSubscription = this.route.queryParamMap.subscribe((params) => {
       this.id = params.get('id');
       if (this.id) {
-        this.decodedId = decodeURIComponent(this.id);
         this.fetchData();
       }
     });
@@ -38,12 +36,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   private fetchData() {
-    if (!this.decodedId) return;
+    if (!this.id) return;
 
     this.loading.set(true);
     this.error.set(null);
 
-    this.searchApiService.details(this.decodedId).subscribe({
+    this.searchApiService.details(this.id).subscribe({
       next: (response: NodeModel) => {
         this.data.set(response);
         this.loading.set(false);

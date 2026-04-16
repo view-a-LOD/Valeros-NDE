@@ -31,7 +31,7 @@ export class SearchBarComponent {
     const id = item.id;
     if (id) {
       this.autocomplete?.hideAndSuppress();
-      this.router.navigate(['/details', encodeURIComponent(id)]);
+      this.router.navigate(['/details'], { queryParams: { id } });
     }
   }
 

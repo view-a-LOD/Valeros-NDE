@@ -59,6 +59,11 @@ export class NodeComponent {
 
   detailsRoute = computed(() => {
     const id = this.data().id;
-    return id ? ['/details', encodeURIComponent(id)] : null;
+    return id ? ['/details'] : null;
+  });
+
+  detailsQueryParams = computed(() => {
+    const id = this.data().id;
+    return id ? { id } : null;
   });
 }

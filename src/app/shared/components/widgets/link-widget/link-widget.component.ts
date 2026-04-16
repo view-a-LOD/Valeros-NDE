@@ -24,7 +24,7 @@ export class LinkWidget extends BaseWidget {
     return normalizeToFirst<string>(node.type);
   }
 
-  getEncodedId(node: NodeModel): string {
-    return encodeURIComponent(node.id);
+  getQueryParams(node: NodeModel): { id: string } {
+    return { id: node.id };
   }
 }
