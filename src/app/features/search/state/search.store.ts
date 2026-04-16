@@ -1,9 +1,12 @@
-import { Injectable, inject, signal, effect } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { distinctUntilChanged, map, skip } from 'rxjs';
 import { ApiService } from '../services/api.service';
 import { FilterStore } from './filter.store';
 import { NodeModel } from '../../../shared/types/node/node.model';
 import { SearchResponse } from '../types/search-response';
 import { Facet } from '../types/facet';
+import { Filters } from '../types/filters';
 
 @Injectable({
   providedIn: 'root',
@@ -25,12 +28,18 @@ export class SearchStore {
   }
 
   private initSearchOnFilterChanges(): void {
-    effect(() => {
-      this.filterStore.selectedFilters();
-      if (this.searchTerm()) {
-        this.search();
-      }
-    });
+    toObservable(this.filterStore.selectedFilters)
+      .pipe(
+        skip(1),
+        map((filters: Filters) => this.filterStore.serialize(filters)),
+        distinctUntilChanged(),
+      )
+      .subscribe((serializedFilters) => {
+        console.log('Filter changed, searching...', serializedFilters);
+        if (this.searchTerm()) {
+          this.search();
+        }
+      });
   }
 
   private performInitialSearch(): void {

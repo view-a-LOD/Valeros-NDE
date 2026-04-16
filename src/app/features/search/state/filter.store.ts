@@ -1,6 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-
-type Filters = Record<string, Set<string>>;
+import { Filters } from '../types/filters';
 
 @Injectable({
   providedIn: 'root',
@@ -51,5 +50,14 @@ export class FilterStore {
 
   hasActiveFilters(): boolean {
     return Object.keys(this.selectedFilters()).length > 0;
+  }
+
+  serialize(filters: Filters): string {
+    return JSON.stringify(filters, (key, value) => {
+      if (value instanceof Set) {
+        return Array.from(value).sort();
+      }
+      return value;
+    });
   }
 }
