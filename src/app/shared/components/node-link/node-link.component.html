@@ -1,0 +1,14 @@
+<a
+  [routerLink]="['/details']"
+  [queryParams]="{ id: node().id }"
+  class="inline-flex items-baseline gap-2"
+  [attr.aria-label]="'View details for ' + getNodeName(node())"
+>
+  <span class="underline">{{ getNodeName(node()) }}</span>
+
+  @if (showType() && getNodeType(node())) {
+    <span class="text-xs text-base-content/60" aria-label="Type">
+      ({{ getNodeType(node()) }})
+    </span>
+  }
+</a>

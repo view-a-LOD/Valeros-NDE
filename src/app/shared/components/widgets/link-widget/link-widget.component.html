@@ -1,22 +1,8 @@
-@if (nodes.length > 0) {
+@if (values().length > 0) {
   <ul class="space-y-2" role="list">
-    @for (node of nodes; track node.id) {
+    @for (node of values(); track node.id) {
       <li>
-        <a
-          [routerLink]="['/details']"
-          [queryParams]="getQueryParams(node)"
-          class="flex items-baseline gap-2"
-          [attr.aria-label]="'View details for ' + getNodeName(node)"
-        >
-          <span class="underline decoration-base-content/30">{{
-            getNodeName(node)
-          }}</span>
-          @if (getNodeType(node)) {
-            <span class="text-xs text-base-content/60" aria-label="Type">
-              ({{ getNodeType(node) }})
-            </span>
-          }
-        </a>
+        <app-node-link [node]="node" />
       </li>
     }
   </ul>

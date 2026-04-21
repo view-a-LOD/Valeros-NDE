@@ -23,19 +23,19 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'license',
       properties: ['isPartOf'],
-      component: TextWidget,
+      component: BadgeWidget,
       config: {
         propertyLabel: 'Licentie',
-        propertyPath: 'license.name',
+        propertyPath: 'license',
       },
     },
     {
       id: 'publisher',
       properties: ['isPartOf'],
-      component: TextWidget,
+      component: BadgeWidget,
       config: {
         propertyLabel: 'Uitgever',
-        propertyPath: 'publisher.name',
+        propertyPath: 'publisher',
       },
     },
     {
