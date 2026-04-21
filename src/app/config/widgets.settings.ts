@@ -23,7 +23,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'license',
       properties: ['isPartOf'],
-      component: BadgeWidget,
+      component: LinkWidget,
       config: {
         propertyLabel: 'Licentie',
         propertyPath: 'license',
@@ -32,10 +32,35 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'publisher',
       properties: ['isPartOf'],
-      component: BadgeWidget,
+      component: LinkWidget,
       config: {
         propertyLabel: 'Uitgever',
         propertyPath: 'publisher',
+      },
+    },
+    {
+      id: 'genre',
+      properties: ['genre'],
+      component: BadgeWidget,
+      config: {
+        propertyLabel: 'Genre',
+      },
+    },
+    {
+      id: 'is-based-on',
+      properties: ['isBasedOn'],
+      component: LinkWidget,
+      config: {
+        propertyLabel: 'Gebaseerd op',
+      },
+    },
+    // TODO: Show geo preview here already (if available)
+    {
+      id: 'content-location',
+      properties: ['contentLocation'],
+      component: LinkWidget,
+      config: {
+        propertyLabel: 'Locatie',
       },
     },
     {
