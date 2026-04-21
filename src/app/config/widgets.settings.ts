@@ -25,7 +25,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       properties: ['isPartOf'],
       component: TextWidget,
       config: {
-        propertyLabel: 'License',
+        propertyLabel: 'Licentie',
         propertyPath: 'license.name',
       },
     },
