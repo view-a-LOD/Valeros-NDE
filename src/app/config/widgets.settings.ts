@@ -57,7 +57,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     },
     {
       id: 'content-location',
-      properties: ['contentLocation'],
+      properties: ['contentLocation', 'location'],
       component: LinkWidget,
       config: {
         propertyLabel: 'Locatie',
@@ -65,7 +65,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     },
     {
       id: 'content-location',
-      properties: ['contentLocation'],
+      properties: ['contentLocation', 'location'],
       component: AsyncPreviewWidget,
       config: {
         showPropertyLabel: false,
