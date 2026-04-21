@@ -30,6 +30,15 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'publisher',
+      properties: ['isPartOf'],
+      component: TextWidget,
+      config: {
+        propertyLabel: 'Uitgever',
+        propertyPath: 'publisher.name',
+      },
+    },
+    {
       id: 'image-gallery',
       properties: ['associatedMedia'],
       component: ImageGalleryWidget,
@@ -174,6 +183,7 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
         'description',
         '*',
         'license',
+        'publisher',
       ]
     : [],
   hiddenProperties: ['id'],
