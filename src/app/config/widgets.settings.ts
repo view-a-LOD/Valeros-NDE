@@ -152,7 +152,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     },
   ],
   defaultWidget: {
-    component: LinkWidget,
+    component: JsonWidget,
     properties: [],
     config: {},
   },
@@ -169,7 +169,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
 export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [...WIDGETS_SETTINGS.mappings],
   defaultWidget: {
-    component: LinkWidget,
+    component: JsonWidget,
     properties: [],
     config: {},
   },
