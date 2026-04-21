@@ -4,12 +4,13 @@ import { BaseWidget } from '../components/widgets/base-widget';
 export interface WidgetsSettings {
   mappings: WidgetMapping[];
   defaultWidget: WidgetMapping;
-  propertyOrder?: string[];
+  widgetOrder?: string[];
   hiddenProperties?: string[];
   includedProperties?: string[];
 }
 
 export interface WidgetMapping {
+  id?: string;
   component: Type<BaseWidget>;
   properties: string[];
   config?: WidgetConfig;

@@ -13,6 +13,7 @@ import { DatasetWidget } from '../shared/components/widgets/dataset-widget/datas
 export const WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
     {
+      id: 'dataset',
       properties: ['isPartOf'],
       component: DatasetWidget,
       config: {
@@ -20,6 +21,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'image-gallery',
       properties: ['associatedMedia'],
       component: ImageGalleryWidget,
       config: {
@@ -36,6 +38,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     //   },
     // },
     {
+      id: 'name',
       properties: ['name'],
       component: TextWidget,
       config: {
@@ -45,6 +48,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'type',
       properties: ['type'],
       component: BadgeWidget,
       config: {
@@ -53,6 +57,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'additional-type',
       properties: ['additionalType'],
       component: BadgeWidget,
       config: {
@@ -62,6 +67,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'material',
       properties: ['material'],
       component: BadgeWidget,
       config: {
@@ -71,6 +77,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'creator',
       properties: ['creator'],
       component: LinkWidget,
       config: {
@@ -78,6 +85,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'date-created',
       properties: ['dateCreated'],
       component: TextWidget,
       config: {
@@ -85,6 +93,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'birth-date',
       properties: ['birthDate'],
       component: TextWidget,
       config: {
@@ -92,6 +101,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'death-date',
       properties: ['deathDate'],
       component: TextWidget,
       config: {
@@ -99,6 +109,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'description',
       properties: ['description'],
       component: TextWidget,
       config: {
@@ -106,6 +117,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'geo',
       properties: ['geo'],
       component: MapWidget,
       config: {
@@ -113,6 +125,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'address',
       properties: ['address'],
       component: AddressWidget,
       config: {
@@ -125,7 +138,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  propertyOrder: ['name', 'isPartOf', 'type', 'additionalType', 'description'],
+  widgetOrder: ['name', 'dataset', 'type', 'additional-type', 'description'],
   includedProperties: [
     'name',
     'additionalType',
@@ -141,8 +154,8 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  propertyOrder: WIDGETS_SETTINGS.propertyOrder
-    ? [...WIDGETS_SETTINGS.propertyOrder]
+  widgetOrder: WIDGETS_SETTINGS.widgetOrder
+    ? [...WIDGETS_SETTINGS.widgetOrder]
     : [],
   hiddenProperties: ['id'],
 };
