@@ -8,9 +8,17 @@ import { MapWidget } from '../shared/components/widgets/map-widget/map-widget.co
 import { IiifWidget } from '../shared/components/widgets/iiif-widget/iiif-widget.component';
 import { LinkWidget } from '../shared/components/widgets/link-widget/link-widget.component';
 import { AddressWidget } from '../shared/components/widgets/address-widget/address-widget.component';
+import { DatasetWidget } from '../shared/components/widgets/dataset-widget/dataset-widget.component';
 
 export const WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
+    {
+      properties: ['isPartOf'],
+      component: DatasetWidget,
+      config: {
+        propertyLabel: 'Dataset',
+      },
+    },
     {
       properties: ['associatedMedia'],
       component: ImageGalleryWidget,
@@ -60,13 +68,6 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
         propertyLabel: 'Materiaal',
         propertyPath: 'name',
         // showPropertyLabel: false,
-      },
-    },
-    {
-      properties: ['isPartOf'],
-      component: JsonWidget,
-      config: {
-        propertyLabel: 'isPartOf',
       },
     },
     {
@@ -124,7 +125,7 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  propertyOrder: ['name', 'type', 'additionalType', 'description'],
+  propertyOrder: ['name', 'isPartOf', 'type', 'additionalType', 'description'],
   includedProperties: [
     'name',
     'additionalType',
