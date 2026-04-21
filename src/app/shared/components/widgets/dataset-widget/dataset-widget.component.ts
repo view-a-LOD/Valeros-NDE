@@ -24,7 +24,7 @@ interface Dataset extends IsPartOfValue {
 
 @Component({
   selector: 'app-dataset-widget',
-  standalone: true,
+
   imports: [CommonModule],
   templateUrl: './dataset-widget.component.html',
 })

@@ -3,7 +3,7 @@ import { WidgetConfig } from '../../types/widget-config';
 
 @Component({
   selector: 'app-property-label-wrapper',
-  standalone: true,
+
   templateUrl: './property-label-wrapper.component.html',
 })
 export class PropertyLabelWrapperComponent {

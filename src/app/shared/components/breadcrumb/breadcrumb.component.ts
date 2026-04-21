@@ -1,9 +1,4 @@
-import {
-  Component,
-  inject,
-  ChangeDetectionStrategy,
-  Signal,
-} from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import {
   BreadcrumbItem,
   BreadcrumbService,
@@ -11,7 +6,7 @@ import {
 
 @Component({
   selector: 'app-breadcrumb',
-  standalone: true,
+
   templateUrl: './breadcrumb.component.html',
 })
 export class BreadcrumbComponent {

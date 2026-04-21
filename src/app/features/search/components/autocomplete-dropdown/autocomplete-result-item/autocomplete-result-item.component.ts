@@ -6,7 +6,6 @@ import { AutocompleteNode } from '../../../types/autocomplete-node';
   selector: 'app-autocomplete-result-item',
   imports: [CommonModule],
   templateUrl: './autocomplete-result-item.component.html',
-  standalone: true,
 })
 export class AutocompleteResultItemComponent {
   item = input.required<AutocompleteNode>();

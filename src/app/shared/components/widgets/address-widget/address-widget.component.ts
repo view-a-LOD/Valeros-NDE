@@ -12,7 +12,7 @@ export interface PostalAddress {
 
 @Component({
   selector: 'app-address-widget',
-  standalone: true,
+
   imports: [],
   templateUrl: './address-widget.component.html',
 })

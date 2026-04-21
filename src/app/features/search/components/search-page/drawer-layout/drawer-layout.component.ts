@@ -1,9 +1,9 @@
 import {
   Component,
-  Input,
+  input,
   signal,
   output,
-  ViewChild,
+  viewChild,
   ElementRef,
   AfterViewInit,
   effect,
@@ -12,28 +12,29 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-drawer-layout',
-  standalone: true,
+
   imports: [CommonModule],
   templateUrl: './drawer-layout.component.html',
 })
 export class DrawerLayoutComponent implements AfterViewInit {
-  @Input() drawerId = 'drawer';
-  @Input() sidebarWidth = '20rem';
-  @Input() closeLabel = 'Close drawer';
-  @Input() initiallyOpen = true;
-  @Input() sidebarTitle = '';
+  drawerId = input<string>('drawer');
+  sidebarWidth = input<string>('20rem');
+  closeLabel = input<string>('Close drawer');
+  initiallyOpen = input<boolean>(true);
+  sidebarTitle = input<string>('');
 
-  @ViewChild('drawerCheckbox') drawerCheckbox?: ElementRef<HTMLInputElement>;
+  drawerCheckbox = viewChild<ElementRef<HTMLInputElement>>('drawerCheckbox');
 
-  isOpen = signal(this.initiallyOpen);
+  isOpen = signal(this.initiallyOpen());
 
   ngOnInit() {
-    this.isOpen.set(this.initiallyOpen);
+    this.isOpen.set(this.initiallyOpen());
   }
 
   ngAfterViewInit() {
-    if (this.drawerCheckbox) {
-      const checkbox = this.drawerCheckbox.nativeElement;
+    const checkboxRef = this.drawerCheckbox();
+    if (checkboxRef) {
+      const checkbox = checkboxRef.nativeElement;
       checkbox.addEventListener('change', () => {
         this.isOpen.set(checkbox.checked);
       });

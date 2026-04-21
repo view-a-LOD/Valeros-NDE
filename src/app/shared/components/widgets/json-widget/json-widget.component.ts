@@ -4,7 +4,7 @@ import { BaseWidget } from '../base-widget';
 
 @Component({
   selector: 'app-json-widget',
-  standalone: true,
+
   imports: [JsonPipe],
   templateUrl: './json-widget.component.html',
 })

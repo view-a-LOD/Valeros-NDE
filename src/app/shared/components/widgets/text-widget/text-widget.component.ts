@@ -4,7 +4,7 @@ import { TextWidgetConfig } from './text-widget.config';
 
 @Component({
   selector: 'app-text-widget',
-  standalone: true,
+
   imports: [],
   templateUrl: './text-widget.component.html',
 })

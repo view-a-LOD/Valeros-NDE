@@ -1,7 +1,7 @@
 <div class="drawer" [class.lg:drawer-open]="isOpen()">
   <input
     #drawerCheckbox
-    [id]="drawerId"
+    [id]="drawerId()"
     type="checkbox"
     class="drawer-toggle"
     [checked]="isOpen()"
@@ -13,13 +13,13 @@
 
   <div class="drawer-side">
     <label
-      [for]="drawerId"
-      [attr.aria-label]="closeLabel"
+      [for]="drawerId()"
+      [attr.aria-label]="closeLabel()"
       class="drawer-overlay"
     ></label>
-    <div class="bg-base-200 min-h-full p-4" [style.width]="sidebarWidth">
-      @if (sidebarTitle) {
-        <h2 class="text-lg font-bold mb-4">{{ sidebarTitle }}</h2>
+    <div class="bg-base-200 min-h-full p-4" [style.width]="sidebarWidth()">
+      @if (sidebarTitle()) {
+        <h2 class="text-lg font-bold mb-4">{{ sidebarTitle() }}</h2>
       }
       <ng-content select="[drawer-sidebar]"></ng-content>
     </div>

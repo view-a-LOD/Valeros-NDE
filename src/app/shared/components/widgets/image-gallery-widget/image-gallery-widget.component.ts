@@ -13,7 +13,7 @@ import { toImageModel } from '../../../utils/image-model.util';
 
 @Component({
   selector: 'app-image-gallery-widget',
-  standalone: true,
+
   imports: [CommonModule],
   templateUrl: './image-gallery-widget.component.html',
 })

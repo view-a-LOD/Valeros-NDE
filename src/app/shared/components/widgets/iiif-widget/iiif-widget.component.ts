@@ -6,7 +6,7 @@ import { AssociatedMediaObject } from '../../../types/node/associated-media-obje
 
 @Component({
   selector: 'app-iiif-widget',
-  standalone: true,
+
   imports: [],
   templateUrl: './iiif-widget.component.html',
 })

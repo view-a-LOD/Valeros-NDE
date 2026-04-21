@@ -30,7 +30,6 @@ import { ApiService } from '../../services/api.service';
     AutocompleteSuggestionItemComponent,
   ],
   templateUrl: './autocomplete-dropdown.component.html',
-  standalone: true,
 })
 export class AutocompleteDropdownComponent {
   searchTerm = input<string>('');

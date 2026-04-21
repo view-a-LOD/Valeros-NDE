@@ -13,7 +13,6 @@ import { normalizeToFirst } from '../../../../shared/utils/value-normalization.u
   selector: 'app-details',
   imports: [CommonModule, NodeComponent, BreadcrumbComponent],
   templateUrl: './details.component.html',
-  standalone: true,
 })
 export class DetailsComponent implements OnInit, OnDestroy {
   id: string | null = null;

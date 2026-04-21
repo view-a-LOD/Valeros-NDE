@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, viewChild, AfterViewInit } from '@angular/core';
 import { BaseWidget } from '../base-widget';
 import * as L from 'leaflet';
 import { normalizeToFirst } from '../../../utils/value-normalization.util';
@@ -21,12 +21,12 @@ type GeoCoordinates = {
 
 @Component({
   selector: 'app-map-widget',
-  standalone: true,
+
   imports: [],
   templateUrl: './map-widget.component.html',
 })
 export class MapWidget extends BaseWidget implements AfterViewInit {
-  @ViewChild('mapContainer', { static: false }) mapContainer!: ElementRef;
+  mapContainer = viewChild.required<ElementRef>('mapContainer');
   private map?: L.Map;
 
   ngAfterViewInit(): void {
@@ -42,7 +42,7 @@ export class MapWidget extends BaseWidget implements AfterViewInit {
     }
 
     const { latitude: lat, longitude: lng } = coordinates;
-    this.map = L.map(this.mapContainer.nativeElement).setView([lat, lng], 13);
+    this.map = L.map(this.mapContainer().nativeElement).setView([lat, lng], 13);
 
     L.tileLayer(
       'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.{ext}',

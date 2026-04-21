@@ -1,7 +1,7 @@
 import {
   Component,
   input,
-  ViewChild,
+  viewChild,
   ViewContainerRef,
   AfterViewInit,
   effect,
@@ -16,7 +16,7 @@ import { BaseWidget } from '../widgets/base-widget';
 
 @Component({
   selector: 'app-dynamic-widget',
-  standalone: true,
+
   templateUrl: './dynamic-widget.component.html',
   imports: [PropertyLabelWrapperComponent],
 })
@@ -25,8 +25,9 @@ export class DynamicWidgetComponent implements AfterViewInit {
   property = input.required<string>();
   widget = input.required<WidgetMapping>();
 
-  @ViewChild('widgetContainer', { read: ViewContainerRef })
-  widgetContainer!: ViewContainerRef;
+  widgetContainer = viewChild.required('widgetContainer', {
+    read: ViewContainerRef,
+  });
 
   private componentRef?: ComponentRef<BaseWidget>;
   private destroyRef = inject(DestroyRef);
@@ -46,7 +47,9 @@ export class DynamicWidgetComponent implements AfterViewInit {
 
   private createWidget() {
     const widget = this.widget();
-    this.componentRef = this.widgetContainer.createComponent(widget.component);
+    this.componentRef = this.widgetContainer().createComponent(
+      widget.component,
+    );
     this.componentRef.setInput('node', this.data());
     this.componentRef.setInput('property', this.property());
     this.componentRef.setInput('config', widget.config);
@@ -60,7 +63,7 @@ export class DynamicWidgetComponent implements AfterViewInit {
     if (!this.componentRef) return;
 
     this.componentRef.destroy();
-    this.widgetContainer.clear();
+    this.widgetContainer().clear();
     this.createWidget();
   }
 }

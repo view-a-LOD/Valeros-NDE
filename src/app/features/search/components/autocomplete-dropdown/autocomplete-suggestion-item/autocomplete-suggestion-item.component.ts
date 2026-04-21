@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-autocomplete-suggestion-item',
   imports: [CommonModule],
   templateUrl: './autocomplete-suggestion-item.component.html',
-  standalone: true,
 })
 export class AutocompleteSuggestionItemComponent {
   suggestion = input.required<string>();

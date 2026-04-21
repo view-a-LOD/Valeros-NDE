@@ -7,7 +7,7 @@ import { NodeModel } from '../../shared/types/node/node.model';
 
 @Component({
   selector: 'app-birthplace-widget',
-  standalone: true,
+
   imports: [MapWidget, TextWidget, PropertyLabelWrapperComponent],
   templateUrl: './birthplace-widget.component.html',
 })

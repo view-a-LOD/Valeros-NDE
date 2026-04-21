@@ -11,7 +11,7 @@ import { WidgetsByPosition } from '../../types/widgets-by-position';
   imports: [CommonModule, DynamicWidgetComponent, RouterLink],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
-  standalone: true,
+
   host: {
     class: 'block',
   },

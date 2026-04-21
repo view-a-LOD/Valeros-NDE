@@ -7,7 +7,7 @@ import { normalizeToFirst } from '../../../utils/value-normalization.util';
 
 @Component({
   selector: 'app-link-widget',
-  standalone: true,
+
   imports: [CommonModule, RouterModule],
   templateUrl: './link-widget.component.html',
 })

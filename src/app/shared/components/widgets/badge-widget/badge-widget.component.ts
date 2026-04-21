@@ -4,7 +4,7 @@ import { BaseWidget } from '../base-widget';
 
 @Component({
   selector: 'app-badge-widget',
-  standalone: true,
+
   imports: [CommonModule],
   templateUrl: './badge-widget.component.html',
 })
