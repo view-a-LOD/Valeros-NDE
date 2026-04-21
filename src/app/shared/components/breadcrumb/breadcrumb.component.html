@@ -1,0 +1,25 @@
+@if (breadcrumbs().length > 0) {
+  <nav aria-label="Breadcrumb" class="mb-4">
+    <ol class="flex items-center space-x-2 text-sm">
+      @for (crumb of breadcrumbs(); track $index; let last = $last) {
+        <li class="flex items-center">
+          @if ($index > 0) {
+            <span class="mx-2 text-base-content/40">/</span>
+          }
+          @if (last) {
+            <span class="text-base-content font-medium" aria-current="page">
+              {{ crumb.label }}
+            </span>
+          } @else {
+            <a
+              (click)="onBreadcrumbClick($index); $event.preventDefault()"
+              class="text-primary hover:underline cursor-pointer"
+            >
+              {{ crumb.label }}
+            </a>
+          }
+        </li>
+      }
+    </ol>
+  </nav>
+}
