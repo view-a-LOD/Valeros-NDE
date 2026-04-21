@@ -32,19 +32,9 @@ export class WidgetService {
 
   getWidgetsByPosition(properties: string[]): WidgetsByPosition {
     const settings = this.getCurrentSettings();
-    const { includedProperties, hiddenProperties, widgetOrder } = settings;
+    const { hiddenProperties, widgetOrderById } = settings;
 
-    const filterVisibleProperties = (properties: string[]): string[] => {
-      if (includedProperties && hiddenProperties) {
-        return properties.filter(
-          (property) =>
-            includedProperties.includes(property) &&
-            !hiddenProperties.includes(property),
-        );
-      }
-      if (includedProperties) {
-        return properties.filter((prop) => includedProperties.includes(prop));
-      }
+    const filterHiddenProperties = (properties: string[]): string[] => {
       if (hiddenProperties) {
         return properties.filter((prop) => !hiddenProperties.includes(prop));
       }
@@ -63,20 +53,44 @@ export class WidgetService {
       return widgets;
     };
 
-    const sortWidgetsBySettingsOrder = (
+    const orderAndFilterWidgets = (
       widgets: Array<{ property: string; widget: WidgetMapping }>,
     ): Array<{ property: string; widget: WidgetMapping }> => {
-      return widgets.sort((a, b) => {
-        const idA = a.widget.id;
-        const idB = b.widget.id;
-        const indexA = idA && widgetOrder ? widgetOrder.indexOf(idA) : -1;
-        const indexB = idB && widgetOrder ? widgetOrder.indexOf(idB) : -1;
+      if (!widgetOrderById || widgetOrderById.length === 0) {
+        return widgets.sort((a, b) => a.property.localeCompare(b.property));
+      }
 
-        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-        if (indexA !== -1) return -1;
-        if (indexB !== -1) return 1;
-        return a.property.localeCompare(b.property);
+      const orderedWidgets: Array<{ property: string; widget: WidgetMapping }> =
+        [];
+      const widgetMap = new Map<
+        string,
+        Array<{ property: string; widget: WidgetMapping }>
+      >();
+
+      // Group widgets by ID
+      widgets.forEach((item) => {
+        const id = item.widget.id || '';
+        if (!widgetMap.has(id)) {
+          widgetMap.set(id, []);
+        }
+        widgetMap.get(id)!.push(item);
       });
+
+      // Process widgetOrder
+      widgetOrderById.forEach((orderId) => {
+        if (orderId === '*') {
+          // Add all remaining widgets not yet added
+          widgetMap.forEach((items, id) => {
+            if (!widgetOrderById.includes(id) || id === '') {
+              orderedWidgets.push(...items);
+            }
+          });
+        } else if (widgetMap.has(orderId)) {
+          orderedWidgets.push(...widgetMap.get(orderId)!);
+        }
+      });
+
+      return orderedWidgets;
     };
 
     const groupWidgetsByPosition = (
@@ -98,11 +112,11 @@ export class WidgetService {
       return byPosition;
     };
 
-    const visibleProperties: string[] = filterVisibleProperties(properties);
+    const visibleProperties: string[] = filterHiddenProperties(properties);
     const collectedWidgets: Array<{ property: string; widget: WidgetMapping }> =
       collectWidgetsForProperties(visibleProperties);
-    const sortedWidgets: Array<{ property: string; widget: WidgetMapping }> =
-      sortWidgetsBySettingsOrder(collectedWidgets);
-    return groupWidgetsByPosition(sortedWidgets);
+    const orderedWidgets: Array<{ property: string; widget: WidgetMapping }> =
+      orderAndFilterWidgets(collectedWidgets);
+    return groupWidgetsByPosition(orderedWidgets);
   }
 }

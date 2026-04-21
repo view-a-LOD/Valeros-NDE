@@ -138,12 +138,13 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  widgetOrder: ['name', 'dataset', 'type', 'additional-type', 'description'],
-  includedProperties: [
+  widgetOrderById: [
     'name',
-    'additionalType',
+    'image-gallery',
+    'dataset',
+    'type',
+    'additional-type',
     'description',
-    'associatedMedia',
   ],
 };
 
@@ -154,8 +155,8 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  widgetOrder: WIDGETS_SETTINGS.widgetOrder
-    ? [...WIDGETS_SETTINGS.widgetOrder]
+  widgetOrderById: WIDGETS_SETTINGS.widgetOrderById
+    ? [...WIDGETS_SETTINGS.widgetOrderById]
     : [],
   hiddenProperties: ['id'],
 };
