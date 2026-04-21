@@ -1,24 +1,9 @@
 import { Component, computed, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseWidget } from '../base-widget';
+import { IsPartOfObject } from '../../../types/node/is-part-of-object';
 
-interface IsPartOfValue {
-  id: string;
-  type: string;
-  name: string;
-  publisher?: {
-    id: string;
-    type: string;
-    name: string;
-  };
-  license?: {
-    id: string;
-    type: string;
-    name: string;
-  };
-}
-
-interface Dataset extends IsPartOfValue {
+interface Dataset extends IsPartOfObject {
   type: 'Dataset';
 }
 
