@@ -19,6 +19,7 @@
           [src]="image.thumbnail"
           [alt]="image.alt"
           class="w-full h-auto object-cover rounded"
+          (error)="onThumbnailError($event)"
         />
       </a>
     }
