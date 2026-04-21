@@ -1,0 +1,12 @@
+@if (isLoading()) {
+  <div class="flex items-center gap-2 text-sm text-gray-500">
+    <span class="loading loading-spinner loading-sm"></span>
+    <span>Laden...</span>
+  </div>
+} @else if (hasItems()) {
+  <div class="space-y-4">
+    <ng-container #previewContainer></ng-container>
+  </div>
+} @else {
+  <div class="text-sm text-gray-500">Geen preview beschikbaar</div>
+}

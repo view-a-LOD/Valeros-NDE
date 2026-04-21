@@ -9,6 +9,7 @@ import { IiifWidget } from '../shared/components/widgets/iiif-widget/iiif-widget
 import { LinkWidget } from '../shared/components/widgets/link-widget/link-widget.component';
 import { AddressWidget } from '../shared/components/widgets/address-widget/address-widget.component';
 import { DatasetWidget } from '../shared/components/widgets/dataset-widget/dataset-widget.component';
+import { AsyncPreviewWidget } from '../shared/components/async-preview-widget/async-preview-widget.component';
 
 export const WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
@@ -54,13 +55,22 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
         propertyLabel: 'Gebaseerd op',
       },
     },
-    // TODO: Show geo preview here already (if available)
     {
       id: 'content-location',
       properties: ['contentLocation'],
       component: LinkWidget,
       config: {
         propertyLabel: 'Locatie',
+      },
+    },
+    {
+      id: 'content-location',
+      properties: ['contentLocation'],
+      component: AsyncPreviewWidget,
+      config: {
+        showPropertyLabel: false,
+        previewComponent: MapWidget,
+        previewProperty: 'geo',
       },
     },
     {
