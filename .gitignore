@@ -14,6 +14,7 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
+/.windsurf
 
 # IDE - VSCode
 .vscode/*
@@ -38,4 +39,3 @@ Thumbs.db
 
 # Angular
 /.angular/cache
-/.windsurf
