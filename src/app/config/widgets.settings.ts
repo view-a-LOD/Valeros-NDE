@@ -156,7 +156,15 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     config: {},
   },
   widgetOrderById: WIDGETS_SETTINGS.widgetOrderById
-    ? [...WIDGETS_SETTINGS.widgetOrderById]
+    ? [
+        'name',
+        'image-gallery',
+        'dataset',
+        'type',
+        'additional-type',
+        'description',
+        '*',
+      ]
     : [],
   hiddenProperties: ['id'],
 };
