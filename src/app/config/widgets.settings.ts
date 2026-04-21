@@ -21,6 +21,15 @@ export const WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'license',
+      properties: ['isPartOf'],
+      component: TextWidget,
+      config: {
+        propertyLabel: 'License',
+        propertyPath: 'license.name',
+      },
+    },
+    {
       id: 'image-gallery',
       properties: ['associatedMedia'],
       component: ImageGalleryWidget,
@@ -164,6 +173,7 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
         'additional-type',
         'description',
         '*',
+        'license',
       ]
     : [],
   hiddenProperties: ['id'],
