@@ -1,9 +1,9 @@
 .node-card {
-  @apply card border border-base-300 bg-base-100;
+  @apply bg-base-100 rounded-none mb-4;
 }
 
 .position-container {
-  @apply empty:hidden space-y-2 overflow-y-auto;
+  @apply empty:hidden overflow-y-auto p-4 flex flex-col gap-2;
 
   app-dynamic-widget {
     display: block;

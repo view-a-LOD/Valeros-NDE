@@ -13,65 +13,77 @@
 }
 
 <ng-template #cardContent>
-  <div class="card-body p-4">
-    <!-- Top Container -->
-    <div class="position-container position-container-topbottom">
-      @for (item of widgetsByPosition().top; track $index) {
-        <app-dynamic-widget
-          [data]="data()"
-          [property]="item.property"
-          [widget]="item.widget"
+  <!-- Top Container -->
+  <div class="position-container position-container-topbottom">
+    @for (item of widgetsByPosition().top; track $index) {
+      <ng-container
+        *ngTemplateOutlet="
+          widgetItem;
+          context: { item: item, first: $first, last: $last }
+        "
+      />
+    }
+  </div>
+
+  <!-- Middle Row: Left, Main, Right -->
+  <div class="flex flex-col md:flex-row min-w-0">
+    <!-- Left Container -->
+    <div class="position-container position-container-side md:order-1">
+      @for (item of widgetsByPosition().left; track $index) {
+        <ng-container
+          *ngTemplateOutlet="
+            widgetItem;
+            context: { item: item, first: $first, last: $last }
+          "
         />
       }
     </div>
 
-    <!-- Middle Row: Left, Main, Right -->
-    <div class="flex flex-col md:flex-row gap-6 min-w-0">
-      <!-- Left Container -->
-      <div class="position-container position-container-side md:order-1">
-        @for (item of widgetsByPosition().left; track $index) {
-          <app-dynamic-widget
-            [data]="data()"
-            [property]="item.property"
-            [widget]="item.widget"
-          />
-        }
-      </div>
-
-      <!-- Main Container -->
-      <div
-        class="position-container w-full md:flex-1 md:min-w-[33%] md:order-2"
-      >
-        @for (item of widgetsByPosition().main; track $index) {
-          <app-dynamic-widget
-            [data]="data()"
-            [property]="item.property"
-            [widget]="item.widget"
-          />
-        }
-      </div>
-
-      <!-- Right Container -->
-      <div class="position-container position-container-side md:order-3">
-        @for (item of widgetsByPosition().right; track $index) {
-          <app-dynamic-widget
-            [data]="data()"
-            [property]="item.property"
-            [widget]="item.widget"
-          />
-        }
-      </div>
+    <!-- Main Container -->
+    <div class="position-container w-full md:flex-1 md:min-w-[33%] md:order-2">
+      @for (item of widgetsByPosition().main; track $index) {
+        <ng-container
+          *ngTemplateOutlet="
+            widgetItem;
+            context: { item: item, first: $first, last: $last }
+          "
+        />
+      }
     </div>
 
-    <!-- Bottom Container -->
-    <div class="position-container position-container-topbottom bg-purple-100">
-      @for (item of widgetsByPosition().bottom; track $index) {
-        <app-dynamic-widget
-          [data]="data()"
-          [property]="item.property"
-          [widget]="item.widget"
+    <!-- Right Container -->
+    <div class="position-container position-container-side md:order-3">
+      @for (item of widgetsByPosition().right; track $index) {
+        <ng-container
+          *ngTemplateOutlet="
+            widgetItem;
+            context: { item: item, first: $first, last: $last }
+          "
         />
       }
     </div>
   </div>
+
+  <!-- Bottom Container -->
+  <div class="position-container position-container-topbottom">
+    @for (item of widgetsByPosition().bottom; track $index) {
+      <ng-container
+        *ngTemplateOutlet="
+          widgetItem;
+          context: { item: item, first: $first, last: $last }
+        "
+      />
+    }
+  </div>
+</ng-template>
+
+<ng-template #widgetItem let-item="item" let-first="first" let-last="last">
+  <app-dynamic-widget
+    [data]="data()"
+    [property]="item.property"
+    [widget]="item.widget"
+    [class.-mx-4]="item.widget.config?.fullWidth"
+    [class.-mt-4]="item.widget.config?.fullWidth && first"
+    [class.-mb-4]="item.widget.config?.fullWidth && last"
+  />
 </ng-template>

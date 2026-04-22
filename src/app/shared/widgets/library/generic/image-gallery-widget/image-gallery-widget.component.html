@@ -14,8 +14,8 @@
         isVisible ? 'block mb-2 overflow-hidden break-inside-avoid' : 'hidden';
       @let imageClass =
         displayedThumbnails().length === 1
-          ? 'w-full h-auto max-h-96 object-cover rounded'
-          : 'w-full h-auto object-cover rounded';
+          ? 'w-full h-auto max-h-96 object-cover'
+          : 'w-full h-auto object-cover';
 
       @if (isLightboxEnabled) {
         <a

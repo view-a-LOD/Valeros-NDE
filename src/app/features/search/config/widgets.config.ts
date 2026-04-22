@@ -91,6 +91,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
         position: 'top',
         maxThumbnails: 1,
         enableLightbox: false,
+        fullWidth: true,
       },
     },
     {

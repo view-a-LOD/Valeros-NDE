@@ -25,4 +25,5 @@ export interface BaseWidgetConfig {
   propertyLabel?: string;
   propertyPath?: string;
   position?: WidgetPosition;
+  fullWidth?: boolean;
 }
