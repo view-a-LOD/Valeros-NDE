@@ -1,4 +1,4 @@
-import { Component, inject, viewChild } from '@angular/core';
+import { Component, inject, viewChild, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,17 +16,39 @@ export class SearchBarComponent {
   private router = inject(Router);
 
   autocomplete = viewChild<AutocompleteDropdownComponent>('autocomplete');
+  private debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+  constructor() {
+    effect(() => {
+      const searchTerm = this.store.searchTerm();
+
+      if (this.debounceTimer) {
+        clearTimeout(this.debounceTimer);
+      }
+
+      this.debounceTimer = setTimeout(() => {
+        this.performSearch(searchTerm);
+      }, 300);
+    });
+  }
 
   onSearchTermChange(value: string): void {
     this.store.searchTerm.set(value);
   }
 
-  onSearch(): void {
-    this.autocomplete()?.hideAndSuppress();
-    const searchTerm = this.store.searchTerm();
+  private performSearch(searchTerm: string): void {
     this.router.navigate([], {
       queryParams: { q: searchTerm || undefined, filters: undefined },
     });
+  }
+
+  onSearch(): void {
+    this.autocomplete()?.hideAndSuppress();
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
+    }
+    const searchTerm = this.store.searchTerm();
+    this.performSearch(searchTerm);
   }
 
   onAutocompleteSelect(item: AutocompleteNode): void {

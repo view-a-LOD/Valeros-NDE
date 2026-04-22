@@ -7,7 +7,6 @@
         class="input input-bordered w-full"
         [ngModel]="store.searchTerm()"
         (ngModelChange)="onSearchTermChange($event)"
-        (keyup.enter)="onSearch()"
         (focus)="onInputFocus()"
         (blur)="onInputBlur()"
       />
