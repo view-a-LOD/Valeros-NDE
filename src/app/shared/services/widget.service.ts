@@ -4,12 +4,10 @@ import {
   WidgetMapping,
   WidgetsSettings,
   WidgetPosition,
-} from '../types/widget-config';
-import {
-  WIDGETS_SETTINGS,
-  DETAILS_WIDGETS_SETTINGS,
-} from '../../config/widgets.settings';
-import { WidgetsByPosition } from '../types/widgets-by-position';
+} from '../../lib/widgets/types/widget-config';
+import { SEARCH_WIDGETS_SETTINGS } from '../../features/search/config/widgets.config';
+import { DETAILS_WIDGETS_SETTINGS } from '../../features/details/config/widgets.config';
+import { WidgetsByPosition } from '../../lib/widgets/types/widgets-by-position';
 
 @Injectable({ providedIn: 'root' })
 export class WidgetService {
@@ -19,7 +17,7 @@ export class WidgetService {
     const url = this.router.url;
     return url.startsWith('/details')
       ? DETAILS_WIDGETS_SETTINGS
-      : WIDGETS_SETTINGS;
+      : SEARCH_WIDGETS_SETTINGS;
   }
 
   getWidgetsForProperty(property: string): WidgetMapping[] {

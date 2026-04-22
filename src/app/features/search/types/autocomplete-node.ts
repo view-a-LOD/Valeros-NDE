@@ -1,4 +1,4 @@
-import { ImageModel } from '../../../shared/types/image.model';
+import { ImageModel } from '../../../core/models/image/image.model';
 
 export interface AutocompleteNode {
   id: string;

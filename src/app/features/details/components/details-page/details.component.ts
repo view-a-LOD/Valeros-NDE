@@ -2,12 +2,12 @@ import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { ApiService } from '../../../search/services/api.service';
-import { NodeComponent } from '../../../../shared/components/node/node.component';
-import { NodeModel } from '../../../../shared/types/node/node.model';
+import { NodeComponent } from '../../../../shared/ui/node/node.component';
+import { NodeModel } from '../../../../core/models/node/node.model';
 import { BreadcrumbService } from '../../../../shared/services/breadcrumb.service';
-import { BreadcrumbComponent } from '../../../../shared/components/breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent } from '../../../../shared/ui/breadcrumb/breadcrumb.component';
 import { normalizeToFirst } from '../../../../shared/utils/value-normalization.util';
+import { ApiService } from '../../../../core/services/api/api.service';
 
 @Component({
   selector: 'app-details',
@@ -21,7 +21,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   error = signal<string | null>(null);
 
   private route = inject(ActivatedRoute);
-  private searchApiService = inject(ApiService);
+  private apiService = inject(ApiService);
   private breadcrumbService = inject(BreadcrumbService);
   private routeSubscription?: Subscription;
 
@@ -44,7 +44,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.loading.set(true);
     this.error.set(null);
 
-    this.searchApiService.details(this.id).subscribe({
+    this.apiService.details(this.id).subscribe({
       next: (response: NodeModel) => {
         this.data.set(response);
         this.loading.set(false);

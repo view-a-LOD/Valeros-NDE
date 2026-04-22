@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Dimensions } from '../types/dimensions';
+import { Dimensions } from '../../core/models/image/dimensions';
 
 export interface IiifImageInfo {
   // '@context'?: string;
