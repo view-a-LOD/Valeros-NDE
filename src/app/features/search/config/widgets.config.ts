@@ -83,6 +83,16 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'image-thumb',
+      properties: ['associatedMedia'],
+      component: ImageGalleryWidget,
+      config: {
+        showPropertyLabel: false,
+        position: 'top',
+        maxThumbnails: 1,
+      },
+    },
+    {
       id: 'name',
       properties: ['name'],
       component: TextWidget,
@@ -186,5 +196,5 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  widgetOrderById: ['image-gallery', 'name', 'description-without-label'],
+  widgetOrderById: ['image-thumb', 'name', 'description-without-label'],
 };

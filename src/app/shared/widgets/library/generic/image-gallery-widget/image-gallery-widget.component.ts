@@ -12,6 +12,7 @@ import {
 } from '../../../../node/types/associated-media.node';
 import { BaseWidget } from '../../../infrastructure/base-widget';
 import { IiifImageService } from '../iiif-widget/iiif-image.service';
+import { ImageGalleryWidgetConfig } from './image-gallery-widget.config';
 
 @Component({
   selector: 'app-image-gallery-widget',
@@ -24,6 +25,7 @@ export class ImageGalleryWidget extends BaseWidget implements OnDestroy {
   private lightbox?: PhotoSwipeLightbox;
   readonly galleryId = `gallery-${crypto.randomUUID()}`;
   readonly imagesWithDimensions = signal<ImageModel[]>([]);
+  readonly displayedThumbnails = signal<ImageModel[]>([]);
 
   constructor() {
     super();
@@ -60,6 +62,14 @@ export class ImageGalleryWidget extends BaseWidget implements OnDestroy {
     forkJoin(dimensionRequests).subscribe(
       (imagesWithDimensions: ImageModel[]) => {
         this.imagesWithDimensions.set(imagesWithDimensions);
+
+        const config = this.config() as ImageGalleryWidgetConfig;
+        const maxThumbnails = config.maxThumbnails;
+        const thumbnails = maxThumbnails
+          ? imagesWithDimensions.slice(0, maxThumbnails)
+          : imagesWithDimensions;
+        this.displayedThumbnails.set(thumbnails);
+
         setTimeout(() => {
           this.initializeLightbox();
         });
