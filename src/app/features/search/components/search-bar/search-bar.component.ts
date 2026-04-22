@@ -1,7 +1,7 @@
 import { Component, inject, viewChild, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SearchStore } from '../../state/search.store';
 import { AutocompleteDropdownComponent } from '../autocomplete-dropdown/autocomplete-dropdown.component';
 import { AutocompleteNode } from '../../types/autocomplete-node';
@@ -17,9 +17,12 @@ import { featherSearch } from '@ng-icons/feather-icons';
 export class SearchBarComponent {
   store = inject(SearchStore);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   autocomplete = viewChild<AutocompleteDropdownComponent>('autocomplete');
+
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  private skipFirstDebouncedSearch = true;
 
   constructor() {
     effect(() => {
@@ -30,6 +33,10 @@ export class SearchBarComponent {
       }
 
       this.debounceTimer = setTimeout(() => {
+        if (this.skipFirstDebouncedSearch) {
+          this.skipFirstDebouncedSearch = false;
+          return;
+        }
         this.performSearch(searchTerm);
       }, 300);
     });
