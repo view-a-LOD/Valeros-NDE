@@ -79,7 +79,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
       component: ImageGalleryWidget,
       config: {
         showPropertyLabel: false,
-        position: 'top',
+        position: 'left',
       },
     },
     {
