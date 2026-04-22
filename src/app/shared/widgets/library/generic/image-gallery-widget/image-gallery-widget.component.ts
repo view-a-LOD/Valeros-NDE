@@ -16,9 +16,9 @@ import { ImageGalleryWidgetConfig } from './image-gallery-widget.config';
 
 @Component({
   selector: 'app-image-gallery-widget',
-
   imports: [CommonModule],
   templateUrl: './image-gallery-widget.component.html',
+  styleUrl: './image-gallery-widget.component.scss',
 })
 export class ImageGalleryWidget extends BaseWidget implements OnDestroy {
   private iiifService = inject(IiifImageService);

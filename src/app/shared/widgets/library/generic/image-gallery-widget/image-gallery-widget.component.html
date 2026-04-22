@@ -11,11 +11,10 @@
     @for (image of imagesWithDimensions(); track $index) {
       @let isVisible = $index < displayedThumbnails().length;
       @let containerClass =
-        isVisible ? 'block mb-2 overflow-hidden break-inside-avoid' : 'hidden';
-      @let imageClass =
-        displayedThumbnails().length === 1
-          ? 'w-full h-auto max-h-96 object-cover'
-          : 'w-full h-auto object-cover';
+        isVisible
+          ? 'image-container' +
+            (displayedThumbnails().length === 1 ? ' single' : ' multiple')
+          : 'hidden';
 
       @if (isLightboxEnabled) {
         <a
@@ -31,7 +30,6 @@
           <img
             [src]="image.thumbnail"
             [alt]="image.alt"
-            [class]="imageClass"
             (error)="onThumbnailError($event)"
           />
         </a>
@@ -40,7 +38,6 @@
           <img
             [src]="image.thumbnail"
             [alt]="image.alt"
-            [class]="imageClass"
             (error)="onThumbnailError($event)"
           />
         </div>

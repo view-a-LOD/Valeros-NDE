@@ -1,0 +1,15 @@
+.image-container {
+  @apply block overflow-hidden break-inside-avoid;
+
+  &.multiple {
+    @apply mb-2;
+  }
+
+  img {
+    @apply w-full h-auto object-cover;
+  }
+
+  &.single img {
+    @apply max-h-96;
+  }
+}
