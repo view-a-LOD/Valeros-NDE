@@ -1,9 +1,9 @@
 import { Component, computed } from '@angular/core';
-import { NodeModel } from '../../../../../core/models/node/node.model';
 import { BaseWidget } from '../../../infrastructure/base-widget';
 import { PropertyLabelWrapperComponent } from '../../../infrastructure/property-label-wrapper/property-label-wrapper.component';
 import { MapWidget } from '../../generic/map-widget/map-widget.component';
 import { TextWidget } from '../../generic/text-widget/text-widget.component';
+import { NodeModel } from '../../../../node/types/node.model';
 
 @Component({
   selector: 'app-birthplace-widget',

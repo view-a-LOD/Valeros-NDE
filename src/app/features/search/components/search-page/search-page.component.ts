@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { SearchStore } from '../../state/search.store';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { NodeComponent } from '../../../../shared/ui/node/node.component';
+import { NodeComponent } from '../../../../shared/node/node.component';
 import { FacetsComponent } from '../facets/facets.component';
 import { DrawerLayoutComponent } from './drawer-layout/drawer-layout.component';
 import { DrawerToggleButtonComponent } from './drawer-layout/drawer-toggle-button/drawer-toggle-button.component';
-import { BreadcrumbService } from '../../../../shared/services/breadcrumb.service';
-import { SearchStateService } from '../../../../shared/services/search-state.service';
+import { BreadcrumbService } from '../../../../shared/breadcrumbs/breadcrumb.service';
+import { SearchStateService } from '../../../../shared/navigation/search-state.service';
 
 @Component({
   selector: 'app-search-page',

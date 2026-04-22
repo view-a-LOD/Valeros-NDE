@@ -1,6 +1,6 @@
 import { Component, ElementRef, viewChild, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
-import { normalizeToFirst } from '../../../../utils/value-normalization.util';
+import { normalizeToFirst } from '../../../../data-utils/value-normalization.util';
 import { BaseWidget } from '../../../infrastructure/base-widget';
 
 const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';

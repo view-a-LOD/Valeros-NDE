@@ -1,7 +1,7 @@
 import { Component, computed, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IsPartOfNode } from '../../../../../core/models/node/is-part-of.node';
 import { BaseWidget } from '../../../infrastructure/base-widget';
+import { IsPartOfNode } from '../../../../node/types/is-part-of.node';
 
 interface Dataset extends IsPartOfNode {
   type: 'Dataset';

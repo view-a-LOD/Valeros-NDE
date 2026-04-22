@@ -20,7 +20,7 @@ import { AutocompleteResultItemComponent } from './autocomplete-result-item/auto
 import { AutocompleteSuggestionItemComponent } from './autocomplete-suggestion-item/autocomplete-suggestion-item.component';
 import { AutocompleteNode } from '../../types/autocomplete-node';
 import { AutocompleteResponse } from '../../types/autocomplete-response';
-import { ApiService } from '../../../../core/services/api/api.service';
+import { ApiService } from '../../../../shared/api/api.service';
 
 @Component({
   selector: 'app-autocomplete-dropdown',

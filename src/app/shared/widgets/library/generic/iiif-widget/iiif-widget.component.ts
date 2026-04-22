@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, OnDestroy, computed } from '@angular/core';
 import Mirador, { MiradorInstance, MiradorConfig } from 'mirador';
-import { AssociatedMediaNode } from '../../../../../core/models/node/associated-media.node';
 import { BaseWidget } from '../../../infrastructure/base-widget';
+import { AssociatedMediaNode } from '../../../../node/types/associated-media.node';
 
 @Component({
   selector: 'app-iiif-widget',

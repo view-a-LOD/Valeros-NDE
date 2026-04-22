@@ -1,16 +1,16 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { buildHttpParams } from '../../utils/http-params.util';
-import { SearchQuery } from '../../../features/search/types/search-query';
+import { buildHttpParams } from './http-params.util';
+import { MockDataService } from './mock-data.service';
+import { AutocompleteQuery } from '../../features/search/types/autocomplete-query';
+import { AutocompleteResponse } from '../../features/search/types/autocomplete-response';
+import { SearchQuery } from '../../features/search/types/search-query';
 import {
   SearchResponse,
   transformToAutocompleteResponse,
-} from '../../../features/search/types/search-response';
-import { AutocompleteQuery } from '../../../features/search/types/autocomplete-query';
-import { AutocompleteResponse } from '../../../features/search/types/autocomplete-response';
-import { NodeModel } from '../../models/node/node.model';
-import { MockDataService } from './mock-data.service';
+} from '../../features/search/types/search-response';
+import { NodeModel } from '../node/types/node.model';
 
 @Injectable({
   providedIn: 'root',

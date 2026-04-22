@@ -2,16 +2,16 @@ import { Component, OnDestroy, signal, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
-import { forkJoin, Observable, of } from 'rxjs';
+import { forkJoin, from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Dimensions } from '../../../../image/types/dimensions';
+import { ImageModel } from '../../../../image/types/image.model';
 import {
   AssociatedMediaNode,
   toImageModel,
-} from '../../../../../core/models/node/associated-media.node';
-import { IiifImageService } from '../../../../services/iiif-image.service';
+} from '../../../../node/types/associated-media.node';
 import { BaseWidget } from '../../../infrastructure/base-widget';
-import { Dimensions } from '../../../../../core/models/image/dimensions';
-import { ImageModel } from '../../../../../core/models/image/image.model';
+import { IiifImageService } from '../iiif-widget/iiif-image.service';
 
 @Component({
   selector: 'app-image-gallery-widget',

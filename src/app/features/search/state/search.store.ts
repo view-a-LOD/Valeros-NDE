@@ -2,12 +2,12 @@ import { Injectable, inject, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { distinctUntilChanged, map, skip, filter } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../../core/services/api/api.service';
 import { FilterStore } from './filter.store';
 import { SearchResponse } from '../types/search-response';
 import { Facet } from '../types/facet';
 import { Filters } from '../types/filters';
-import { NodeModel } from '../../../core/models/node/node.model';
+import { ApiService } from '../../../shared/api/api.service';
+import { NodeModel } from '../../../shared/node/types/node.model';
 
 interface SearchUrlParams {
   q: string;

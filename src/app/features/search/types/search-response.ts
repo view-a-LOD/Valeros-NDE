@@ -1,12 +1,13 @@
-import {
-  AssociatedMediaNode,
-  toImageModel,
-} from '../../../core/models/node/associated-media.node';
-import { NodeModel } from '../../../core/models/node/node.model';
-import { normalizeToFirst } from '../../../shared/utils/value-normalization.util';
+import { from } from 'rxjs';
+import { NodeModel } from '../../../shared/node/types/node.model';
 import { AutocompleteNode } from './autocomplete-node';
 import { AutocompleteResponse } from './autocomplete-response';
 import { Facet } from './facet';
+import {
+  AssociatedMediaNode,
+  toImageModel,
+} from '../../../shared/node/types/associated-media.node';
+import { normalizeToFirst } from '../../../shared/data-utils/value-normalization.util';
 
 export interface SearchResponse {
   id: string;

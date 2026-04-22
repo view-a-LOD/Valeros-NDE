@@ -2,12 +2,12 @@ import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { NodeComponent } from '../../../../shared/ui/node/node.component';
-import { NodeModel } from '../../../../core/models/node/node.model';
-import { BreadcrumbService } from '../../../../shared/services/breadcrumb.service';
-import { BreadcrumbComponent } from '../../../../shared/ui/breadcrumb/breadcrumb.component';
-import { normalizeToFirst } from '../../../../shared/utils/value-normalization.util';
-import { ApiService } from '../../../../core/services/api/api.service';
+import { NodeComponent } from '../../../../shared/node/node.component';
+import { BreadcrumbService } from '../../../../shared/breadcrumbs/breadcrumb.service';
+import { normalizeToFirst } from '../../../../shared/data-utils/value-normalization.util';
+import { BreadcrumbComponent } from '../../../../shared/breadcrumbs/breadcrumb/breadcrumb.component';
+import { ApiService } from '../../../../shared/api/api.service';
+import { NodeModel } from '../../../../shared/node/types/node.model';
 
 @Component({
   selector: 'app-details',

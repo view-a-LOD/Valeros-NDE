@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NodeLinkComponent } from '../../../../ui/node-link/node-link.component';
+import { NodeLinkComponent } from '../../../../node/node-link/node-link.component';
 import { BaseWidget } from '../../../infrastructure/base-widget';
 
 @Component({

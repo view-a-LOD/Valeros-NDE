@@ -1,8 +1,5 @@
 import { Component, inject, Signal } from '@angular/core';
-import {
-  BreadcrumbService,
-  BreadcrumbItem,
-} from '../../services/breadcrumb.service';
+import { BreadcrumbService, BreadcrumbItem } from '../breadcrumb.service';
 
 @Component({
   selector: 'app-breadcrumb',

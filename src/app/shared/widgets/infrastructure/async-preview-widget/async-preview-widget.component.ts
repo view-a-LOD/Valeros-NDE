@@ -13,15 +13,12 @@ import {
 import { CommonModule } from '@angular/common';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {
-  isNodeModel,
-  NodeModel,
-} from '../../../../core/models/node/node.model';
-import { ApiService } from '../../../../core/services/api/api.service';
-import { getNestedValue } from '../../../utils/property-path.util';
+import { ApiService } from '../../../api/api.service';
+import { getNestedValue } from '../../../data-utils/property-path.util';
 import { BaseWidgetConfig } from '../../types/widget-config';
 import { BaseWidget } from '../base-widget';
 import { isAsyncPreviewConfig } from './async-preview-config';
+import { NodeModel, isNodeModel } from '../../../node/types/node.model';
 
 interface PreviewItem {
   id: string;

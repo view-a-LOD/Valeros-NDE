@@ -1,6 +1,6 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { Params, Router } from '@angular/router';
-import { SearchStateService } from './search-state.service';
+import { SearchStateService } from '../navigation/search-state.service';
 
 export interface BreadcrumbItem {
   label: string;

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NodeModel } from '../../../core/models/node/node.model'
-import { normalizeToFirst } from '../../utils/value-normalization.util';
+import { normalizeToFirst } from '../../data-utils/value-normalization.util';
+import { NodeModel } from '../types/node.model';
 
 @Component({
   selector: 'app-node-link',

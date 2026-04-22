@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NodeLinkComponent } from '../../../../ui/node-link/node-link.component';
+import { NodeLinkComponent } from '../../../../node/node-link/node-link.component';
 import { BaseWidget } from '../../../infrastructure/base-widget';
-import { isNodeModel } from '../../../../../core/models/node/node.model';
+import { isNodeModel } from '../../../../node/types/node.model';
 
 @Component({
   selector: 'app-badge-widget',

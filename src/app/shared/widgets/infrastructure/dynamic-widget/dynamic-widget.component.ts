@@ -10,9 +10,9 @@ import {
   inject,
 } from '@angular/core';
 import { PropertyLabelWrapperComponent } from '../property-label-wrapper/property-label-wrapper.component';
-import { NodeModel } from '../../../../core/models/node/node.model';
 import { WidgetMapping } from '../../types/widget-config';
 import { BaseWidget } from '../base-widget';
+import { NodeModel } from '../../../node/types/node.model';
 
 @Component({
   selector: 'app-dynamic-widget',
