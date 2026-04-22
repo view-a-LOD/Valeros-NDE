@@ -21,5 +21,5 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     'publisher',
   ],
   hiddenProperties: ['id'],
-  hiddenWidgetsById: ['image-thumb'],
+  hiddenWidgetsById: ['image-thumb', 'description-without-label'],
 };
