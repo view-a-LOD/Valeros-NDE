@@ -8,7 +8,7 @@ import {
   AssociatedMediaNode,
   toImageModel,
 } from '../../../../../core/models/node/associated-media.node';
-import { IiifImageService } from '../../../../../shared/services/iiif-image.service';
+import { IiifImageService } from '../../../../services/iiif-image.service';
 import { BaseWidget } from '../../../infrastructure/base-widget';
 import { Dimensions } from '../../../../../core/models/image/dimensions';
 import { ImageModel } from '../../../../../core/models/image/image.model';

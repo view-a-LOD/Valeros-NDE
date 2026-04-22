@@ -4,10 +4,10 @@ import {
   WidgetMapping,
   WidgetsSettings,
   WidgetPosition,
-} from '../../lib/widgets/types/widget-config';
-import { SEARCH_WIDGETS_SETTINGS } from '../../features/search/config/widgets.config';
-import { DETAILS_WIDGETS_SETTINGS } from '../../features/details/config/widgets.config';
-import { WidgetsByPosition } from '../../lib/widgets/types/widgets-by-position';
+} from '../types/widget-config';
+import { SEARCH_WIDGETS_SETTINGS } from '../../../features/search/config/widgets.config';
+import { DETAILS_WIDGETS_SETTINGS } from '../../../features/details/config/widgets.config';
+import { WidgetsByPosition } from '../types/widgets-by-position';
 
 @Injectable({ providedIn: 'root' })
 export class WidgetService {

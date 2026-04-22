@@ -1,15 +1,15 @@
-import { WidgetsSettings } from '../../../lib/widgets/types/widget-config';
-import { TextWidget } from '../../../lib/widgets/library/generic/text-widget/text-widget.component';
-import { JsonWidget } from '../../../lib/widgets/library/generic/json-widget/json-widget.component';
-import { BadgeWidget } from '../../../lib/widgets/library/generic/badge-widget/badge-widget.component';
-import { BirthplaceWidget } from '../../../lib/widgets/library/domain-specific/birthplace-widget/birthplace-widget.component';
-import { ImageGalleryWidget } from '../../../lib/widgets/library/generic/image-gallery-widget/image-gallery-widget.component';
-import { MapWidget } from '../../../lib/widgets/library/generic/map-widget/map-widget.component';
-import { IiifWidget } from '../../../lib/widgets/library/generic/iiif-widget/iiif-widget.component';
-import { LinkWidget } from '../../../lib/widgets/library/generic/link-widget/link-widget.component';
-import { AddressWidget } from '../../../lib/widgets/library/domain-specific/address-widget/address-widget.component';
-import { DatasetWidget } from '../../../lib/widgets/library/domain-specific/dataset-widget/dataset-widget.component';
-import { AsyncPreviewWidget } from '../../../lib/widgets/infrastructure/async-preview-widget/async-preview-widget.component';
+import { WidgetsSettings } from '../../../shared/widgets/types/widget-config';
+import { TextWidget } from '../../../shared/widgets/library/generic/text-widget/text-widget.component';
+import { JsonWidget } from '../../../shared/widgets/library/generic/json-widget/json-widget.component';
+import { BadgeWidget } from '../../../shared/widgets/library/generic/badge-widget/badge-widget.component';
+import { BirthplaceWidget } from '../../../shared/widgets/library/domain-specific/birthplace-widget/birthplace-widget.component';
+import { ImageGalleryWidget } from '../../../shared/widgets/library/generic/image-gallery-widget/image-gallery-widget.component';
+import { MapWidget } from '../../../shared/widgets/library/generic/map-widget/map-widget.component';
+import { IiifWidget } from '../../../shared/widgets/library/generic/iiif-widget/iiif-widget.component';
+import { LinkWidget } from '../../../shared/widgets/library/generic/link-widget/link-widget.component';
+import { AddressWidget } from '../../../shared/widgets/library/domain-specific/address-widget/address-widget.component';
+import { DatasetWidget } from '../../../shared/widgets/library/domain-specific/dataset-widget/dataset-widget.component';
+import { AsyncPreviewWidget } from '../../../shared/widgets/infrastructure/async-preview-widget/async-preview-widget.component';
 
 export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [

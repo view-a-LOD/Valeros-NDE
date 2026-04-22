@@ -1,10 +1,10 @@
 import { Component, input, inject, computed, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { WidgetService } from '../../services/widget.service';
-import { DynamicWidgetComponent } from '../../../lib/widgets/infrastructure/dynamic-widget/dynamic-widget.component';
-import { WidgetsByPosition } from '../../../lib/widgets/types/widgets-by-position';
-import { NodeModel } from '../../../core/models/node/node.model'
+import { WidgetService } from '../../widgets/infrastructure/widget.service';
+import { DynamicWidgetComponent } from '../../widgets/infrastructure/dynamic-widget/dynamic-widget.component';
+import { WidgetsByPosition } from '../../widgets/types/widgets-by-position';
+import { NodeModel } from '../../../core/models/node/node.model';
 
 @Component({
   selector: 'app-node',

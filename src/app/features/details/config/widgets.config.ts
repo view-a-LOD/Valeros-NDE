@@ -1,5 +1,5 @@
-import { WidgetsSettings } from '../../../lib/widgets/types/widget-config';
-import { JsonWidget } from '../../../lib/widgets/library/generic/json-widget/json-widget.component';
+import { WidgetsSettings } from '../../../shared/widgets/types/widget-config';
+import { JsonWidget } from '../../../shared/widgets/library/generic/json-widget/json-widget.component';
 import { SEARCH_WIDGETS_SETTINGS } from '../../search/config/widgets.config';
 
 export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
