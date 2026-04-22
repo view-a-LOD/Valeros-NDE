@@ -1,8 +1,11 @@
 @if (imagesWithDimensions().length > 0) {
   <div
     [id]="galleryId"
-    class="grid gap-2"
-    [class]="displayedThumbnails().length === 1 ? 'grid-cols-1' : 'grid-cols-2'"
+    [class]="
+      displayedThumbnails().length === 1
+        ? 'gap-2'
+        : 'columns-1 sm:columns-2 gap-2'
+    "
     (click)="$event.stopPropagation()"
   >
     @for (image of imagesWithDimensions(); track $index) {
@@ -13,14 +16,18 @@
         [attr.aria-label]="'View ' + image.alt + ' in fullscreen'"
         [class]="
           $index < displayedThumbnails().length
-            ? 'block overflow-hidden hover:opacity-90 transition-opacity cursor-pointer'
+            ? 'block mb-2 overflow-hidden hover:opacity-90 transition-opacity cursor-pointer break-inside-avoid'
             : 'hidden'
         "
       >
         <img
           [src]="image.thumbnail"
           [alt]="image.alt"
-          class="w-full h-auto max-h-96 object-cover rounded"
+          [class]="
+            displayedThumbnails().length === 1
+              ? 'w-full h-auto max-h-96 object-cover rounded'
+              : 'w-full h-auto object-cover rounded'
+          "
           (error)="onThumbnailError($event)"
         />
       </a>
