@@ -79,7 +79,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
       component: ImageGalleryWidget,
       config: {
         showPropertyLabel: false,
-        position: 'left',
+        position: 'top',
       },
     },
     {
@@ -89,7 +89,6 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
       config: {
         showPropertyLabel: false,
         asHeader: true,
-        position: 'top',
       },
     },
     {
@@ -159,6 +158,15 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'description-without-label',
+      properties: ['description'],
+      component: TextWidget,
+      config: {
+        propertyLabel: 'Beschrijving',
+        showPropertyLabel: false,
+      },
+    },
+    {
       id: 'geo',
       properties: ['geo'],
       component: MapWidget,
@@ -178,12 +186,5 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  widgetOrderById: [
-    'name',
-    'image-gallery',
-    'dataset',
-    'type',
-    'additional-type',
-    'description',
-  ],
+  widgetOrderById: ['image-gallery', 'name', 'description-without-label'],
 };
