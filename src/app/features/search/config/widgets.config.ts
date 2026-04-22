@@ -2,10 +2,8 @@ import { WidgetsSettings } from '../../../shared/widgets/types/widget-config';
 import { TextWidget } from '../../../shared/widgets/library/generic/text-widget/text-widget.component';
 import { JsonWidget } from '../../../shared/widgets/library/generic/json-widget/json-widget.component';
 import { BadgeWidget } from '../../../shared/widgets/library/generic/badge-widget/badge-widget.component';
-import { BirthplaceWidget } from '../../../shared/widgets/library/domain-specific/birthplace-widget/birthplace-widget.component';
 import { ImageGalleryWidget } from '../../../shared/widgets/library/generic/image-gallery-widget/image-gallery-widget.component';
 import { MapWidget } from '../../../shared/widgets/library/generic/map-widget/map-widget.component';
-import { IiifWidget } from '../../../shared/widgets/library/generic/iiif-widget/iiif-widget.component';
 import { LinkWidget } from '../../../shared/widgets/library/generic/link-widget/link-widget.component';
 import { AddressWidget } from '../../../shared/widgets/library/domain-specific/address-widget/address-widget.component';
 import { DatasetWidget } from '../../../shared/widgets/library/domain-specific/dataset-widget/dataset-widget.component';
@@ -66,6 +64,24 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'content-location',
       properties: ['contentLocation', 'location'],
+      component: AsyncPreviewWidget,
+      config: {
+        showPropertyLabel: false,
+        previewComponent: MapWidget,
+        previewProperty: 'geo',
+      },
+    },
+    {
+      id: 'birth-place-link',
+      properties: ['birthPlace'],
+      component: LinkWidget,
+      config: {
+        propertyLabel: 'Locatie',
+      },
+    },
+    {
+      id: 'birth-place',
+      properties: ['birthPlace'],
       component: AsyncPreviewWidget,
       config: {
         showPropertyLabel: false,
