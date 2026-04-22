@@ -1,34 +1,31 @@
 <div class="form-control">
-  <div class="flex gap-2">
-    <div class="relative flex-1">
-      <input
-        type="text"
-        placeholder="Search..."
-        class="input input-bordered w-full"
-        [ngModel]="store.searchTerm()"
-        (ngModelChange)="onSearchTermChange($event)"
-        (keyup.enter)="onSearch()"
-        (focus)="onInputFocus()"
-        (blur)="onInputBlur()"
-      />
-      <app-autocomplete-dropdown
-        #autocomplete
-        [searchTerm]="store.searchTerm()"
-        (selectItem)="onAutocompleteSelect($event)"
-        (selectSuggestion)="onSuggestionSelect($event)"
-      />
-    </div>
-
+  <div class="relative">
+    <input
+      type="text"
+      placeholder="Search..."
+      class="input input-bordered rounded-full w-full pr-24"
+      [ngModel]="store.searchTerm()"
+      (ngModelChange)="onSearchTermChange($event)"
+      (keyup.enter)="onSearch()"
+      (focus)="onInputFocus()"
+      (blur)="onInputBlur()"
+    />
     <button
-      class="btn btn-primary"
+      class="btn btn-primary btn-sm rounded-full absolute right-2.5 top-1/2 -translate-y-1/2"
       (click)="onSearch()"
       [disabled]="store.loading()"
     >
       @if (store.loading()) {
         <span class="loading loading-spinner"></span>
       } @else {
-        Search
+        Zoek
       }
     </button>
+    <app-autocomplete-dropdown
+      #autocomplete
+      [searchTerm]="store.searchTerm()"
+      (selectItem)="onAutocompleteSelect($event)"
+      (selectSuggestion)="onSuggestionSelect($event)"
+    />
   </div>
 </div>
