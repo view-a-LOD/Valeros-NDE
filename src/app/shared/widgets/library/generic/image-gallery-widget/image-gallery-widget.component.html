@@ -20,7 +20,7 @@
         <img
           [src]="image.thumbnail"
           [alt]="image.alt"
-          class="w-full h-auto object-cover rounded"
+          class="w-full h-auto max-h-96 object-cover rounded"
           (error)="onThumbnailError($event)"
         />
       </a>
