@@ -20,6 +20,7 @@ module.exports = {
           ...require('daisyui/src/theming/themes')['light'],
           primary: '#00839F',
           'primary-content': '#ffffff',
+          '--rounded-btn': '9999px',
         },
       },
     ],
