@@ -54,7 +54,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
-      id: 'content-location',
+      id: 'content-location-link',
       properties: ['contentLocation', 'location'],
       component: LinkWidget,
       config: {
