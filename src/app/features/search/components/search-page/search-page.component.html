@@ -25,11 +25,14 @@
 
       @if (store.results().length > 0) {
         <div
-          tabindex="-1"
-          class="mb-4 text-sm text-base-content/70 outline-none"
+          class="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
         >
-          Found {{ store.totalResults() }} results (showing
-          {{ store.results().length }})
+          <app-results-count
+            [totalResults]="store.totalResults()"
+            [showingResults]="store.results().length"
+          />
+
+          <app-search-sort />
         </div>
 
         <div class="space-y-2">

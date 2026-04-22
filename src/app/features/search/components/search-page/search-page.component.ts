@@ -7,6 +7,8 @@ import { NodeComponent } from '../../../../shared/node/node.component';
 import { FacetsComponent } from '../facets/facets.component';
 import { DrawerLayoutComponent } from './drawer-layout/drawer-layout.component';
 import { DrawerToggleButtonComponent } from './drawer-layout/drawer-toggle-button/drawer-toggle-button.component';
+import { SearchSort } from '../search-sort/search-sort';
+import { ResultsCount } from '../results-count/results-count';
 import { BreadcrumbService } from '../../../../shared/breadcrumbs/breadcrumb.service';
 import { SearchStateService } from '../../../../shared/navigation/search-state.service';
 
@@ -19,6 +21,8 @@ import { SearchStateService } from '../../../../shared/navigation/search-state.s
     FacetsComponent,
     DrawerLayoutComponent,
     DrawerToggleButtonComponent,
+    SearchSort,
+    ResultsCount,
   ],
   templateUrl: './search-page.component.html',
 })
