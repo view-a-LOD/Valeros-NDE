@@ -17,6 +17,8 @@
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
+    "@ng-icons/core": "^33.2.2",
+    "@ng-icons/feather-icons": "^33.2.2",
     "leaflet": "^1.9.4",
     "mirador": "^4.0.0",
     "photoswipe": "^5.4.4",
