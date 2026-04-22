@@ -35,9 +35,11 @@
           <app-search-sort />
         </div>
 
-        <div class="space-y-2">
+        <div class="columns-1 md:columns-2 gap-4 space-y-4">
           @for (result of store.results(); track result.id) {
-            <app-node [data]="result" />
+            <div class="break-inside-avoid mb-4">
+              <app-node [data]="result" />
+            </div>
           }
         </div>
       } @else if (!store.loading() && store.searchTerm()) {
