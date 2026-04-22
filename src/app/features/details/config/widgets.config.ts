@@ -21,4 +21,5 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     'publisher',
   ],
   hiddenProperties: ['id'],
+  hiddenWidgetsById: [],
 };

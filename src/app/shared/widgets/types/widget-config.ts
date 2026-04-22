@@ -6,6 +6,7 @@ export interface WidgetsSettings {
   defaultWidget: WidgetMapping;
   widgetOrderById?: string[];
   hiddenProperties?: string[];
+  hiddenWidgetsById?: string[];
 }
 
 export interface WidgetMapping {

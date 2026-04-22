@@ -30,13 +30,24 @@ export class WidgetService {
 
   getWidgetsByPosition(properties: string[]): WidgetsByPosition {
     const settings = this.getCurrentSettings();
-    const { hiddenProperties, widgetOrderById } = settings;
+    const { hiddenProperties, widgetOrderById, hiddenWidgetsById } = settings;
 
     const filterHiddenProperties = (properties: string[]): string[] => {
       if (hiddenProperties) {
         return properties.filter((prop) => !hiddenProperties.includes(prop));
       }
       return properties;
+    };
+
+    const filterHiddenWidgets = (
+      widgets: Array<{ property: string; widget: WidgetMapping }>,
+    ): Array<{ property: string; widget: WidgetMapping }> => {
+      if (hiddenWidgetsById && hiddenWidgetsById.length > 0) {
+        return widgets.filter(
+          (item) => !hiddenWidgetsById.includes(item.widget.id || ''),
+        );
+      }
+      return widgets;
     };
 
     const collectWidgetsForProperties = (
@@ -113,8 +124,10 @@ export class WidgetService {
     const visibleProperties: string[] = filterHiddenProperties(properties);
     const collectedWidgets: Array<{ property: string; widget: WidgetMapping }> =
       collectWidgetsForProperties(visibleProperties);
+    const filteredWidgets: Array<{ property: string; widget: WidgetMapping }> =
+      filterHiddenWidgets(collectedWidgets);
     const orderedWidgets: Array<{ property: string; widget: WidgetMapping }> =
-      orderAndFilterWidgets(collectedWidgets);
+      orderAndFilterWidgets(filteredWidgets);
     return groupWidgetsByPosition(orderedWidgets);
   }
 }
