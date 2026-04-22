@@ -1,13 +1,23 @@
-@if (asHeader()) {
-  @for (value of values(); track $index) {
-    <h2 class="font-bold">
-      <span [innerHTML]="value"></span>
-    </h2>
+<ng-template #textContent let-value>
+  @if (enableHighlights()) {
+    <app-highlighted-text [text]="value" [maxLength]="maxLength()" />
+  } @else {
+    <app-truncated-text [text]="value" [maxLength]="maxLength()" />
   }
-} @else {
-  @for (value of values(); track $index) {
+</ng-template>
+
+@for (value of values(); track $index) {
+  @if (asHeader()) {
+    <h2 class="font-bold">
+      <ng-container
+        *ngTemplateOutlet="textContent; context: { $implicit: value }"
+      />
+    </h2>
+  } @else {
     <div>
-      <span [innerHTML]="value"></span>
+      <ng-container
+        *ngTemplateOutlet="textContent; context: { $implicit: value }"
+      />
     </div>
   }
 }
