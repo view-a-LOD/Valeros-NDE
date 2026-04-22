@@ -5,11 +5,14 @@ import { Router } from '@angular/router';
 import { SearchStore } from '../../state/search.store';
 import { AutocompleteDropdownComponent } from '../autocomplete-dropdown/autocomplete-dropdown.component';
 import { AutocompleteNode } from '../../types/autocomplete-node';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { featherSearch } from '@ng-icons/feather-icons';
 
 @Component({
   selector: 'app-search-bar',
-  imports: [CommonModule, FormsModule, AutocompleteDropdownComponent],
+  imports: [CommonModule, FormsModule, AutocompleteDropdownComponent, NgIcon],
   templateUrl: './search-bar.component.html',
+  viewProviders: [provideIcons({ featherSearch })],
 })
 export class SearchBarComponent {
   store = inject(SearchStore);

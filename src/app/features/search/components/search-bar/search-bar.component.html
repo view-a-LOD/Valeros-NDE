@@ -1,26 +1,29 @@
 <div class="form-control">
   <div class="relative">
-    <input
-      type="text"
-      placeholder="Search..."
-      class="input input-bordered rounded-full w-full pr-24"
-      [ngModel]="store.searchTerm()"
-      (ngModelChange)="onSearchTermChange($event)"
-      (keyup.enter)="onSearch()"
-      (focus)="onInputFocus()"
-      (blur)="onInputBlur()"
-    />
-    <button
-      class="btn btn-primary btn-sm rounded-full absolute right-2.5 top-1/2 -translate-y-1/2"
-      (click)="onSearch()"
-      [disabled]="store.loading()"
-    >
-      @if (store.loading()) {
-        <span class="loading loading-spinner"></span>
-      } @else {
-        Zoek
-      }
-    </button>
+    <label class="input input-bordered rounded-full flex items-center gap-2">
+      <input
+        type="text"
+        placeholder="Search..."
+        class="grow"
+        [ngModel]="store.searchTerm()"
+        (ngModelChange)="onSearchTermChange($event)"
+        (keyup.enter)="onSearch()"
+        (focus)="onInputFocus()"
+        (blur)="onInputBlur()"
+      />
+      <button
+        class="btn btn-primary btn-sm rounded-full"
+        (click)="onSearch()"
+        [disabled]="store.loading()"
+      >
+        @if (store.loading()) {
+          <span class="loading loading-spinner"></span>
+        } @else {
+          <ng-icon name="featherSearch" size="16"></ng-icon> Zoek
+        }
+      </button>
+    </label>
+
     <app-autocomplete-dropdown
       #autocomplete
       [searchTerm]="store.searchTerm()"
