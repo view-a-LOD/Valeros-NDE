@@ -27,6 +27,11 @@ export class ImageGalleryWidget extends BaseWidget implements OnDestroy {
   readonly imagesWithDimensions = signal<ImageModel[]>([]);
   readonly displayedThumbnails = signal<ImageModel[]>([]);
 
+  get isLightboxEnabled(): boolean {
+    const config = this.config() as ImageGalleryWidgetConfig;
+    return config.enableLightbox ?? true;
+  }
+
   constructor() {
     super();
     effect(() => {
@@ -70,9 +75,11 @@ export class ImageGalleryWidget extends BaseWidget implements OnDestroy {
           : imagesWithDimensions;
         this.displayedThumbnails.set(thumbnails);
 
-        setTimeout(() => {
-          this.initializeLightbox();
-        });
+        if (this.isLightboxEnabled) {
+          setTimeout(() => {
+            this.initializeLightbox();
+          });
+        }
       },
     );
   }

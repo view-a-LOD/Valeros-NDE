@@ -9,28 +9,42 @@
     (click)="$event.stopPropagation()"
   >
     @for (image of imagesWithDimensions(); track $index) {
-      <a
-        [href]="image.src"
-        [attr.data-pswp-width]="image.dimensions?.width || 1280"
-        [attr.data-pswp-height]="image.dimensions?.height || 720"
-        [attr.aria-label]="'View ' + image.alt + ' in fullscreen'"
-        [class]="
-          $index < displayedThumbnails().length
-            ? 'block mb-2 overflow-hidden hover:opacity-90 transition-opacity cursor-pointer break-inside-avoid'
-            : 'hidden'
-        "
-      >
-        <img
-          [src]="image.thumbnail"
-          [alt]="image.alt"
+      @let isVisible = $index < displayedThumbnails().length;
+      @let containerClass =
+        isVisible ? 'block mb-2 overflow-hidden break-inside-avoid' : 'hidden';
+      @let imageClass =
+        displayedThumbnails().length === 1
+          ? 'w-full h-auto max-h-96 object-cover rounded'
+          : 'w-full h-auto object-cover rounded';
+
+      @if (isLightboxEnabled) {
+        <a
+          [href]="image.src"
+          [attr.data-pswp-width]="image.dimensions?.width || 1280"
+          [attr.data-pswp-height]="image.dimensions?.height || 720"
+          [attr.aria-label]="'View ' + image.alt + ' in fullscreen'"
           [class]="
-            displayedThumbnails().length === 1
-              ? 'w-full h-auto max-h-96 object-cover rounded'
-              : 'w-full h-auto object-cover rounded'
+            containerClass +
+            ' hover:opacity-90 transition-opacity cursor-pointer'
           "
-          (error)="onThumbnailError($event)"
-        />
-      </a>
+        >
+          <img
+            [src]="image.thumbnail"
+            [alt]="image.alt"
+            [class]="imageClass"
+            (error)="onThumbnailError($event)"
+          />
+        </a>
+      } @else {
+        <div [class]="containerClass">
+          <img
+            [src]="image.thumbnail"
+            [alt]="image.alt"
+            [class]="imageClass"
+            (error)="onThumbnailError($event)"
+          />
+        </div>
+      }
     }
   </div>
 }

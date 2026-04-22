@@ -90,6 +90,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
         showPropertyLabel: false,
         position: 'top',
         maxThumbnails: 1,
+        enableLightbox: false,
       },
     },
     {
