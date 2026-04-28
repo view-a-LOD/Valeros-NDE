@@ -13,7 +13,8 @@ import { getFacetLabel } from '../../config/facet-labels.config';
 export class FacetsComponent {
   store = inject(SearchStore);
   filterStore = inject(FilterStore);
-  getFacetLabel = getFacetLabel;
+
+  protected readonly getFacetLabel = getFacetLabel;
 
   hasFacetWithItems = computed(() =>
     this.store.facets().some((facet) => facet.orderedItems.length > 0),
