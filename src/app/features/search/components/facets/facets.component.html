@@ -12,6 +12,13 @@
             {{ facet.name }}
           </div>
           <div class="collapse-content">
+            <div class="mb-3">
+              <input
+                type="text"
+                placeholder="Filter options..."
+                class="input input-sm input-bordered w-full"
+              />
+            </div>
             <div class="space-y-1">
               @for (item of facet.orderedItems; track item.value) {
                 <label
