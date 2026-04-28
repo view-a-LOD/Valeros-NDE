@@ -8,7 +8,7 @@
 
 @for (value of values(); track $index) {
   @if (asHeader()) {
-    <h2 class="font-bold">
+    <h2 class="font-bold text-lg">
       <ng-container
         *ngTemplateOutlet="textContent; context: { $implicit: value }"
       />
