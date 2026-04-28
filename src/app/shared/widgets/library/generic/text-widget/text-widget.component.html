@@ -14,7 +14,7 @@
       />
     </h2>
   } @else {
-    <div>
+    <div [class.text-lg]="largeFont()">
       <ng-container
         *ngTemplateOutlet="textContent; context: { $implicit: value }"
       />

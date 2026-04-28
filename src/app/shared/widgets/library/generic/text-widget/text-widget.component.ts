@@ -16,6 +16,10 @@ export class TextWidget extends BaseWidget {
     return (this.config() as TextWidgetConfig).asHeader === true;
   });
 
+  largeFont = computed(() => {
+    return (this.config() as TextWidgetConfig).largeFont === true;
+  });
+
   maxLength = computed(() => {
     return (this.config() as TextWidgetConfig).maxLength;
   });

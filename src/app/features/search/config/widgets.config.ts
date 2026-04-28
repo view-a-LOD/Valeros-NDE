@@ -67,7 +67,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
       properties: ['contentLocation', 'location'],
       component: AsyncPreviewWidget,
       config: {
-        showPropertyLabel: false,
+        propertyLabel: 'Locatie (kaart)',
         previewComponent: MapWidget,
         previewProperty: 'geo',
       },

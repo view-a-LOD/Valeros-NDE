@@ -1,9 +1,21 @@
 import { WidgetsSettings } from '../../../shared/widgets/types/widget-config';
 import { JsonWidget } from '../../../shared/widgets/library/generic/json-widget/json-widget.component';
 import { SEARCH_WIDGETS_SETTINGS } from '../../search/config/widgets.config';
+import { LinkOrLiteralWidget } from '../../../shared/widgets/library/generic/link-or-literal-widget/link-or-literal-widget.component';
 
 export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
-  mappings: [...SEARCH_WIDGETS_SETTINGS.mappings],
+  mappings: [
+    ...SEARCH_WIDGETS_SETTINGS.mappings,
+    {
+      id: 'description-header',
+      properties: ['description'],
+      component: LinkOrLiteralWidget,
+      config: {
+        showPropertyLabel: false,
+        largeFont: true,
+      },
+    },
+  ],
   defaultWidget: {
     component: JsonWidget,
     properties: [],
@@ -11,15 +23,10 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
   },
   widgetOrder: [
     {
-      widgetIds: [
-        'name',
-        'image-gallery',
-        'type',
-        'additional-type',
-        'description',
-        '*',
-        'license',
-      ],
+      widgetIds: ['name', 'description-header'],
+    },
+    {
+      widgetIds: ['image-gallery', 'type', 'additional-type', '*', 'license'],
     },
     {
       label: 'Bronhouder',
@@ -27,5 +34,9 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     },
   ],
   hiddenProperties: ['id'],
-  hiddenWidgetsById: ['image-thumb', 'description-without-label'],
+  hiddenWidgetsById: [
+    'image-thumb',
+    'description',
+    'description-without-label',
+  ],
 };

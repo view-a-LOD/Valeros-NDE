@@ -33,6 +33,7 @@ export class LinkOrLiteralWidget extends BaseWidget {
   textConfig = computed(() => ({
     showPropertyLabel: false,
     asHeader: (this.config() as TextWidgetConfig).asHeader,
+    largeFont: (this.config() as TextWidgetConfig).largeFont,
     maxLength: (this.config() as TextWidgetConfig).maxLength,
     enableHighlights: (this.config() as TextWidgetConfig).enableHighlights,
   }));
