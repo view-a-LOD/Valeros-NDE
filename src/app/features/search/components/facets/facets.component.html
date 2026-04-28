@@ -1,50 +1,54 @@
-@if (store.facets().length > 0) {
-  <div class="space-y-2">
-    @for (facet of store.facets(); track facet.name) {
-      @if (facet.orderedItems.length > 0) {
+<div class="space-y-2">
+  @for (facet of store.facets(); track facet.name) {
+    @if (facet.orderedItems.length > 0) {
+      <div
+        class="collapse collapse-arrow border border-base-300 rounded-lg bg-base-100"
+      >
+        <input type="checkbox" class="peer" checked />
         <div
-          class="collapse collapse-arrow border border-base-300 rounded-lg bg-base-100"
+          class="collapse-title flex items-center font-semibold text-sm capitalize"
         >
-          <input type="checkbox" class="peer" checked />
-          <div
-            class="collapse-title flex items-center font-semibold text-sm capitalize"
-          >
-            {{ getFacetLabel(facet.name) }}
+          {{ getFacetLabel(facet.name) }}
+        </div>
+        <div class="collapse-content">
+          <div class="mb-3">
+            <input
+              type="text"
+              placeholder="Filter..."
+              class="input input-sm input-bordered w-full"
+            />
           </div>
-          <div class="collapse-content">
-            <div class="mb-3">
-              <input
-                type="text"
-                placeholder="Filter..."
-                class="input input-sm input-bordered w-full"
-              />
-            </div>
-            <div class="space-y-1 max-h-48 overflow-y-scroll">
-              @for (item of facet.orderedItems; track item.value) {
-                <label
-                  class="flex justify-between items-center text-sm cursor-pointer hover:bg-base-200 p-1 rounded gap-1"
-                >
-                  <div class="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      class="checkbox checkbox-sm"
-                      [checked]="isSelected(facet.name, item.value)"
-                      (click)="onFacetToggle(facet.name, item.value)"
-                    />
-                    <span class="text-base-content/80">{{ item.value }}</span>
-                  </div>
-                  <span class="text-base-content/60 text-xs">{{
-                    item.count
-                  }}</span>
-                </label>
-              }
-            </div>
-            <!-- <button class="btn btn-sm w-full mt-2 text-xs">
+          <div class="space-y-1 max-h-48 overflow-y-scroll">
+            @for (item of facet.orderedItems; track item.value) {
+              <label
+                class="flex justify-between items-center text-sm cursor-pointer hover:bg-base-200 p-1 rounded gap-1"
+              >
+                <div class="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    class="checkbox checkbox-sm"
+                    [checked]="isSelected(facet.name, item.value)"
+                    (click)="onFacetToggle(facet.name, item.value)"
+                  />
+                  <span class="text-base-content/80">{{ item.value }}</span>
+                </div>
+                <span class="text-base-content/60 text-xs">{{
+                  item.count
+                }}</span>
+              </label>
+            }
+          </div>
+          <!-- <button class="btn btn-sm w-full mt-2 text-xs">
               Meer opties tonen
             </button> -->
-          </div>
         </div>
-      }
+      </div>
     }
+  }
+</div>
+
+@if (!hasFacetWithItems()) {
+  <div class="text-center py-4 text-base-content/60">
+    Geen filters beschikbaar
   </div>
 }

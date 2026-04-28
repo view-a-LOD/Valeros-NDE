@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchStore } from '../../state/search.store';
 import { FilterStore } from '../../state/filter.store';
@@ -14,6 +14,10 @@ export class FacetsComponent {
   store = inject(SearchStore);
   filterStore = inject(FilterStore);
   getFacetLabel = getFacetLabel;
+
+  hasFacetWithItems = computed(() =>
+    this.store.facets().some((facet) => facet.orderedItems.length > 0),
+  );
 
   onFacetToggle(facetName: string, value: string): void {
     this.filterStore.toggleFilter(facetName, value);
