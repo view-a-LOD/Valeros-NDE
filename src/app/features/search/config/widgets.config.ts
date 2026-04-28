@@ -143,7 +143,6 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Materiaal',
-        propertyPath: 'name',
       },
     },
     {
