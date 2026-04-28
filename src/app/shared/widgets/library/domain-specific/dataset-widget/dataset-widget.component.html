@@ -1,6 +1,5 @@
-<div class="flex flex-wrap gap-2">
-  @for (dataset of datasets(); track $index) {
-    <!-- TODO: Optionally add links here (use link widget?) -->
-    <p>{{ dataset.name }}</p>
-  }
-</div>
+<app-link-or-literal-widget
+  [node]="nodeWithDatasets()"
+  property="datasets"
+  [config]="{}"
+/>

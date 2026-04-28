@@ -5,6 +5,7 @@ import { BadgeWidget } from '../../../shared/widgets/library/generic/badge-widge
 import { ImageGalleryWidget } from '../../../shared/widgets/library/generic/image-gallery-widget/image-gallery-widget.component';
 import { MapWidget } from '../../../shared/widgets/library/generic/map-widget/map-widget.component';
 import { LinkWidget } from '../../../shared/widgets/library/generic/link-widget/link-widget.component';
+import { LinkOrLiteralWidget } from '../../../shared/widgets/library/generic/link-or-literal-widget/link-or-literal-widget.component';
 import { AddressWidget } from '../../../shared/widgets/library/domain-specific/address-widget/address-widget.component';
 import { DatasetWidget } from '../../../shared/widgets/library/domain-specific/dataset-widget/dataset-widget.component';
 import { AsyncPreviewWidget } from '../../../shared/widgets/infrastructure/async-preview-widget/async-preview-widget.component';
@@ -22,7 +23,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'license',
       properties: ['isPartOf'],
-      component: LinkWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Licentie',
         propertyPath: 'license',
@@ -31,7 +32,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'publisher',
       properties: ['isPartOf'],
-      component: LinkWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Uitgever',
         propertyPath: 'publisher',
@@ -40,7 +41,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'genre',
       properties: ['genre'],
-      component: BadgeWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Genre',
       },
@@ -48,7 +49,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'is-based-on',
       properties: ['isBasedOn'],
-      component: LinkWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Gebaseerd op',
       },
@@ -56,7 +57,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'content-location-link',
       properties: ['contentLocation', 'location'],
-      component: LinkWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Locatie',
       },
@@ -74,7 +75,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'birth-place-link',
       properties: ['birthPlace'],
-      component: LinkWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Locatie',
       },
@@ -113,7 +114,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'name',
       properties: ['name'],
-      component: TextWidget,
+      component: LinkOrLiteralWidget,
       config: {
         showPropertyLabel: false,
         asHeader: true,
@@ -122,7 +123,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'type',
       properties: ['type'],
-      component: BadgeWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Soort',
       },
@@ -130,7 +131,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'additional-type',
       properties: ['additionalType'],
-      component: BadgeWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Soort (aanvullend)',
         propertyPath: 'name',
@@ -139,7 +140,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'material',
       properties: ['material'],
-      component: BadgeWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Materiaal',
         propertyPath: 'name',
@@ -148,7 +149,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'creator',
       properties: ['creator'],
-      component: LinkWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Vervaardiger',
       },
@@ -156,7 +157,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'date-created',
       properties: ['dateCreated'],
-      component: TextWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Vervaardigingsdatum',
       },
@@ -164,7 +165,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'birth-date',
       properties: ['birthDate'],
-      component: TextWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Geboortedatum',
       },
@@ -172,7 +173,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'death-date',
       properties: ['deathDate'],
-      component: TextWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Overlijdensdatum',
       },
@@ -180,7 +181,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'description',
       properties: ['description'],
-      component: TextWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Beschrijving',
       },
@@ -188,7 +189,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'description-without-label',
       properties: ['description'],
-      component: TextWidget,
+      component: LinkOrLiteralWidget,
       config: {
         propertyLabel: 'Beschrijving',
         showPropertyLabel: false,

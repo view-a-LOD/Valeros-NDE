@@ -1,0 +1,14 @@
+@if (nodeValues().length > 0) {
+  <app-badge-widget
+    [node]="nodeWithNodeValues()"
+    property="nodes"
+    [config]="{}"
+  />
+}
+@if (literalValues().length > 0) {
+  <app-text-widget
+    [node]="nodeWithLiteralValues()"
+    property="literals"
+    [config]="textConfig()"
+  />
+}
