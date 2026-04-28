@@ -2,18 +2,17 @@ import {
   Component,
   input,
   signal,
-  output,
   viewChild,
   ElementRef,
   AfterViewInit,
-  effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DrawerToggleButtonComponent } from './drawer-toggle-button/drawer-toggle-button.component';
 
 @Component({
   selector: 'app-drawer-layout',
 
-  imports: [CommonModule],
+  imports: [CommonModule, DrawerToggleButtonComponent],
   templateUrl: './drawer-layout.component.html',
 })
 export class DrawerLayoutComponent implements AfterViewInit {

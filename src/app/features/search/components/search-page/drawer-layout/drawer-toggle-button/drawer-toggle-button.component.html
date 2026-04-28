@@ -1,12 +1,28 @@
+<ng-template #buttonContent>
+  @if (iconName()) {
+    <ng-icon [name]="iconName()" [size]="iconSize()"></ng-icon>
+  }
+  @if (!iconOnly()) {
+    {{ isOpen() ? labelWhenOpen() : labelWhenClosed() }}
+  }
+</ng-template>
+
 <!-- Desktop -->
 <button
   (click)="onToggle()"
   [class]="buttonClass()"
   class="hidden lg:inline-flex"
+  [attr.aria-label]="isOpen() ? labelWhenOpen() : labelWhenClosed()"
 >
-  {{ isOpen() ? labelWhenOpen() : labelWhenClosed() }}
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </button>
+
 <!-- Mobile -->
-<label [for]="drawerId()" [class]="buttonClass()" class="lg:hidden">
-  {{ isOpen() ? labelWhenOpen() : labelWhenClosed() }}
+<label
+  [for]="drawerId()"
+  [class]="buttonClass()"
+  class="lg:hidden"
+  [attr.aria-label]="isOpen() ? labelWhenOpen() : labelWhenClosed()"
+>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </label>

@@ -11,7 +11,7 @@
     <ng-content select="[drawer-content]"></ng-content>
   </div>
 
-  <div class="drawer-side">
+  <div class="drawer-side z-20">
     <label
       [for]="drawerId()"
       [attr.aria-label]="closeLabel()"
@@ -19,7 +19,18 @@
     ></label>
     <div class="bg-app-bg-dark min-h-full p-4" [style.width]="sidebarWidth()">
       @if (sidebarTitle()) {
-        <h2 class="text-lg font-bold mb-4">{{ sidebarTitle() }}</h2>
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-bold">{{ sidebarTitle() }}</h2>
+          <app-drawer-toggle-button
+            [drawerId]="drawerId()"
+            [isOpen]="isOpen()"
+            (toggle)="toggleDrawer()"
+            buttonClass="btn btn-sm btn-circle btn-ghost"
+            iconName="featherX"
+            iconSize="20"
+            [iconOnly]="true"
+          />
+        </div>
       }
       <ng-content select="[drawer-sidebar]"></ng-content>
     </div>
