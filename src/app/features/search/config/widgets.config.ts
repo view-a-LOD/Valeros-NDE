@@ -85,7 +85,8 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
       properties: ['birthPlace'],
       component: AsyncPreviewWidget,
       config: {
-        showPropertyLabel: false,
+        propertyLabel: 'Geboorteplaats (kaart)',
+        showPropertyLabel: true,
         previewComponent: MapWidget,
         previewProperty: 'geo',
       },
