@@ -1,6 +1,6 @@
 <ng-template #buttonContent>
-  @if (iconName()) {
-    <ng-icon [name]="iconName()" [size]="iconSize()"></ng-icon>
+  @if (icon()) {
+    <ng-icon [svg]="icon()" [size]="iconSize()"></ng-icon>
   }
   @if (!iconOnly()) {
     {{ isOpen() ? labelWhenOpen() : labelWhenClosed() }}

@@ -12,6 +12,7 @@ import { ResultsCount } from '../results-count/results-count';
 import { Pagination } from '../pagination/pagination';
 import { BreadcrumbService } from '../../../../shared/breadcrumbs/breadcrumb.service';
 import { SearchStateService } from '../../../../shared/navigation/search-state.service';
+import { featherFilter } from '@ng-icons/feather-icons';
 
 @Component({
   selector: 'app-search-page',
@@ -33,6 +34,8 @@ export class SearchPageComponent implements OnInit {
   private breadcrumbService = inject(BreadcrumbService);
   private searchStateService = inject(SearchStateService);
   private route = inject(ActivatedRoute);
+
+  protected readonly featherFilter = featherFilter;
 
   ngOnInit(): void {
     this.breadcrumbService.reset();

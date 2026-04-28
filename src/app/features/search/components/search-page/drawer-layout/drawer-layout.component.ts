@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DrawerToggleButtonComponent } from './drawer-toggle-button/drawer-toggle-button.component';
+import { featherX } from '@ng-icons/feather-icons';
 
 @Component({
   selector: 'app-drawer-layout',
@@ -25,6 +26,8 @@ export class DrawerLayoutComponent implements AfterViewInit {
   drawerCheckbox = viewChild<ElementRef<HTMLInputElement>>('drawerCheckbox');
 
   isOpen = signal(this.initiallyOpen());
+
+  protected readonly featherX = featherX;
 
   ngOnInit() {
     this.isOpen.set(this.initiallyOpen());
