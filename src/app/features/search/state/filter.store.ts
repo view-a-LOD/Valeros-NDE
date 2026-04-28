@@ -57,7 +57,8 @@ export class FilterStore {
     for (const [facetName, values] of Object.entries(selectedFilters)) {
       for (const value of values) {
         const decodedValue = decodeURIComponent(value);
-        filterStrings.push(`${facetName}:${decodedValue}`);
+        const escapedValue = decodedValue.replace(/`/g, '\\`');
+        filterStrings.push(`${facetName}:\`${escapedValue}\``);
       }
     }
 
