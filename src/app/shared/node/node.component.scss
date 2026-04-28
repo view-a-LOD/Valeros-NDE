@@ -3,7 +3,7 @@
 }
 
 .position-container {
-  @apply empty:hidden overflow-y-auto p-4 flex flex-col gap-2;
+  @apply empty:hidden overflow-y-auto p-4 flex flex-col gap-3;
 
   app-dynamic-widget {
     display: block;
