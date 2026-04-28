@@ -1,0 +1,57 @@
+@if (totalPages() > 1) {
+<nav
+  class="flex justify-center items-center gap-2 mt-8"
+  role="navigation"
+  aria-label="Pagination"
+>
+  @if (hasPrevious()) {
+  <a
+    class="btn btn-sm"
+    [routerLink]="[]"
+    [queryParams]="getPreviousPageQueryParams()"
+    queryParamsHandling="merge"
+    aria-label="Vorige pagina"
+  >
+    Vorige
+  </a>
+  } @else {
+  <span class="btn btn-sm btn-disabled" aria-label="Vorige pagina">
+    Vorige
+  </span>
+  }
+
+  <div class="join">
+    @for (page of pages(); track page) { @if (page === '...') {
+    <span class="join-item btn btn-sm btn-disabled">...</span>
+    } @else {
+    <a
+      class="join-item btn btn-sm"
+      [class.btn-active]="page === currentPage()"
+      [routerLink]="[]"
+      [queryParams]="getPageQueryParams($any(page))"
+      queryParamsHandling="merge"
+      [attr.aria-current]="page === currentPage() ? 'page' : null"
+      [attr.aria-label]="'Pagina ' + page"
+    >
+      {{ page }}
+    </a>
+    } }
+  </div>
+
+  @if (hasNext()) {
+  <a
+    class="btn btn-sm"
+    [routerLink]="[]"
+    [queryParams]="getNextPageQueryParams()"
+    queryParamsHandling="merge"
+    aria-label="Volgende pagina"
+  >
+    Volgende
+  </a>
+  } @else {
+  <span class="btn btn-sm btn-disabled" aria-label="Volgende pagina">
+    Volgende
+  </span>
+  }
+</nav>
+}

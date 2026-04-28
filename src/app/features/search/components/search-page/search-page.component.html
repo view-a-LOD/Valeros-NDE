@@ -49,6 +49,12 @@
             </div>
           }
         </div>
+
+        <app-pagination
+          [currentPage]="store.currentPage()"
+          [totalItems]="store.totalResults()"
+          [pageSize]="store.pageSize()"
+        />
       } @else if (!store.loading() && store.searchTerm()) {
         <div
           tabindex="-1"

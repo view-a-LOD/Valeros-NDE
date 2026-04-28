@@ -9,6 +9,7 @@ import { DrawerLayoutComponent } from './drawer-layout/drawer-layout.component';
 import { DrawerToggleButtonComponent } from './drawer-layout/drawer-toggle-button/drawer-toggle-button.component';
 import { SearchSort } from '../search-sort/search-sort';
 import { ResultsCount } from '../results-count/results-count';
+import { Pagination } from '../pagination/pagination';
 import { BreadcrumbService } from '../../../../shared/breadcrumbs/breadcrumb.service';
 import { SearchStateService } from '../../../../shared/navigation/search-state.service';
 
@@ -23,6 +24,7 @@ import { SearchStateService } from '../../../../shared/navigation/search-state.s
     DrawerToggleButtonComponent,
     SearchSort,
     ResultsCount,
+    Pagination,
   ],
   templateUrl: './search-page.component.html',
 })

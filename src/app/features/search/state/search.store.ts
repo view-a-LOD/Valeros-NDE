@@ -12,6 +12,7 @@ import { NodeModel } from '../../../shared/node/types/node.model';
 interface SearchUrlParams {
   q: string;
   filters: string | null;
+  page: number;
 }
 
 @Injectable({
@@ -28,6 +29,10 @@ export class SearchStore {
   facets = signal<Facet[]>([]);
   loading = signal(false);
   error = signal<string | null>(null);
+  currentPage = signal(1);
+  pageSize = signal(20);
+  nextPage = signal<string | undefined>(undefined);
+  prevPage = signal<string | undefined>(undefined);
 
   constructor() {
     this.initSearchOnUrlChanges();
@@ -42,25 +47,28 @@ export class SearchStore {
           (params): SearchUrlParams => ({
             q: params['q'] || '*',
             filters: params['filters'] || null,
+            page: params['page'] ? parseInt(params['page'], 10) : 1,
           }),
         ),
         distinctUntilChanged((prev: SearchUrlParams, curr: SearchUrlParams) => {
           const queryChanged = prev.q !== curr.q;
           const filtersChanged = prev.filters !== curr.filters;
-          return !queryChanged && !filtersChanged;
+          const pageChanged = prev.page !== curr.page;
+          return !queryChanged && !filtersChanged && !pageChanged;
         }),
       )
-      .subscribe(({ q: query, filters }: SearchUrlParams) => {
+      .subscribe(({ q: query, filters, page }: SearchUrlParams) => {
         this.filterStore.clearFiltersIfQueryChanged(query, previousQuery);
         this.filterStore.syncFiltersFromUrl(filters);
 
         previousQuery = query;
         this.searchTerm.set(query);
-        this.performSearch(query);
+        this.currentPage.set(page);
+        this.performSearch(query, page);
       });
   }
 
-  private performSearch(term: string): void {
+  private performSearch(term: string, page: number = 1): void {
     const trimmedTerm = term.trim();
 
     if (!trimmedTerm) {
@@ -73,12 +81,11 @@ export class SearchStore {
 
     const filters = this.filterStore.buildFilterStrings();
 
-    // TODO: Replace hardcoded size and page
     this.searchApiService
       .search({
         q: trimmedTerm,
-        size: 10,
-        page: 1,
+        size: this.pageSize(),
+        page,
         ...(filters.length > 0 && { filter: filters }),
       })
       .subscribe({
@@ -86,6 +93,8 @@ export class SearchStore {
           this.results.set(response.orderedItems);
           this.totalResults.set(response.partOf.totalItems);
           this.facets.set(response.partOf.facets || []);
+          this.nextPage.set(response.next);
+          this.prevPage.set(response.prev);
           this.loading.set(false);
 
           console.log('Search results:', response);
