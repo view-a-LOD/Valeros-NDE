@@ -4,9 +4,14 @@ import { BaseWidget } from '../infrastructure/base-widget';
 export interface WidgetsSettings {
   mappings: WidgetMapping[];
   defaultWidget: WidgetMapping;
-  widgetOrderById?: string[];
+  widgetOrder?: WidgetOrderGroup[];
   hiddenProperties?: string[];
   hiddenWidgetsById?: string[];
+}
+
+export interface WidgetOrderGroup {
+  label?: string;
+  widgetIds: string[];
 }
 
 export interface WidgetMapping {

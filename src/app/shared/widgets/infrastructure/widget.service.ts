@@ -7,7 +7,10 @@ import {
 } from '../types/widget-config';
 import { SEARCH_WIDGETS_SETTINGS } from '../../../features/search/config/widgets.config';
 import { DETAILS_WIDGETS_SETTINGS } from '../../../features/details/config/widgets.config';
-import { WidgetsByPosition } from '../types/widgets-by-position';
+import {
+  WidgetsByPosition,
+  WidgetGroup as WidgetGroupByPosition,
+} from '../types/widgets-by-position';
 
 @Injectable({ providedIn: 'root' })
 export class WidgetService {
@@ -30,7 +33,7 @@ export class WidgetService {
 
   getWidgetsByPosition(properties: string[]): WidgetsByPosition {
     const settings = this.getCurrentSettings();
-    const { hiddenProperties, widgetOrderById, hiddenWidgetsById } = settings;
+    const { hiddenProperties, widgetOrder, hiddenWidgetsById } = settings;
 
     const filterHiddenProperties = (properties: string[]): string[] => {
       if (hiddenProperties) {
@@ -62,15 +65,17 @@ export class WidgetService {
       return widgets;
     };
 
-    const orderAndFilterWidgets = (
+    const orderAndGroupWidgets = (
       widgets: Array<{ property: string; widget: WidgetMapping }>,
-    ): Array<{ property: string; widget: WidgetMapping }> => {
-      if (!widgetOrderById || widgetOrderById.length === 0) {
-        return widgets.sort((a, b) => a.property.localeCompare(b.property));
+    ): WidgetGroupByPosition[] => {
+      if (!widgetOrder || widgetOrder.length === 0) {
+        return [
+          {
+            items: widgets.sort((a, b) => a.property.localeCompare(b.property)),
+          },
+        ];
       }
 
-      const orderedWidgets: Array<{ property: string; widget: WidgetMapping }> =
-        [];
       const widgetMap = new Map<
         string,
         Array<{ property: string; widget: WidgetMapping }>
@@ -85,25 +90,45 @@ export class WidgetService {
         widgetMap.get(id)!.push(item);
       });
 
-      // Process widgetOrder
-      widgetOrderById.forEach((orderId) => {
-        if (orderId === '*') {
-          // Add all remaining widgets not yet added
-          widgetMap.forEach((items, id) => {
-            if (!widgetOrderById.includes(id) || id === '') {
-              orderedWidgets.push(...items);
-            }
+      // Collect all widget IDs from all groups for checking
+      const allOrderedIds = new Set<string>();
+      widgetOrder.forEach((group) => {
+        group.widgetIds.forEach((id) => allOrderedIds.add(id));
+      });
+
+      const groupedWidgets: WidgetGroupByPosition[] = [];
+
+      // Process widgetOrder groups
+      widgetOrder.forEach((group) => {
+        const groupItems: Array<{ property: string; widget: WidgetMapping }> =
+          [];
+
+        group.widgetIds.forEach((widgetId) => {
+          if (widgetId === '*') {
+            // Add all remaining widgets not yet added
+            widgetMap.forEach((items, id) => {
+              if (!allOrderedIds.has(id) || id === '') {
+                groupItems.push(...items);
+              }
+            });
+          } else if (widgetMap.has(widgetId)) {
+            groupItems.push(...widgetMap.get(widgetId)!);
+          }
+        });
+
+        if (groupItems.length > 0) {
+          groupedWidgets.push({
+            label: group.label,
+            items: groupItems,
           });
-        } else if (widgetMap.has(orderId)) {
-          orderedWidgets.push(...widgetMap.get(orderId)!);
         }
       });
 
-      return orderedWidgets;
+      return groupedWidgets;
     };
 
     const groupWidgetsByPosition = (
-      widgets: Array<{ property: string; widget: WidgetMapping }>,
+      groups: WidgetGroupByPosition[],
     ): WidgetsByPosition => {
       const byPosition: WidgetsByPosition = {
         top: [],
@@ -113,9 +138,32 @@ export class WidgetService {
         bottom: [],
       };
 
-      widgets.forEach(({ property, widget }) => {
-        const position = widget.config?.position || 'main';
-        byPosition[position].push({ property, widget });
+      groups.forEach((group) => {
+        const positionGroups: Record<
+          WidgetPosition,
+          Array<{ property: string; widget: WidgetMapping }>
+        > = {
+          top: [],
+          left: [],
+          main: [],
+          right: [],
+          bottom: [],
+        };
+
+        group.items.forEach(({ property, widget }) => {
+          const position = widget.config?.position || 'main';
+          positionGroups[position].push({ property, widget });
+        });
+
+        Object.entries(positionGroups).forEach(([position, items]) => {
+          const hasItemsForPosition = items.length > 0;
+          if (hasItemsForPosition) {
+            byPosition[position as WidgetPosition].push({
+              label: group.label,
+              items,
+            });
+          }
+        });
       });
 
       return byPosition;
@@ -126,8 +174,8 @@ export class WidgetService {
       collectWidgetsForProperties(visibleProperties);
     const filteredWidgets: Array<{ property: string; widget: WidgetMapping }> =
       filterHiddenWidgets(collectedWidgets);
-    const orderedWidgets: Array<{ property: string; widget: WidgetMapping }> =
-      orderAndFilterWidgets(filteredWidgets);
-    return groupWidgetsByPosition(orderedWidgets);
+    const groupedWidgets: WidgetGroupByPosition[] =
+      orderAndGroupWidgets(filteredWidgets);
+    return groupWidgetsByPosition(groupedWidgets);
   }
 }

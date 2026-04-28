@@ -15,11 +15,11 @@
 <ng-template #cardContent>
   <!-- Top Container -->
   <div class="position-container position-container-topbottom">
-    @for (item of widgetsByPosition().top; track $index) {
+    @for (group of widgetsByPosition().top; track $index) {
       <ng-container
         *ngTemplateOutlet="
-          widgetItem;
-          context: { item: item, first: $first, last: $last }
+          widgetGroup;
+          context: { group: group, first: $first }
         "
       />
     }
@@ -29,11 +29,11 @@
   <div class="flex flex-col md:flex-row min-w-0">
     <!-- Left Container -->
     <div class="position-container position-container-side md:order-1">
-      @for (item of widgetsByPosition().left; track $index) {
+      @for (group of widgetsByPosition().left; track $index) {
         <ng-container
           *ngTemplateOutlet="
-            widgetItem;
-            context: { item: item, first: $first, last: $last }
+            widgetGroup;
+            context: { group: group, first: $first }
           "
         />
       }
@@ -41,11 +41,11 @@
 
     <!-- Main Container -->
     <div class="position-container w-full md:flex-1 md:min-w-[33%] md:order-2">
-      @for (item of widgetsByPosition().main; track $index) {
+      @for (group of widgetsByPosition().main; track $index) {
         <ng-container
           *ngTemplateOutlet="
-            widgetItem;
-            context: { item: item, first: $first, last: $last }
+            widgetGroup;
+            context: { group: group, first: $first }
           "
         />
       }
@@ -53,11 +53,11 @@
 
     <!-- Right Container -->
     <div class="position-container position-container-side md:order-3">
-      @for (item of widgetsByPosition().right; track $index) {
+      @for (group of widgetsByPosition().right; track $index) {
         <ng-container
           *ngTemplateOutlet="
-            widgetItem;
-            context: { item: item, first: $first, last: $last }
+            widgetGroup;
+            context: { group: group, first: $first }
           "
         />
       }
@@ -66,7 +66,25 @@
 
   <!-- Bottom Container -->
   <div class="position-container position-container-topbottom">
-    @for (item of widgetsByPosition().bottom; track $index) {
+    @for (group of widgetsByPosition().bottom; track $index) {
+      <ng-container
+        *ngTemplateOutlet="
+          widgetGroup;
+          context: { group: group, first: $first }
+        "
+      />
+    }
+  </div>
+</ng-template>
+
+<ng-template #widgetGroup let-group="group" let-first="first">
+  <div class="widget-group flex flex-col gap-2" [class.mt-6]="!first">
+    @if (group.label) {
+      <h3 class="text-sm font-semibold text-base-content/70">
+        {{ group.label }}
+      </h3>
+    }
+    @for (item of group.items; track $index) {
       <ng-container
         *ngTemplateOutlet="
           widgetItem;

@@ -9,16 +9,22 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  widgetOrderById: [
-    'name',
-    'image-gallery',
-    'dataset',
-    'type',
-    'additional-type',
-    'description',
-    '*',
-    'license',
-    'publisher',
+  widgetOrder: [
+    {
+      widgetIds: [
+        'name',
+        'image-gallery',
+        'type',
+        'additional-type',
+        'description',
+        '*',
+        'license',
+      ],
+    },
+    {
+      label: 'Bronhouder',
+      widgetIds: ['dataset', 'publisher'],
+    },
   ],
   hiddenProperties: ['id'],
   hiddenWidgetsById: ['image-thumb', 'description-without-label'],

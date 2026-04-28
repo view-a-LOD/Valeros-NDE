@@ -216,5 +216,9 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
     properties: [],
     config: {},
   },
-  widgetOrderById: ['image-thumb', 'name', 'description-without-label'],
+  widgetOrder: [
+    {
+      widgetIds: ['image-thumb', 'name', 'description-without-label'],
+    },
+  ],
 };
