@@ -1,8 +1,10 @@
-<div>
+<div class="flex gap-4">
   @if (showLabel()) {
-    <div class="text-xs font-semibold text-base-content/50 mb-1">
+    <div class="w-1/5">
       {{ displayLabel() }}
     </div>
   }
-  <ng-content />
+  <div class="flex-1 font-mono">
+    <ng-content />
+  </div>
 </div>
