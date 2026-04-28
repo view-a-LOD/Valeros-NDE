@@ -45,7 +45,7 @@ export class SearchStore {
       .pipe(
         map(
           (params): SearchUrlParams => ({
-            q: params['q'] || '*',
+            q: params['q'] || '',
             filters: params['filters'] || null,
             page: params['page'] ? parseInt(params['page'], 10) : 1,
           }),
@@ -69,11 +69,12 @@ export class SearchStore {
   }
 
   private performSearch(term: string, page: number = 1): void {
-    const trimmedTerm = term.trim();
+    let trimmedTerm = term.trim();
 
     if (!trimmedTerm) {
-      this.results.set([]);
-      return;
+      trimmedTerm = '*';
+      // this.results.set([]);
+      // return;
     }
 
     this.loading.set(true);
