@@ -155,8 +155,8 @@ export class MockDataService {
           ...obj,
           geo: {
             type: 'GeoCoordinates',
-            latitude: 52.0815523,
-            longitude: 5.1203423,
+            latitude: 50 + Math.random() * 3.5,
+            longitude: 3 + Math.random() * 4,
           },
         };
       }
