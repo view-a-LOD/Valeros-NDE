@@ -2,7 +2,7 @@ import { Component, computed, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseWidget } from '../../../infrastructure/base-widget';
 import { IsPartOfNode } from '../../../../node/types/is-part-of.node';
-import { LinkOrLiteralWidget } from '../../generic/link-or-literal-widget/link-or-literal-widget.component';
+import { LinkWidget } from '../../generic/link-widget/link-widget.component';
 import { NodeModel } from '../../../../node/types/node.model';
 
 interface Dataset extends IsPartOfNode {
@@ -12,7 +12,7 @@ interface Dataset extends IsPartOfNode {
 @Component({
   selector: 'app-dataset-widget',
 
-  imports: [CommonModule, LinkOrLiteralWidget],
+  imports: [CommonModule, LinkWidget],
   templateUrl: './dataset-widget.component.html',
 })
 export class DatasetWidget extends BaseWidget {

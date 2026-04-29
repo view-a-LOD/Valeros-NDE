@@ -1,9 +1,17 @@
-@if (values().length > 0) {
-  <ul class="space-y-2" role="list">
-    @for (node of values(); track node.id) {
-      <li>
-        <app-node-link [node]="node" />
-      </li>
+@if (nodeValues().length > 0) {
+  <div class="flex flex-wrap gap-2">
+    @for (nodeValue of nodeValues(); track $index) {
+      <span class="badge badge-primary py-3">
+        <app-node-link [node]="nodeValue" [showType]="false" />
+      </span>
     }
-  </ul>
+  </div>
+}
+
+@if (literalValues().length > 0) {
+  <app-text-widget
+    [node]="nodeWithLiteralValues()"
+    property="literals"
+    [config]="textConfig()"
+  />
 }

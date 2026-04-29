@@ -1,7 +1,7 @@
 import { WidgetsSettings } from '../../../shared/widgets/types/widget-config';
 import { JsonWidget } from '../../../shared/widgets/library/generic/json-widget/json-widget.component';
 import { SEARCH_WIDGETS_SETTINGS } from '../../search/config/widgets.config';
-import { LinkOrLiteralWidget } from '../../../shared/widgets/library/generic/link-or-literal-widget/link-or-literal-widget.component';
+import { LinkWidget } from '../../../shared/widgets/library/generic/link-widget/link-widget.component';
 
 export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
@@ -9,7 +9,7 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     {
       id: 'description-header',
       properties: ['description'],
-      component: LinkOrLiteralWidget,
+      component: LinkWidget,
       config: {
         showPropertyLabel: false,
         largeFont: true,
