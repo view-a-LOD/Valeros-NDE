@@ -1,1 +1,1 @@
-export type ViewType = 'masonry' | 'list' | 'map' | 'timeline';
+export type ViewType = 'grid' | 'list' | 'map' | 'timeline';

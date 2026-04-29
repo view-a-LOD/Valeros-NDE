@@ -5,7 +5,7 @@ import { MasonryViewComponent } from '../views/library/masonry-view/masonry-view
 export const SEARCH_VIEWS_CONFIG: ViewsSettings = {
   mappings: [
     {
-      type: 'masonry',
+      type: 'grid',
       component: MasonryViewComponent,
       config: {
         pageSize: 20,
@@ -16,5 +16,5 @@ export const SEARCH_VIEWS_CONFIG: ViewsSettings = {
       label: 'Grid weergave',
     },
   ],
-  defaultView: 'masonry',
+  defaultView: 'grid',
 };
