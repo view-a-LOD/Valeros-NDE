@@ -34,29 +34,28 @@
         <div
           class="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
         >
-          <app-results-count
-            [totalResults]="store.totalResults()"
-            [showingResults]="store.results().length"
-          />
-
-          <app-search-sort />
-        </div>
-
-        <div
-          class="columns-1 md:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5 gap-4 space-y-4"
-        >
-          @for (result of store.results(); track result.id) {
-            <div class="break-inside-avoid mb-4">
-              <app-node [data]="result" />
-            </div>
+          @if (currentViewConfig().showResultsCount !== false) {
+            <app-results-count
+              [totalResults]="store.totalResults()"
+              [showingResults]="store.results().length"
+            />
           }
+
+          <div class="flex gap-2 items-center">
+            <app-view-switcher [currentView]="store.currentView()" />
+            <app-search-sort />
+          </div>
         </div>
 
-        <app-pagination
-          [currentPage]="store.currentPage()"
-          [totalItems]="store.totalResults()"
-          [pageSize]="store.pageSize()"
-        />
+        <ng-container #viewContainer></ng-container>
+
+        @if (currentViewConfig().showPagination !== false) {
+          <app-pagination
+            [currentPage]="store.currentPage()"
+            [totalItems]="store.totalResults()"
+            [pageSize]="store.pageSize()"
+          />
+        }
       } @else if (!store.loading() && store.searchTerm()) {
         <div
           tabindex="-1"

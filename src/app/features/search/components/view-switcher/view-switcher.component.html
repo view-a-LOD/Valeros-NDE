@@ -1,0 +1,14 @@
+<div class="join">
+  @for (view of availableViews; track view.type) {
+    <button
+      type="button"
+      class="btn join-item"
+      [class.btn-active]="currentView() === view.type"
+      (click)="onViewChange(view.type)"
+      [attr.aria-label]="view.label"
+      [attr.aria-pressed]="currentView() === view.type"
+    >
+      <ng-icon [svg]="view.icon" size="20" />
+    </button>
+  }
+</div>

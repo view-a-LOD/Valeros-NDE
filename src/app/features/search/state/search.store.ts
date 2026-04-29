@@ -8,11 +8,14 @@ import { Facet } from '../types/facet';
 import { Filters } from '../types/filters';
 import { ApiService } from '../../../shared/api/api.service';
 import { NodeModel } from '../../../shared/node/types/node.model';
+import { ViewType } from '../views/types/view-type';
+import { ViewService } from '../views/infrastructure/view.service';
 
 interface SearchUrlParams {
   q: string;
   filters: string | null;
   page: number;
+  view: ViewType;
 }
 
 @Injectable({
@@ -22,6 +25,7 @@ export class SearchStore {
   private searchApiService = inject(ApiService);
   private filterStore = inject(FilterStore);
   private route = inject(ActivatedRoute);
+  private viewService = inject(ViewService);
 
   searchTerm = signal('');
   results = signal<NodeModel[]>([]);
@@ -33,6 +37,7 @@ export class SearchStore {
   pageSize = signal(20);
   nextPage = signal<string | undefined>(undefined);
   prevPage = signal<string | undefined>(undefined);
+  currentView = signal<ViewType>(this.viewService.getDefaultViewType());
 
   constructor() {
     this.initSearchOnUrlChanges();
@@ -48,22 +53,35 @@ export class SearchStore {
             q: params['q'] || '',
             filters: params['filters'] || null,
             page: params['page'] ? parseInt(params['page'], 10) : 1,
+            view:
+              (params['view'] as ViewType) ||
+              this.viewService.getDefaultViewType(),
           }),
         ),
         distinctUntilChanged((prev: SearchUrlParams, curr: SearchUrlParams) => {
           const queryChanged = prev.q !== curr.q;
           const filtersChanged = prev.filters !== curr.filters;
           const pageChanged = prev.page !== curr.page;
-          return !queryChanged && !filtersChanged && !pageChanged;
+          const viewChanged = prev.view !== curr.view;
+          return (
+            !queryChanged && !filtersChanged && !pageChanged && !viewChanged
+          );
         }),
       )
-      .subscribe(({ q: query, filters, page }: SearchUrlParams) => {
+      .subscribe(({ q: query, filters, page, view }: SearchUrlParams) => {
         this.filterStore.clearFiltersIfQueryChanged(query, previousQuery);
         this.filterStore.syncFiltersFromUrl(filters);
 
         previousQuery = query;
         this.searchTerm.set(query);
         this.currentPage.set(page);
+        this.currentView.set(view);
+
+        const viewConfig = this.viewService.getViewConfig(view);
+        if (viewConfig.pageSize) {
+          this.pageSize.set(viewConfig.pageSize);
+        }
+
         this.performSearch(query, page);
       });
   }
