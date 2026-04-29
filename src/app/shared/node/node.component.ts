@@ -20,13 +20,13 @@ import { NodeModel } from './types/node.model';
 export class NodeComponent {
   data = input.required<NodeModel>();
   clickable = input<boolean>(true);
-  widgetsSettings = input<WidgetsSettings>();
+  widgetsSettings = input.required<WidgetsSettings>();
 
   private widgetService = inject(WidgetService);
 
   widgetsByPosition: Signal<WidgetsByPosition> = computed(() => {
     const properties = Object.keys(this.data());
-    const widgetsSettings = this.widgetsSettings()!;
+    const widgetsSettings = this.widgetsSettings();
     return this.widgetService.getWidgetsByPosition(properties, widgetsSettings);
   });
 

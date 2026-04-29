@@ -10,5 +10,5 @@ export abstract class BaseResultsView {
   currentPage = input.required<number>();
   pageSize = input.required<number>();
   config = input<BaseViewConfig>({});
-  widgetsSettings = input<WidgetsSettings>();
+  widgetsSettings = input.required<WidgetsSettings>();
 }
