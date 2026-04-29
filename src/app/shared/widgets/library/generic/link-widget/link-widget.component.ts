@@ -29,6 +29,9 @@ export class LinkWidget extends BaseWidget {
 
   textConfig = computed(() => ({
     showPropertyLabel: false,
-    ...this.typedConfig,
+    asHeader: this.typedConfig().asHeader,
+    largeFont: this.typedConfig().largeFont,
+    maxLength: this.typedConfig().maxLength,
+    enableHighlights: this.typedConfig().enableHighlights,
   }));
 }
