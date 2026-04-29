@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { NodeModel } from '../node/types/node.model';
+import { SearchResponse } from '../../features/search/types/search-response';
 
 @Injectable({
   providedIn: 'root',
@@ -141,5 +142,37 @@ export class MockDataService {
         name: 'Creative Commons: publieke domein',
       },
     });
+  }
+
+  addRandomGeoToNode(node: NodeModel): NodeModel {
+    const addRandomGeoToArray = (arr: any[] | undefined) => {
+      if (!Array.isArray(arr)) return undefined;
+      return arr.map((obj) => ({
+        ...obj,
+        geo: {
+          type: 'GeoCoordinates',
+          latitude: 52.0815523,
+          longitude: 5.1203423,
+        },
+      }));
+    };
+
+    const location = addRandomGeoToArray(node['location']);
+    const contentLocation = addRandomGeoToArray(node['contentLocation']);
+
+    return {
+      ...node,
+      ...(location && { location }),
+      ...(contentLocation && { contentLocation }),
+    };
+  }
+
+  addRandomGeoToSearchResponse(response: SearchResponse): SearchResponse {
+    return {
+      ...response,
+      orderedItems: response.orderedItems.map((node: NodeModel) =>
+        this.addRandomGeoToNode(node),
+      ),
+    };
   }
 }

@@ -25,7 +25,14 @@ export class ApiService {
     const params = buildHttpParams(queryParams);
     const url = `${this.apiBaseUrl}/heritage-objects/page/${page}`;
 
-    return this.http.get<SearchResponse>(url, { params });
+    // TODO: Remove mock geo when API is ready
+    return this.http
+      .get<SearchResponse>(url, { params })
+      .pipe(
+        map((response: SearchResponse) =>
+          this.mockDataService.addRandomGeoToSearchResponse(response),
+        ),
+      );
   }
 
   autocomplete(query: AutocompleteQuery): Observable<AutocompleteResponse> {
@@ -80,7 +87,12 @@ export class ApiService {
         if (response.orderedItems.length === 0) {
           throw new Error('No item found with this ID');
         }
-        return response.orderedItems[0];
+        const firstItem = response.orderedItems[0];
+
+        // TODO: Remove mock geo when API is ready
+        const firstItemWithMockGeo =
+          this.mockDataService.addRandomGeoToNode(firstItem);
+        return firstItemWithMockGeo;
       }),
     );
   }
