@@ -1,9 +1,24 @@
-<a
-  [routerLink]="['/details']"
-  [queryParams]="{ id: node().id }"
-  class="inline-flex items-baseline gap-2"
-  [attr.aria-label]="'View details for ' + getNodeName(node())"
->
+@if (isInternalLink()) {
+  <a
+    [routerLink]="['/details']"
+    [queryParams]="{ id: node().id }"
+    [attr.aria-label]="'Bekijk details van ' + getNodeName(node())"
+  >
+    <ng-container *ngTemplateOutlet="linkContent" />
+  </a>
+} @else {
+  <a
+    [href]="node().id"
+    target="_blank"
+    rel="noopener noreferrer"
+    [attr.aria-label]="'Bekijk externe link van ' + getNodeName(node())"
+  >
+    <ng-container *ngTemplateOutlet="linkContent" />
+    <ng-icon name="featherExternalLink" size="14" />
+  </a>
+}
+
+<ng-template #linkContent>
   <span class="underline">{{ getNodeName(node()) }}</span>
 
   @if (showType() && getNodeType(node())) {
@@ -11,4 +26,4 @@
       ({{ getNodeType(node()) }})
     </span>
   }
-</a>
+</ng-template>
