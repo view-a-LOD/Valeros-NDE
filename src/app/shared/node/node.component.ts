@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { WidgetService } from '../widgets/infrastructure/widget.service';
 import { DynamicWidgetComponent } from '../widgets/infrastructure/dynamic-widget/dynamic-widget.component';
 import { WidgetsByPosition } from '../widgets/types/widgets-by-position';
+import { WidgetsSettings } from '../widgets/types/widget-config';
 import { NodeModel } from './types/node.model';
 
 @Component({
@@ -19,12 +20,15 @@ import { NodeModel } from './types/node.model';
 export class NodeComponent {
   data = input.required<NodeModel>();
   clickable = input<boolean>(true);
+  widgetsSettings = input<WidgetsSettings>();
 
   private widgetService = inject(WidgetService);
 
-  widgetsByPosition: Signal<WidgetsByPosition> = computed(() =>
-    this.widgetService.getWidgetsByPosition(Object.keys(this.data())),
-  );
+  widgetsByPosition: Signal<WidgetsByPosition> = computed(() => {
+    const properties = Object.keys(this.data());
+    const widgetsSettings = this.widgetsSettings()!;
+    return this.widgetService.getWidgetsByPosition(properties, widgetsSettings);
+  });
 
   detailsRoute = computed(() => {
     const id = this.data().id;

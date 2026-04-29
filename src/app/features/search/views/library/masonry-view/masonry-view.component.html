@@ -3,7 +3,7 @@
 >
   @for (result of results(); track result.id) {
     <div class="break-inside-avoid mb-4">
-      <app-node [data]="result" />
+      <app-node [data]="result" [widgetsSettings]="widgetsSettings()" />
     </div>
   }
 </div>

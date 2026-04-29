@@ -23,17 +23,12 @@ export class WidgetService {
       : SEARCH_WIDGETS_SETTINGS;
   }
 
-  getWidgetsForProperty(property: string): WidgetMapping[] {
-    const settings = this.getCurrentSettings();
-    const widgets = settings.mappings.filter((m: WidgetMapping) =>
-      m.properties.includes(property),
-    );
-    return widgets.length > 0 ? widgets : [settings.defaultWidget];
-  }
-
-  getWidgetsByPosition(properties: string[]): WidgetsByPosition {
-    const settings = this.getCurrentSettings();
-    const { hiddenProperties, widgetOrder, hiddenWidgetsById } = settings;
+  getWidgetsByPosition(
+    properties: string[],
+    widgetsSettings: WidgetsSettings,
+  ): WidgetsByPosition {
+    const { hiddenProperties, widgetOrder, hiddenWidgetsById } =
+      widgetsSettings;
 
     const filterHiddenProperties = (properties: string[]): string[] => {
       if (hiddenProperties) {
@@ -57,8 +52,16 @@ export class WidgetService {
       properties: string[],
     ): Array<{ property: string; widget: WidgetMapping }> => {
       const widgets: Array<{ property: string; widget: WidgetMapping }> = [];
+
+      const getWidgetsForProperty = (property: string): WidgetMapping[] => {
+        const widgets = widgetsSettings.mappings.filter((m) =>
+          m.properties.includes(property),
+        );
+        return widgets.length > 0 ? widgets : [widgetsSettings.defaultWidget];
+      };
+
       properties.forEach((property) => {
-        this.getWidgetsForProperty(property).forEach((widget) => {
+        getWidgetsForProperty(property).forEach((widget) => {
           widgets.push({ property, widget });
         });
       });

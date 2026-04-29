@@ -2,6 +2,7 @@ import { Type } from '@angular/core';
 import { IconType } from '@ng-icons/core';
 import { BaseResultsView } from '../infrastructure/base-results-view';
 import { ViewType } from './view-type';
+import { WidgetsSettings } from '../../../../shared/widgets/types/widget-config';
 
 export interface BaseViewConfig {
   pageSize?: number;
@@ -17,6 +18,7 @@ export interface ViewMapping {
   config: ViewConfig;
   icon: IconType;
   label: string;
+  widgetsSettings: WidgetsSettings;
 }
 
 export interface ViewsSettings {

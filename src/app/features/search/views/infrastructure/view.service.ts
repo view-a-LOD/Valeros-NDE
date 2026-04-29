@@ -27,4 +27,8 @@ export class ViewService {
   getDefaultViewType(): ViewType {
     return this.settings.defaultView;
   }
+
+  getViewWidgetsSettings(viewType: ViewType) {
+    return this.getViewMapping(viewType)?.widgetsSettings;
+  }
 }

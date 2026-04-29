@@ -76,10 +76,11 @@ export class SearchPageComponent implements OnInit {
       if (viewContainer) {
         viewContainer.clear();
 
-        const component = this.viewService.getViewComponent(
-          this.store.currentView(),
-        );
-        const config = this.viewService.getViewConfig(this.store.currentView());
+        const currentView = this.store.currentView();
+        const component = this.viewService.getViewComponent(currentView);
+        const config = this.viewService.getViewConfig(currentView);
+        const widgetsSettings =
+          this.viewService.getViewWidgetsSettings(currentView);
 
         if (component) {
           const componentRef = viewContainer.createComponent(component);
@@ -88,6 +89,7 @@ export class SearchPageComponent implements OnInit {
           componentRef.setInput('currentPage', this.store.currentPage());
           componentRef.setInput('pageSize', this.store.pageSize());
           componentRef.setInput('config', config);
+          componentRef.setInput('widgetsSettings', widgetsSettings);
         }
       }
     });
