@@ -1,11 +1,11 @@
 import { WidgetsSettings } from '../../../shared/widgets/types/widget-config';
 import { JsonWidget } from '../../../shared/widgets/library/generic/json-widget/json-widget.component';
-import { SEARCH_WIDGETS_SETTINGS } from '../../search/config/widgets.config';
+import { BASE_WIDGETS_SETTINGS } from '../../search/config/widgets.config';
 import { LinkWidget } from '../../../shared/widgets/library/generic/link-widget/link-widget.component';
 
 export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
-    ...SEARCH_WIDGETS_SETTINGS.mappings,
+    ...BASE_WIDGETS_SETTINGS.mappings,
     {
       id: 'description-header',
       properties: ['description'],

@@ -6,7 +6,7 @@ import { AddressWidget } from '../../../shared/widgets/library/domain-specific/a
 import { DatasetWidget } from '../../../shared/widgets/library/domain-specific/dataset-widget/dataset-widget.component';
 import { LinkWidget } from '../../../shared/widgets/library/generic/link-widget/link-widget.component';
 
-export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
+export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
     {
       id: 'dataset',
@@ -206,6 +206,56 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
   widgetOrder: [
     {
       widgetIds: ['image-thumb', 'name', 'description-without-label'],
+    },
+  ],
+};
+
+export const LIST_VIEW_WIDGETS_SETTINGS: WidgetsSettings = {
+  ...BASE_WIDGETS_SETTINGS,
+  mappings: [
+    ...BASE_WIDGETS_SETTINGS.mappings,
+    {
+      id: 'image-thumb-left',
+      properties: ['associatedMedia'],
+      component: ImageGalleryWidget,
+      config: {
+        showPropertyLabel: false,
+        position: 'left',
+        maxThumbnails: 1,
+        enableLightbox: false,
+        fullWidth: true,
+      },
+    },
+    {
+      id: 'dataset-without-label',
+      properties: ['isPartOf'],
+      component: DatasetWidget,
+      config: {
+        showPropertyLabel: false,
+      },
+    },
+  ],
+  widgetOrder: [
+    {
+      widgetIds: [
+        'image-thumb-left',
+        'name',
+        'description-without-label',
+        // 'dataset-without-label',
+      ],
+    },
+  ],
+};
+
+export const GRID_VIEW_WIDGETS_SETTINGS: WidgetsSettings = {
+  ...BASE_WIDGETS_SETTINGS,
+  widgetOrder: [
+    {
+      widgetIds: [
+        'image-thumb',
+        // 'name',
+        // 'description-without-label'
+      ],
     },
   ],
 };

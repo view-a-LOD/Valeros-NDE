@@ -5,7 +5,7 @@ import {
   WidgetsSettings,
   WidgetPosition,
 } from '../types/widget-config';
-import { SEARCH_WIDGETS_SETTINGS } from '../../../features/search/config/widgets.config';
+import { BASE_WIDGETS_SETTINGS } from '../../../features/search/config/widgets.config';
 import { DETAILS_WIDGETS_SETTINGS } from '../../../features/details/config/widgets.config';
 import {
   WidgetsByPosition,
@@ -16,11 +16,11 @@ import {
 export class WidgetService {
   private router = inject(Router);
 
-  getCurrentSettings(): WidgetsSettings {
+  getDefaultSettings(): WidgetsSettings {
     const url = this.router.url;
     return url.startsWith('/details')
       ? DETAILS_WIDGETS_SETTINGS
-      : SEARCH_WIDGETS_SETTINGS;
+      : BASE_WIDGETS_SETTINGS;
   }
 
   getWidgetsByPosition(
