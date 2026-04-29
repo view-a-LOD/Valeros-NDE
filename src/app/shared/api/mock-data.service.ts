@@ -144,27 +144,43 @@ export class MockDataService {
     });
   }
 
+  addRandomGeoToPlaceObjects(
+    value: any | any[] | undefined,
+  ): any | any[] | undefined {
+    if (value === undefined || value === null) return undefined;
+
+    const processObject = (obj: any) => {
+      if (obj?.type === 'Place') {
+        return {
+          ...obj,
+          geo: {
+            type: 'GeoCoordinates',
+            latitude: 52.0815523,
+            longitude: 5.1203423,
+          },
+        };
+      }
+      return obj;
+    };
+
+    if (Array.isArray(value)) {
+      return value.map(processObject);
+    }
+
+    return processObject(value);
+  }
+
   addRandomGeoToNode(node: NodeModel): NodeModel {
-    const addRandomGeoToArray = (arr: any[] | undefined) => {
-      if (!Array.isArray(arr)) return undefined;
-      return arr.map((obj) => ({
-        ...obj,
-        geo: {
-          type: 'GeoCoordinates',
-          latitude: 52.0815523,
-          longitude: 5.1203423,
-        },
-      }));
-    };
+    const enrichedNode: NodeModel = { ...node };
 
-    const location = addRandomGeoToArray(node['location']);
-    const contentLocation = addRandomGeoToArray(node['contentLocation']);
+    for (const [property, value] of Object.entries(node)) {
+      const processed = this.addRandomGeoToPlaceObjects(value);
+      if (processed !== undefined) {
+        enrichedNode[property] = processed;
+      }
+    }
 
-    return {
-      ...node,
-      ...(location && { location }),
-      ...(contentLocation && { contentLocation }),
-    };
+    return enrichedNode;
   }
 
   addRandomGeoToSearchResponse(response: SearchResponse): SearchResponse {

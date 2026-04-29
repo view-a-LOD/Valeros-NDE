@@ -46,32 +46,35 @@ export class ApiService {
   }
 
   details(id: string): Observable<NodeModel> {
+    let mockObservable: Observable<NodeModel> | null = null;
+
     if (id.includes('v1/places/')) {
-      return this.mockDataService.placeDetails(id);
+      mockObservable = this.mockDataService.placeDetails(id);
     }
     // if (id.includes('v1/heritage-objects/')) {
-    //   return this.mockDataService.heritageObjectDetails(id);
+    //   mockObservable = this.mockDataService.heritageObjectDetails(id);
     // }
-    if (id.includes('v1/organizations/')) {
-      return this.mockDataService.organizationDetails(id);
+    else if (id.includes('v1/organizations/')) {
+      mockObservable = this.mockDataService.organizationDetails(id);
+    } else if (id.includes('v1/persons/')) {
+      mockObservable = this.mockDataService.personDetails(id);
+    } else if (id.includes('v1/occupations/')) {
+      mockObservable = this.mockDataService.occupationDetails(id);
+    } else if (id.includes('v1/media-objects/')) {
+      mockObservable = this.mockDataService.mediaObjectDetails(id);
+    } else if (id.includes('v1/licenses/')) {
+      mockObservable = this.mockDataService.licenseDetails(id);
+    } else if (id.includes('v1/terms/')) {
+      mockObservable = this.mockDataService.termDetails(id);
+    } else if (id.includes('v1/datasets/')) {
+      mockObservable = this.mockDataService.datasetDetails(id);
     }
-    if (id.includes('v1/persons/')) {
-      return this.mockDataService.personDetails(id);
-    }
-    if (id.includes('v1/occupations/')) {
-      return this.mockDataService.occupationDetails(id);
-    }
-    if (id.includes('v1/media-objects/')) {
-      return this.mockDataService.mediaObjectDetails(id);
-    }
-    if (id.includes('v1/licenses/')) {
-      return this.mockDataService.licenseDetails(id);
-    }
-    if (id.includes('v1/terms/')) {
-      return this.mockDataService.termDetails(id);
-    }
-    if (id.includes('v1/datasets/')) {
-      return this.mockDataService.datasetDetails(id);
+
+    if (mockObservable) {
+      // TODO: Remove mock geo when API is ready
+      return mockObservable.pipe(
+        map((node) => this.mockDataService.addRandomGeoToNode(node)),
+      );
     }
 
     // TODO: Use proper endpoint when available (GET /v1/heritage-objects/{id})
