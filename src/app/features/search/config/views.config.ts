@@ -1,15 +1,13 @@
-import { featherGrid, featherList, featherX } from '@ng-icons/feather-icons';
+import { featherGrid, featherList, featherMap } from '@ng-icons/feather-icons';
 import { ViewsSettings } from '../views/types/view-config';
 import { MasonryViewComponent } from '../views/library/masonry-view/masonry-view.component';
 import { ListViewComponent } from '../views/library/list-view/list-view.component';
+import { MapViewComponent } from '../views/library/map-view/map-view.component';
 import {
   GRID_VIEW_WIDGETS_SETTINGS,
   LIST_VIEW_WIDGETS_SETTINGS,
+  MAP_VIEW_WIDGETS_SETTINGS,
 } from './widgets.config';
-import { config } from 'rxjs';
-import { ImageGalleryWidget } from '../../../shared/widgets/library/generic/image-gallery-widget/image-gallery-widget.component';
-import { DatasetWidget } from '../../../shared/widgets/library/domain-specific/dataset-widget/dataset-widget.component';
-import { LinkWidget } from '../../../shared/widgets/library/generic/link-widget/link-widget.component';
 
 export const SEARCH_VIEWS_CONFIG: ViewsSettings = {
   mappings: [
@@ -36,6 +34,18 @@ export const SEARCH_VIEWS_CONFIG: ViewsSettings = {
       icon: featherGrid,
       label: 'Grid weergave',
       widgetsSettings: GRID_VIEW_WIDGETS_SETTINGS,
+    },
+    {
+      type: 'map',
+      component: MapViewComponent,
+      config: {
+        pageSize: 100,
+        showPagination: false,
+        showResultsCount: true,
+      },
+      icon: featherMap,
+      label: 'Kaart weergave',
+      widgetsSettings: MAP_VIEW_WIDGETS_SETTINGS,
     },
   ],
   defaultView: 'list',

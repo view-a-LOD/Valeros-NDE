@@ -259,3 +259,12 @@ export const GRID_VIEW_WIDGETS_SETTINGS: WidgetsSettings = {
     },
   ],
 };
+
+export const MAP_VIEW_WIDGETS_SETTINGS: WidgetsSettings = {
+  ...BASE_WIDGETS_SETTINGS,
+  widgetOrder: [
+    {
+      widgetIds: ['image-thumb', 'name', 'description-without-label'],
+    },
+  ],
+};

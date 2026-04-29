@@ -1,0 +1,11 @@
+.map-container {
+  width: 100%;
+  height: calc(100vh - 200px);
+  min-height: 500px;
+}
+
+::ng-deep .map-popup-content {
+  a {
+    color: inherit;
+  }
+}
