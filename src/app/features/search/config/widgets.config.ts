@@ -180,7 +180,7 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
       config: {
         propertyLabel: 'Beschrijving',
         showPropertyLabel: false,
-        maxLength: 300,
+        maxLength: 200,
       },
     },
     {
