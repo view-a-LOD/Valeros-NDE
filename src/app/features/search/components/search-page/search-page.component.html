@@ -43,7 +43,10 @@
 
           <div class="flex gap-2 items-center">
             <app-view-switcher [currentView]="store.currentView()" />
-            <app-search-sort />
+
+            @if (currentViewConfig().showSort !== false) {
+              <app-search-sort />
+            }
           </div>
         </div>
 

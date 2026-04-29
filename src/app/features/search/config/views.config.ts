@@ -42,6 +42,7 @@ export const SEARCH_VIEWS_CONFIG: ViewsSettings = {
         pageSize: 100,
         showPagination: false,
         showResultsCount: true,
+        showSort: false,
       },
       icon: featherMap,
       label: 'Kaart weergave',
