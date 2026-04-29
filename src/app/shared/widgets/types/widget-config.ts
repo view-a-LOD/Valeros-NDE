@@ -31,4 +31,5 @@ export interface BaseWidgetConfig {
   propertyPath?: string;
   position?: WidgetPosition;
   fullWidth?: boolean;
+  showOriginalLink?: boolean;
 }

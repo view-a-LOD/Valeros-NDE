@@ -8,17 +8,22 @@ import {
   DestroyRef,
   ComponentRef,
   inject,
+  computed,
+  Signal,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { PropertyLabelWrapperComponent } from '../property-label-wrapper/property-label-wrapper.component';
 import { WidgetMapping } from '../../types/widget-config';
 import { BaseWidget } from '../base-widget';
 import { NodeModel } from '../../../node/types/node.model';
+import { LinkWidget } from '../../library/generic/link-widget/link-widget.component';
+import { normalizeToArray } from '../../../data-utils/value-normalization.util';
 
 @Component({
   selector: 'app-dynamic-widget',
 
   templateUrl: './dynamic-widget.component.html',
-  imports: [PropertyLabelWrapperComponent],
+  imports: [PropertyLabelWrapperComponent, LinkWidget, NgTemplateOutlet],
 })
 export class DynamicWidgetComponent implements AfterViewInit {
   data = input.required<NodeModel>();

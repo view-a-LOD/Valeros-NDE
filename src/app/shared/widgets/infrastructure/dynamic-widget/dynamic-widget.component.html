@@ -1,10 +1,23 @@
+<ng-template #widgetContent>
+  @if (widget().config?.showOriginalLink) {
+    <div class="mb-2">
+      <app-link-widget
+        [node]="this.data()"
+        [property]="property()"
+        [config]="{ showPropertyLabel: false }"
+      />
+    </div>
+  }
+  <ng-container #widgetContainer></ng-container>
+</ng-template>
+
 @if (widget().config?.showPropertyLabel !== false) {
   <app-property-label-wrapper
     [property]="property()"
     [config]="widget().config || {}"
   >
-    <ng-container #widgetContainer></ng-container>
+    <ng-container *ngTemplateOutlet="widgetContent" />
   </app-property-label-wrapper>
 } @else {
-  <ng-container #widgetContainer></ng-container>
+  <ng-container *ngTemplateOutlet="widgetContent" />
 }

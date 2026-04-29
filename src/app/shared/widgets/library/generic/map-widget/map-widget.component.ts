@@ -2,6 +2,7 @@ import { Component, ElementRef, viewChild, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import { normalizeToFirst } from '../../../../data-utils/value-normalization.util';
 import { BaseWidget } from '../../../infrastructure/base-widget';
+import { isNodeModel } from '../../../../node/types/node.model';
 
 const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/marker-icon.png';
@@ -34,8 +35,7 @@ export class MapWidget extends BaseWidget implements AfterViewInit {
   }
 
   private initMap(): void {
-    const coordinates: GeoCoordinates | undefined =
-      normalizeToFirst<GeoCoordinates>(this.values());
+    const coordinates = this.extractCoordinates();
     if (!coordinates) {
       console.warn('No coordinates found, skipping map initialization');
       return;
@@ -56,5 +56,29 @@ export class MapWidget extends BaseWidget implements AfterViewInit {
     ).addTo(this.map);
 
     L.marker([lat, lng]).addTo(this.map);
+  }
+
+  private extractCoordinates(): GeoCoordinates | undefined {
+    const values = this.values();
+
+    for (const value of values) {
+      if (isNodeModel(value)) {
+        const geoValue = value['geo'];
+        if (geoValue) {
+          const coordinates = normalizeToFirst<GeoCoordinates>(geoValue);
+          if (coordinates && coordinates.type === 'GeoCoordinates') {
+            return coordinates;
+          }
+        }
+      } else if (
+        value &&
+        typeof value === 'object' &&
+        value.type === 'GeoCoordinates'
+      ) {
+        return value as GeoCoordinates;
+      }
+    }
+
+    return undefined;
   }
 }

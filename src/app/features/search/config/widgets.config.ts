@@ -4,7 +4,6 @@ import { ImageGalleryWidget } from '../../../shared/widgets/library/generic/imag
 import { MapWidget } from '../../../shared/widgets/library/generic/map-widget/map-widget.component';
 import { AddressWidget } from '../../../shared/widgets/library/domain-specific/address-widget/address-widget.component';
 import { DatasetWidget } from '../../../shared/widgets/library/domain-specific/dataset-widget/dataset-widget.component';
-import { AsyncPreviewWidget } from '../../../shared/widgets/infrastructure/async-preview-widget/async-preview-widget.component';
 import { LinkWidget } from '../../../shared/widgets/library/generic/link-widget/link-widget.component';
 
 export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
@@ -51,41 +50,32 @@ export const SEARCH_WIDGETS_SETTINGS: WidgetsSettings = {
         propertyLabel: 'Gebaseerd op',
       },
     },
-    {
-      id: 'content-location-link',
-      properties: ['contentLocation', 'location'],
-      component: LinkWidget,
-      config: {
-        propertyLabel: 'Locatie',
-      },
-    },
+
     {
       id: 'content-location',
       properties: ['contentLocation', 'location'],
-      component: AsyncPreviewWidget,
-      config: {
-        propertyLabel: 'Locatie (kaart)',
-        previewComponent: MapWidget,
-        previewProperty: 'geo',
-      },
-    },
-    {
-      id: 'birth-place-link',
-      properties: ['birthPlace'],
-      component: LinkWidget,
+      component: MapWidget,
       config: {
         propertyLabel: 'Locatie',
+        showOriginalLink: true,
       },
     },
     {
       id: 'birth-place',
       properties: ['birthPlace'],
-      component: AsyncPreviewWidget,
+      component: MapWidget,
       config: {
-        propertyLabel: 'Geboorteplaats (kaart)',
-        showPropertyLabel: true,
-        previewComponent: MapWidget,
-        previewProperty: 'geo',
+        propertyLabel: 'Geboorteplaats',
+        showOriginalLink: true,
+      },
+    },
+    {
+      id: 'death-place',
+      properties: ['deathPlace'],
+      component: MapWidget,
+      config: {
+        propertyLabel: 'Plaats van overlijden',
+        showOriginalLink: true,
       },
     },
     {
