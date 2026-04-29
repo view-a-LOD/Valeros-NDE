@@ -1,0 +1,5 @@
+<div class="columns-1 gap-4 space-y-4">
+  @for (result of results(); track result.id) {
+    <app-node [data]="result" />
+  }
+</div>
