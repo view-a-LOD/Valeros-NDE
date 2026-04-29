@@ -1,9 +1,10 @@
 <div class="flex gap-4">
-  @if (showLabel()) {
-    <div class="w-1/5 break-words hyphens-auto" lang="nl">
-      {{ displayLabel() }}
-    </div>
-  }
+  <div class="w-1/5 break-words hyphens-auto" lang="nl">
+    @if (showLabel()) {
+      <span>{{ displayLabel() }}</span>
+    }
+  </div>
+
   <div class="flex-1 font-mono">
     <ng-content />
   </div>
