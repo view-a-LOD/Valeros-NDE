@@ -48,13 +48,14 @@ export class ApiService {
   details(id: string): Observable<NodeModel> {
     let mockObservable: Observable<NodeModel> | null = null;
 
-    if (id.includes('v1/places/')) {
+    if (id.includes('v1/heritage-objects/')) {
+      const extractedId = id.split('/').pop() || id;
+      const url = `${this.apiBaseUrl}/heritage-objects/${extractedId}`;
+
+      mockObservable = this.http.get<NodeModel>(url);
+    } else if (id.includes('v1/places/')) {
       mockObservable = this.mockDataService.placeDetails(id);
-    }
-    // if (id.includes('v1/heritage-objects/')) {
-    //   mockObservable = this.mockDataService.heritageObjectDetails(id);
-    // }
-    else if (id.includes('v1/organizations/')) {
+    } else if (id.includes('v1/organizations/')) {
       mockObservable = this.mockDataService.organizationDetails(id);
     } else if (id.includes('v1/persons/')) {
       mockObservable = this.mockDataService.personDetails(id);
@@ -68,35 +69,13 @@ export class ApiService {
       mockObservable = this.mockDataService.termDetails(id);
     } else if (id.includes('v1/datasets/')) {
       mockObservable = this.mockDataService.datasetDetails(id);
+    } else {
+      throw new Error(`Unsupported resource type for ID: ${id}`);
     }
 
-    if (mockObservable) {
-      // TODO: Remove mock geo when API is ready
-      return mockObservable.pipe(
-        map((node) => this.mockDataService.addRandomGeoToNode(node)),
-      );
-    }
-
-    // TODO: Use proper endpoint when available (GET /v1/heritage-objects/{id})
-    // For now, use search with ID filter
-    const params = buildHttpParams({
-      filter: `id:${id}`,
-      size: 1,
-    });
-    const url = `${this.apiBaseUrl}/heritage-objects/page/1`;
-
-    return this.http.get<SearchResponse>(url, { params }).pipe(
-      map((response) => {
-        if (response.orderedItems.length === 0) {
-          throw new Error('No item found with this ID');
-        }
-        const firstItem = response.orderedItems[0];
-
-        // TODO: Remove mock geo when API is ready
-        const firstItemWithMockGeo =
-          this.mockDataService.addRandomGeoToNode(firstItem);
-        return firstItemWithMockGeo;
-      }),
+    // TODO: Remove mock geo when API is ready
+    return mockObservable.pipe(
+      map((node) => this.mockDataService.addRandomGeoToNode(node)),
     );
   }
 }
