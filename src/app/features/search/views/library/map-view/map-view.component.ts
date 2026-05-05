@@ -28,7 +28,7 @@ import { GeoCoordinates } from '../../../../../shared/map/geo-coordinates.model'
 export class MapViewComponent extends BaseResultsView implements AfterViewInit {
   mapContainer = viewChild.required<ElementRef>('mapContainer');
   private map?: L.Map;
-  private markers: L.Marker[] = [];
+  private markers: L.CircleMarker[] = [];
   private mapService = inject(MapService);
 
   constructor(

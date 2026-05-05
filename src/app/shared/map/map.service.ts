@@ -5,19 +5,14 @@ import { normalizeToArray } from '../data-utils/value-normalization.util';
 import { isNodeModel, NodeModel } from '../node/types/node.model';
 import { GeoCoordinates, isGeoCoordinates } from './geo-coordinates.model';
 
-const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
-const iconUrl = 'assets/leaflet/marker-icon.png';
-const shadowUrl = 'assets/leaflet/marker-shadow.png';
-const iconDefault = L.icon({
-  iconRetinaUrl,
-  iconUrl,
-  shadowUrl,
-  iconSize: [16, 25],
-  shadowSize: [25, 25],
-  iconAnchor: [8, 25],
-  popupAnchor: [0, -25],
-});
-L.Marker.prototype.options.icon = iconDefault;
+const defaultCircleMarkerOptions: L.CircleMarkerOptions = {
+  radius: 8,
+  fillColor: '#00839F',
+  color: '#ffffff',
+  weight: 2,
+  opacity: 1,
+  fillOpacity: 1,
+};
 
 @Injectable({ providedIn: 'root' })
 export class MapService {
@@ -87,11 +82,14 @@ export class MapService {
     coordinates: GeoCoordinates[],
     popupContent?: (coord: GeoCoordinates) => HTMLElement | string,
     popupOptions?: L.PopupOptions,
-  ): L.Marker[] {
-    const markers: L.Marker[] = [];
+  ): L.CircleMarker[] {
+    const markers: L.CircleMarker[] = [];
 
     coordinates.forEach((coord) => {
-      const marker = L.marker([coord.latitude, coord.longitude]).addTo(map);
+      const marker = L.circleMarker(
+        [coord.latitude, coord.longitude],
+        defaultCircleMarkerOptions,
+      ).addTo(map);
 
       if (popupContent) {
         marker.bindPopup(popupContent(coord), popupOptions);
