@@ -8,6 +8,7 @@ import { normalizeToFirst } from '../../../../shared/data-utils/value-normalizat
 import { BreadcrumbComponent } from '../../../../shared/breadcrumbs/breadcrumb/breadcrumb.component';
 import { ApiService } from '../../../../shared/api/api.service';
 import { NodeModel } from '../../../../shared/node/types/node.model';
+import { PageTitleService } from '../../../../shared/page-title/page-title.service';
 
 @Component({
   selector: 'app-details',
@@ -23,6 +24,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private apiService = inject(ApiService);
   private breadcrumbService = inject(BreadcrumbService);
+  private pageTitleService = inject(PageTitleService);
   private routeSubscription?: Subscription;
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         this.data.set(response);
         this.loading.set(false);
         this.addBreadcrumb(response);
+        this.updatePageTitle(response);
       },
       error: (err) => {
         this.error.set('Failed to load data: ' + err.message);
@@ -66,5 +69,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
       route: ['/details'],
       queryParams: { id: this.id! },
     });
+  }
+
+  private updatePageTitle(data: NodeModel): void {
+    const label: string =
+      normalizeToFirst<string>(data.name) || data.id || 'Details';
+    this.pageTitleService.setTitleWithFallback(label, 'Details');
   }
 }

@@ -24,6 +24,7 @@ import { BreadcrumbService } from '../../../../shared/breadcrumbs/breadcrumb.ser
 import { SearchStateService } from '../../../../shared/navigation/search-state.service';
 import { BreakpointService } from '../../../../shared/breakpoint/breakpoint.service';
 import { featherFilter } from '@ng-icons/feather-icons';
+import { PageTitleService } from '../../../../shared/page-title/page-title.service';
 
 @Component({
   selector: 'app-search-page',
@@ -48,6 +49,7 @@ export class SearchPageComponent implements OnInit {
   private router = inject(Router);
   private breakpointService = inject(BreakpointService);
   private viewService = inject(ViewService);
+  private pageTitleService = inject(PageTitleService);
 
   viewContainer = viewChild('viewContainer', { read: ViewContainerRef });
 
@@ -59,6 +61,7 @@ export class SearchPageComponent implements OnInit {
 
   constructor() {
     this.loadViewWhenContainerIsReady();
+    this.updatePageTitleOnSearchChange();
   }
 
   ngOnInit(): void {
@@ -92,6 +95,16 @@ export class SearchPageComponent implements OnInit {
           componentRef.setInput('widgetsSettings', widgetsSettings);
         }
       }
+    });
+  }
+
+  private updatePageTitleOnSearchChange(): void {
+    effect(() => {
+      const searchTerm = this.store.searchTerm();
+      const title = searchTerm
+        ? `Zoekresultaten "${searchTerm}"`
+        : 'Zoekresultaten';
+      this.pageTitleService.setTitle(title);
     });
   }
 }
