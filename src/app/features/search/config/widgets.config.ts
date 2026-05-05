@@ -43,6 +43,14 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       },
     },
     {
+      id: 'about',
+      properties: ['about'],
+      component: LinkWidget,
+      config: {
+        propertyLabel: 'Over',
+      },
+    },
+    {
       id: 'is-based-on',
       properties: ['isBasedOn'],
       component: LinkWidget,
