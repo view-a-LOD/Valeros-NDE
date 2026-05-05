@@ -30,7 +30,7 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
     },
     {
       label: 'Bronhouder',
-      widgetIds: ['dataset', 'publisher'],
+      widgetIds: ['dataset', 'publisher', 'is-based-on'],
     },
   ],
   hiddenProperties: ['id'],
