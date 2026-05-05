@@ -48,7 +48,9 @@ export class SearchBarComponent {
 
   private performSearch(searchTerm: string): void {
     this.router.navigate([], {
+      relativeTo: this.route,
       queryParams: { q: searchTerm || undefined, filters: undefined },
+      queryParamsHandling: 'merge',
     });
   }
 
@@ -72,9 +74,7 @@ export class SearchBarComponent {
   onSuggestionSelect(suggestion: string): void {
     this.store.searchTerm.set(suggestion);
     this.autocomplete()?.hideAndSuppress();
-    this.router.navigate([], {
-      queryParams: { q: suggestion || undefined, filters: undefined },
-    });
+    this.performSearch(suggestion);
   }
 
   onInputFocus(): void {
