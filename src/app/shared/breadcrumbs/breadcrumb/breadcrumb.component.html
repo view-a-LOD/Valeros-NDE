@@ -1,10 +1,17 @@
 @if (breadcrumbs().length > 0) {
   <nav aria-label="Breadcrumb" class="mb-4">
-    <ol class="flex items-center space-x-2 text-sm">
+    <ol class="flex flex-col text-sm md:flex-row md:items-center">
       @for (crumb of breadcrumbs(); track $index; let last = $last) {
-        <li class="flex items-center">
+        <li
+          class="flex items-center md:!pl-0"
+          [style.paddingLeft.rem]="$index * 1"
+        >
           @if ($index > 0) {
-            <span class="mx-2 text-base-content/40">/</span>
+            <span
+              class="mr-2 md:mx-2 text-base-content/40 inline-flex items-center"
+            >
+              <ng-icon name="featherChevronRight" size="16" />
+            </span>
           }
           @if (last) {
             <span class="text-base-content font-medium" aria-current="page">
