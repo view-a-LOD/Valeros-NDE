@@ -29,7 +29,6 @@ export const DETAILS_WIDGETS_SETTINGS: WidgetsSettings = {
       widgetIds: ['image-gallery', 'type', 'additional-type', '*', 'license'],
     },
     {
-      label: 'Bronhouder',
       widgetIds: ['dataset', 'publisher', 'is-based-on'],
     },
   ],
