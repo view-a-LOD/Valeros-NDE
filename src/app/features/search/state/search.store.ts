@@ -16,6 +16,7 @@ interface SearchUrlParams {
   filters: string | null;
   page: number;
   view: ViewType;
+  sort: string | null;
 }
 
 @Injectable({
@@ -38,6 +39,7 @@ export class SearchStore {
   nextPage = signal<string | undefined>(undefined);
   prevPage = signal<string | undefined>(undefined);
   currentView = signal<ViewType>(this.viewService.getDefaultViewType());
+  currentSort = signal<string | null>(null);
 
   constructor() {
     this.initSearchOnUrlChanges();
@@ -56,6 +58,7 @@ export class SearchStore {
             view:
               (params['view'] as ViewType) ||
               this.viewService.getDefaultViewType(),
+            sort: params['sort'] || null,
           }),
         ),
         distinctUntilChanged((prev: SearchUrlParams, curr: SearchUrlParams) => {
@@ -63,12 +66,17 @@ export class SearchStore {
           const filtersChanged = prev.filters !== curr.filters;
           const pageChanged = prev.page !== curr.page;
           const viewChanged = prev.view !== curr.view;
+          const sortChanged = prev.sort !== curr.sort;
           return (
-            !queryChanged && !filtersChanged && !pageChanged && !viewChanged
+            !queryChanged &&
+            !filtersChanged &&
+            !pageChanged &&
+            !viewChanged &&
+            !sortChanged
           );
         }),
       )
-      .subscribe(({ q: query, filters, page, view }: SearchUrlParams) => {
+      .subscribe(({ q: query, filters, page, view, sort }: SearchUrlParams) => {
         this.filterStore.clearFiltersIfQueryChanged(query, previousQuery);
         this.filterStore.syncFiltersFromUrl(filters);
 
@@ -76,6 +84,7 @@ export class SearchStore {
         this.searchTerm.set(query);
         this.currentPage.set(page);
         this.currentView.set(view);
+        this.currentSort.set(sort);
 
         const viewConfig = this.viewService.getViewConfig(view);
         if (viewConfig.pageSize) {
@@ -106,6 +115,7 @@ export class SearchStore {
         size: this.pageSize(),
         page,
         ...(filters.length > 0 && { filter: filters }),
+        ...(this.currentSort() && { sort: this.currentSort()! }),
       })
       .subscribe({
         next: (response: SearchResponse) => {
