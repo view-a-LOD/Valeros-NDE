@@ -59,7 +59,7 @@ export class MapService {
   createMap(
     container: HTMLElement,
     center: [number, number],
-    zoom: number = 13,
+    zoom: number = 8,
   ): L.Map {
     const map = L.map(container).setView(center, zoom);
 

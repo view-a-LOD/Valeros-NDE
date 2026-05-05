@@ -46,7 +46,7 @@ export class MapWidget extends BaseWidget implements AfterViewInit {
     this.map = this.mapService.createMap(
       this.mapContainer().nativeElement,
       [firstCoord.latitude, firstCoord.longitude],
-      13,
+      8,
     );
 
     this.mapService.addMarkersAndFitBounds(this.map, coordinates);
