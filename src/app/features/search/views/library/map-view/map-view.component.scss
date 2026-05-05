@@ -2,6 +2,7 @@
   width: 100%;
   height: calc(100vh - 200px);
   min-height: 500px;
+  z-index: 1;
 }
 
 ::ng-deep .map-popup-content {
