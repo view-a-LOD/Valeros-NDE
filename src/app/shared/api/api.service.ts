@@ -25,12 +25,12 @@ export class ApiService {
     const params = buildHttpParams(queryParams);
     const url = `${this.apiBaseUrl}/heritage-objects/page/${page}`;
 
-    // TODO: Remove mock geo when API is ready
+    // TODO: Remove mock data enrichment when API is ready
     return this.http
       .get<SearchResponse>(url, { params })
       .pipe(
         map((response: SearchResponse) =>
-          this.mockDataService.addRandomGeoToSearchResponse(response),
+          this.mockDataService.enrichSearchResponseWithMockData(response),
         ),
       );
   }
@@ -73,9 +73,9 @@ export class ApiService {
       throw new Error(`Unsupported resource type for ID: ${id}`);
     }
 
-    // TODO: Remove mock geo when API is ready
+    // TODO: Remove mock data enrichment when API is ready
     return mockObservable.pipe(
-      map((node) => this.mockDataService.addRandomGeoToNode(node)),
+      map((node) => this.mockDataService.enrichNodeWithMockData(node)),
     );
   }
 }

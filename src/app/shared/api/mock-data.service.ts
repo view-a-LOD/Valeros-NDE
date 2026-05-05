@@ -122,6 +122,7 @@ export class MockDataService {
       id: 'https://example.org/v1/terms/{id}',
       type: 'DefinedTerm',
       name: 'fotoafdruk zwart-wit',
+      image: 'https://picsum.photos/seed/fotoafdruk-zwart-wit/200/200',
     });
   }
 
@@ -144,21 +145,16 @@ export class MockDataService {
     });
   }
 
-  addRandomGeoToPlaceObjects(
+  private enrichObjectsByType(
     value: any | any[] | undefined,
+    typeName: string,
+    enrichFn: (obj: any) => any,
   ): any | any[] | undefined {
     if (value === undefined || value === null) return undefined;
 
     const processObject = (obj: any) => {
-      if (obj?.type === 'Place') {
-        return {
-          ...obj,
-          geo: {
-            type: 'GeoCoordinates',
-            latitude: 50 + Math.random() * 3.5,
-            longitude: 3 + Math.random() * 4,
-          },
-        };
+      if (obj?.type === typeName) {
+        return enrichFn(obj);
       }
       return obj;
     };
@@ -170,11 +166,34 @@ export class MockDataService {
     return processObject(value);
   }
 
-  addRandomGeoToNode(node: NodeModel): NodeModel {
+  addRandomGeoToPlaceObjects(
+    value: any | any[] | undefined,
+  ): any | any[] | undefined {
+    return this.enrichObjectsByType(value, 'Place', (obj) => ({
+      ...obj,
+      geo: {
+        type: 'GeoCoordinates',
+        latitude: 50 + Math.random() * 3.5,
+        longitude: 3 + Math.random() * 4,
+      },
+    }));
+  }
+
+  addRandomImageToDefinedTermObjects(
+    value: any | any[] | undefined,
+  ): any | any[] | undefined {
+    return this.enrichObjectsByType(value, 'DefinedTerm', (obj) => ({
+      ...obj,
+      image: `https://picsum.photos/seed/${encodeURIComponent(obj.name?.['@value'] || obj.name || 'term')}/200/200`,
+    }));
+  }
+
+  enrichNodeWithMockData(node: NodeModel): NodeModel {
     const enrichedNode: NodeModel = { ...node };
 
     for (const [property, value] of Object.entries(node)) {
-      const processed = this.addRandomGeoToPlaceObjects(value);
+      let processed = this.addRandomGeoToPlaceObjects(value);
+      processed = this.addRandomImageToDefinedTermObjects(processed ?? value);
       if (processed !== undefined) {
         enrichedNode[property] = processed;
       }
@@ -183,11 +202,11 @@ export class MockDataService {
     return enrichedNode;
   }
 
-  addRandomGeoToSearchResponse(response: SearchResponse): SearchResponse {
+  enrichSearchResponseWithMockData(response: SearchResponse): SearchResponse {
     return {
       ...response,
       orderedItems: response.orderedItems.map((node: NodeModel) =>
-        this.addRandomGeoToNode(node),
+        this.enrichNodeWithMockData(node),
       ),
     };
   }
