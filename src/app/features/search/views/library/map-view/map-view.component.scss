@@ -5,8 +5,54 @@
   z-index: 1;
 }
 
-::ng-deep .map-popup-content {
-  a {
-    color: inherit;
+::ng-deep {
+  .map-popup-content {
+    a {
+      color: inherit;
+    }
+  }
+
+  .leaflet-popup-content-wrapper {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border: none;
+  }
+
+  .leaflet-popup-content {
+    margin: 0;
+
+    & .node-card {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .leaflet-container a.leaflet-popup-close-button {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 28px !important;
+    line-height: 28px !important;
+    padding: 0 !important;
+    top: 8px !important;
+    right: 8px !important;
+    color: #666 !important;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #333 !important;
+      background-color: transparent !important;
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .leaflet-popup-tip-container {
+    .leaflet-popup-tip {
+      box-shadow: none;
+    }
   }
 }
