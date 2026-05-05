@@ -1,4 +1,5 @@
 import { Type } from '@angular/core';
+import { IconType } from '@ng-icons/core';
 import { BaseWidget } from '../infrastructure/base-widget';
 
 export interface WidgetsSettings {
@@ -29,6 +30,7 @@ export interface BaseWidgetConfig {
   showPropertyLabel?: boolean;
   propertyLabel?: string;
   propertyPath?: string;
+  icon?: IconType;
   position?: WidgetPosition;
   fullWidth?: boolean;
   showOriginalLink?: boolean;

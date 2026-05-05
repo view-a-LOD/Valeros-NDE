@@ -5,6 +5,25 @@ import { MapWidget } from '../../../shared/widgets/library/generic/map-widget/ma
 import { AddressWidget } from '../../../shared/widgets/library/domain-specific/address-widget/address-widget.component';
 import { DatasetWidget } from '../../../shared/widgets/library/domain-specific/dataset-widget/dataset-widget.component';
 import { LinkWidget } from '../../../shared/widgets/library/generic/link-widget/link-widget.component';
+import {
+  featherAlignLeft,
+  featherArchive,
+  featherArrowRight,
+  featherArrowUpRight,
+  featherCalendar,
+  featherCornerDownRight,
+  featherCornerUpRight,
+  featherExternalLink,
+  featherFileText,
+  featherGrid,
+  featherHome,
+  featherInfo,
+  featherMapPin,
+  featherPackage,
+  featherTag,
+  featherUser,
+  featherUsers,
+} from '@ng-icons/feather-icons';
 
 export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
   mappings: [
@@ -14,6 +33,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: DatasetWidget,
       config: {
         propertyLabel: 'Dataset',
+        icon: featherArchive,
       },
     },
     {
@@ -23,6 +43,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       config: {
         propertyLabel: 'Licentie',
         propertyPath: 'license',
+        icon: featherFileText,
       },
     },
     {
@@ -32,6 +53,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       config: {
         propertyLabel: 'Uitgever',
         propertyPath: 'publisher',
+        icon: featherUsers,
       },
     },
     {
@@ -40,6 +62,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkWidget,
       config: {
         propertyLabel: 'Genre',
+        icon: featherTag,
       },
     },
     {
@@ -48,6 +71,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkWidget,
       config: {
         propertyLabel: 'Over',
+        icon: featherInfo,
       },
     },
     {
@@ -56,6 +80,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkWidget,
       config: {
         propertyLabel: 'Gebaseerd op',
+        icon: featherExternalLink,
       },
     },
 
@@ -65,6 +90,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: MapWidget,
       config: {
         propertyLabel: 'Locatie',
+        icon: featherMapPin,
         showOriginalLink: true,
       },
     },
@@ -74,6 +100,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: MapWidget,
       config: {
         propertyLabel: 'Geboorteplaats',
+        icon: featherMapPin,
         showOriginalLink: true,
       },
     },
@@ -83,6 +110,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: MapWidget,
       config: {
         propertyLabel: 'Plaats van overlijden',
+        icon: featherMapPin,
         showOriginalLink: true,
       },
     },
@@ -122,6 +150,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkWidget,
       config: {
         propertyLabel: 'Soort',
+        icon: featherGrid,
       },
     },
     {
@@ -131,6 +160,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       config: {
         propertyLabel: 'Soort (aanvullend)',
         propertyPath: 'name',
+        icon: featherGrid,
       },
     },
     {
@@ -139,6 +169,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkWidget,
       config: {
         propertyLabel: 'Materiaal',
+        icon: featherPackage,
       },
     },
     {
@@ -147,6 +178,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkWidget,
       config: {
         propertyLabel: 'Vervaardiger',
+        icon: featherUser,
       },
     },
     {
@@ -155,6 +187,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkWidget,
       config: {
         propertyLabel: 'Vervaardigingsdatum',
+        icon: featherCalendar,
       },
     },
     {
@@ -163,6 +196,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkWidget,
       config: {
         propertyLabel: 'Geboortedatum',
+        icon: featherCalendar,
       },
     },
     {
@@ -171,6 +205,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkWidget,
       config: {
         propertyLabel: 'Overlijdensdatum',
+        icon: featherCalendar,
       },
     },
     {
@@ -179,6 +214,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: LinkWidget,
       config: {
         propertyLabel: 'Beschrijving',
+        icon: featherAlignLeft,
       },
     },
     {
@@ -203,6 +239,7 @@ export const BASE_WIDGETS_SETTINGS: WidgetsSettings = {
       component: AddressWidget,
       config: {
         propertyLabel: 'Adres',
+        icon: featherHome,
       },
     },
   ],

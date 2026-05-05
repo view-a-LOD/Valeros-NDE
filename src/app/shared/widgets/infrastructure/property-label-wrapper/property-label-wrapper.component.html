@@ -1,7 +1,16 @@
-<div class="flex flex-col md:flex-row md:gap-4">
-  <div class="w-full md:w-1/5 break-words hyphens-auto" lang="nl">
+<div class="flex flex-col lg:flex-row lg:gap-8">
+  <div class="w-full lg:w-1/5 break-words hyphens-auto" lang="nl">
     @if (showLabel()) {
-      <span>{{ displayLabel() }}</span>
+      <span class="flex items-center gap-4">
+        @if (icon()) {
+          <ng-icon
+            class="flex-shrink-0 inline-flex items-center"
+            [svg]="icon()"
+            size="16"
+          />
+        }
+        <span>{{ displayLabel() }}</span>
+      </span>
     }
   </div>
 
