@@ -46,6 +46,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     this.apiService.details(this.id).subscribe({
       next: (response: NodeModel) => {
+        console.log('Details response:', response);
         this.data.set(response);
         this.loading.set(false);
         this.addBreadcrumb(response);
