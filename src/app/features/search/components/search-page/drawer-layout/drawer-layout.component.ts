@@ -18,7 +18,7 @@ import { featherX } from '@ng-icons/feather-icons';
 })
 export class DrawerLayoutComponent implements AfterViewInit {
   drawerId = input<string>('drawer');
-  sidebarWidth = input<string>('20rem');
+  sidebarWidth = input<string>('18rem');
   closeLabel = input<string>('Close drawer');
   initiallyOpen = input<boolean>(true);
   sidebarTitle = input<string>('');

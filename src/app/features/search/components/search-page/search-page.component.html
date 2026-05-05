@@ -6,8 +6,10 @@
   [initiallyOpen]="isDesktop()"
 >
   <div drawer-content>
-    <div class="container mx-auto p-8 max-w-full">
-      <div class="sticky top-0 z-10 bg-app-bg pb-6 -mt-8 pt-8 -mx-8 px-8">
+    <div class="container mx-auto p-4 sm:p-8 max-w-full">
+      <div
+        class="sticky top-0 z-10 bg-app-bg pb-6 -mt-4 pt-4 -mx-4 px-4 sm:-mt-8 sm:pt-8 sm:-mx-8 sm:px-8"
+      >
         <div class="flex items-center gap-2">
           <app-drawer-toggle-button
             [class.lg:hidden]="drawer.isOpen()"
@@ -18,7 +20,7 @@
             buttonClass="btn"
             [iconOnly]="true"
           />
-          <div class="flex-1">
+          <div class="flex-1 min-w-0">
             <app-search-bar />
           </div>
         </div>
@@ -41,7 +43,9 @@
             />
           }
 
-          <div class="flex gap-3 items-center">
+          <div
+            class="flex flex-col items-baseline gap-2 sm:gap-3 sm:flex-row sm:items-center"
+          >
             @if (currentViewConfig().showSort !== false) {
               <app-search-sort />
             }

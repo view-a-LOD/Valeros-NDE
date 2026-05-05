@@ -4,7 +4,7 @@
       <input
         type="text"
         placeholder="Zoeken..."
-        class="grow"
+        class="grow min-w-0"
         [ngModel]="store.searchTerm()"
         (ngModelChange)="onSearchTermChange($event)"
         (keyup.enter)="onSearch()"
