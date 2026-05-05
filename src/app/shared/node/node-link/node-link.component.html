@@ -1,22 +1,39 @@
-@if (isInternalLink()) {
-  <a
-    [routerLink]="['/details']"
-    [queryParams]="{ id: node().id }"
-    [attr.aria-label]="'Bekijk details van ' + getNodeName(node())"
-  >
-    <ng-container *ngTemplateOutlet="linkContent" />
-  </a>
-} @else {
-  <a
-    [href]="node().id"
-    target="_blank"
-    rel="noopener noreferrer"
-    [attr.aria-label]="'Bekijk externe link van ' + getNodeName(node())"
-  >
-    <ng-container *ngTemplateOutlet="linkContent" />
-    <ng-icon name="featherExternalLink" size="14" />
-  </a>
-}
+<div class="flex items-center gap-2">
+  <!-- TODO: Support ImageObject here as well, see https://schema.org/image -->
+  @if (node()['image']) {
+    <div class="avatar">
+      <div class="w-4 h-4 rounded">
+        <img
+          [src]="node()['image']"
+          [alt]="getNodeName(node())"
+          class="object-cover"
+        />
+      </div>
+    </div>
+  }
+
+  <div class="flex-1">
+    @if (isInternalLink()) {
+      <a
+        [routerLink]="['/details']"
+        [queryParams]="{ id: node().id }"
+        [attr.aria-label]="'Bekijk details van ' + getNodeName(node())"
+      >
+        <ng-container *ngTemplateOutlet="linkContent" />
+      </a>
+    } @else {
+      <a
+        [href]="node().id"
+        target="_blank"
+        rel="noopener noreferrer"
+        [attr.aria-label]="'Bekijk externe link van ' + getNodeName(node())"
+      >
+        <ng-container *ngTemplateOutlet="linkContent" />
+        <ng-icon name="featherExternalLink" size="14" />
+      </a>
+    }
+  </div>
+</div>
 
 <ng-template #linkContent>
   <span class="underline">{{ getNodeName(node()) }}</span>
